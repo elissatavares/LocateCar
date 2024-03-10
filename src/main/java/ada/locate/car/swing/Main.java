@@ -1,4 +1,4 @@
-package org.example.swing;
+package ada.locate.car.swing;
 
 import javax.swing.*;
 import java.util.Arrays;
