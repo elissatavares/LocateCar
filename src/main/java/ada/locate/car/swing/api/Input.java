@@ -1,4 +1,4 @@
-package ada.locate.car.swing;
+package ada.locate.car.swing.api;
 
 
 public interface Input<T> {

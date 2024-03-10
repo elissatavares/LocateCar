@@ -1,10 +1,10 @@
-package ada.locate.car.swing;
+package ada.locate.car.swing.impl;
 
 import javax.swing.*;
 
 import java.awt.*;
 
-public class CrateFrame {
+public class CreateFrame {
     private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static JFrame execute(){
