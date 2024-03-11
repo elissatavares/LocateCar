@@ -1,7 +1,7 @@
 package ada.locate.car.app.messages;
 
 public enum MessagesClient {
-    ALL_CLIENT_DATA("Name: \nAddress: \nPhone Number: \nEmail: \nCPF: "),
+    ALL_CLIENT_DATA("Name: \nAddress: \nPhone Number: \nEmail: "),
     ENTER_CPF("Enter CPF"),
     ENTER_CNPJ("Enter CNPJ"),
 //    CPF_REGEX("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"),
