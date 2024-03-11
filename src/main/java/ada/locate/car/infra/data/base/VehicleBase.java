@@ -43,11 +43,6 @@ public class VehicleBase implements CRUD<Vehicle> {
     }
 
     @Override
-    public List<Vehicle> findAllBySpecification(Vehicle o) {
-        return null;
-    }
-
-    @Override
     public List<Vehicle> findAll() {
         return null;
     }

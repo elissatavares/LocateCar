@@ -1,10 +1,11 @@
 package ada.locate.car.app;
 
+import ada.locate.car.app.menu.Menu;
+import ada.locate.car.app.messages.MessagesApp;
+import ada.locate.car.app.menu.VehicleMenu;
 import ada.locate.car.controller.api.Controller;
-// import ada.locate.car.controller.impl.client.CreateClientCNPJ;
 import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.controller.impl.client.CreateClientCPFControllerImpl;
-//import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.infra.data.base.ClientCPFBase;
 import ada.locate.car.infra.data.base.VehicleBase;
 import ada.locate.car.infra.repository.ClientCPFRepository;
@@ -33,11 +34,31 @@ public class LocateCar {
         Controller createVehicle = new CreateVehicleControllerImpl(inputOptionString, inputMultipleFields, showInformation);
         Controller createClientCPF = new CreateClientCPFControllerImpl(inputMultipleFields, showInformation, inputCPF);
 
+        Menu vehicleMenu = new VehicleMenu(inputOptionInt, createVehicle);
+
         JFrame frame = CreateFrame.execute();
         frame.setVisible(true);
 
-        createVehicle.execute();
-        createClientCPF.execute();
+        Integer option;
+        do {
+            //main menu
+            //recebe de quem se trata a edição
+            option = inputOptionInt.execute(MessagesApp.MAIN_MENU.get(), MessagesApp.MAIN_OPTIONS_MENU.get());
+            if(option != null){
+                //direciona para o menu com as opções específicas de Client, Vehicle ou Alocation
+                switch (option){
+                    //Client
+                    //case 1 -> Menu.;
+                    //Vehicle
+                    case 2 -> vehicleMenu.run();
+                    //Alocation
+                    // case 3 -> AlocationMenu.run();
+                }
+            }
+        } while (option != null);
+
+//        createVehicle.execute();
+//        createClientCPF.execute();
         frame.dispose();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }

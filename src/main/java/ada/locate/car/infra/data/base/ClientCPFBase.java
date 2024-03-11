@@ -42,11 +42,6 @@ public class ClientCPFBase implements CRUD<ClientCPF> {
     }
 
     @Override
-    public List<ClientCPF> findAllBySpecification(ClientCPF o) {
-        return null;
-    }
-
-    @Override
     public List<ClientCPF> findAll() {
         return null;
     }
