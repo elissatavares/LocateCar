@@ -25,7 +25,7 @@ public class CreateVehicleControllerImpl implements Controller {
     public void execute() {
         String[] campus = inputMultipleFields.execute(MessagesVehicle.INSERT_DATA.get(), MessagesVehicle.ALL_DATA.get());
         String model = inputOptionString.execute(MessagesVehicle.SELECT_MODEL.get(), MessagesVehicle.ALL_MODELS.get());
-        Vehicle vehicle = new Vehicle(campus[0], LocalDate.parse(campus[1]), campus[2], campus[3], campus[4], model);
+        Vehicle vehicle = new Vehicle(campus[0], LocalDate.parse(campus[1]), campus[2], campus[3], model);
         showInformation.execute(vehicle.toString(), MessagesVehicle.VEHICLE_DETAILS.get());
 
         System.out.println(Arrays.toString(campus));

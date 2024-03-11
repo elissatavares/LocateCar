@@ -9,7 +9,6 @@ public class Vehicle {
     private LocalDate yearManufacture;
     private String color;
     private String plateNumber;
-    private String identificationNumber;
 
     @Override
     public String toString() {
@@ -23,13 +22,42 @@ public class Vehicle {
                 '}';
     }
 
-    public Vehicle(String brand, LocalDate yearManufacture, String color, String plateNumber, String identificationNumber,String model) {
+    public Vehicle(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
         this.brand = brand;
         this.available = true;
         this.model = model;
         this.yearManufacture = yearManufacture;
         this.color = color;
         this.plateNumber = plateNumber;
-        this.identificationNumber = identificationNumber;
+    }
+
+
+    private enum Model {
+        SMALL("Small"),
+        MEDIUM("Medium"),
+        SUV("SUV");
+
+        private String description;
+
+        Model(String description) {
+            this.description = description;
+        }
+
+        public String get() {
+            return description;
+        }
+
+        private static String allModels() {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Model model : Model.values()) {
+                stringBuilder.append(model.description).append("\n");
+            }
+            return stringBuilder.toString();
+        }
+
+    }
+
+    public static String getModels(){
+        return Model.allModels();
     }
 }
