@@ -13,6 +13,6 @@ public class ShowInputOptionsIntImpl implements Input<Integer> {
                 title, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                 options, options[0]);
 
-        return selectedOption == - 1 ? null : selectedOption + 1;
+        return selectedOption == JOptionPane.CLOSED_OPTION ? null : selectedOption + 1;
     }
 }
