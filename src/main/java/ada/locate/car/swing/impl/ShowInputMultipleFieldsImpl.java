@@ -1,8 +1,11 @@
-package ada.locate.car.swing;
+package ada.locate.car.swing.impl;
+
+import ada.locate.car.swing.api.Input;
 
 import javax.swing.*;
 
-public class ShowInputDialogVariosCampos implements Input<String[]>{
+public class ShowInputMultipleFieldsImpl implements Input<String[]> {
+    // precisa trantar quando receber cancel ou apertar no x
     @Override
     public String[] execute(String title, String fields) {
         String[] fieldNames = fields.split("\n");
@@ -26,8 +29,7 @@ public class ShowInputDialogVariosCampos implements Input<String[]>{
                 inputs[i] = ((JTextField) ((JPanel) panel.getComponent(i)).getComponent(1)).getText();
             }
             return inputs;
-        } else {
-            return null;
         }
+        return null;
     }
 }

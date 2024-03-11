@@ -1,8 +1,10 @@
-package ada.locate.car.swing;
+package ada.locate.car.swing.impl;
+
+import ada.locate.car.swing.api.Input;
 
 import javax.swing.*;
 
-public class ShowInputDialog implements Input<String>{
+public class ShowInputOnlyFieldImpl implements Input<String> {
 
     @Override
     public String execute(String title, String description) {
