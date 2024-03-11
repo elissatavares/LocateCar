@@ -19,7 +19,7 @@ public class LocateCar {
         Output showInformation = new ShowInformationOutputImpl();
 
 //        Controller createVehicle = new CreateVehicleControllerImpl(inputOptionString, inputMultipleFields, showInformation);
-        Controller createClientCNPJ = new CreateClientCPFControllerImpl(inputOptionString, inputMultipleFields, showInformation);
+        Controller createClientCNPJ = new CreateClientCPFControllerImpl(inputMultipleFields, showInformation);
 
         JFrame frame = CreateFrame.execute();
         frame.setVisible(true);
