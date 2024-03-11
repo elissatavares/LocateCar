@@ -16,3 +16,4 @@ public class ShowInputOptionsStringImpl implements Input<String> {
         return selectedOption == -1 ? null : options[selectedOption];
     }
 }
+

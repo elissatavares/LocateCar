@@ -11,6 +11,9 @@ public class CreateFrame {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
+
+        CPFInput cpfInput = new CPFInput();
+        frame.add(cpfInput);
         return frame;
     }
 }
