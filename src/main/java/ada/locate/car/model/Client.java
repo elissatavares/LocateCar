@@ -22,4 +22,32 @@ public class Client {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    private enum Model {
+        CPF("Client with CPF"),
+        CNPJ("Client with CNPJ");
+
+        private String description;
+
+        Model(String description) {
+            this.description = description;
+        }
+
+        public String get() {
+            return description;
+        }
+
+        private static String allModels() {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Client.Model model : Client.Model.values()) {
+                stringBuilder.append(model.description).append("\n");
+            }
+            return stringBuilder.toString();
+        }
+
+    }
+
+    public static String getModels(){
+        return Client.Model.allModels();
+    }
 }
