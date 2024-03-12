@@ -4,7 +4,7 @@ public class ClientCNPJ {
     private Client client;
     private String cnpj;
 
-    public ClientCNPJ(String name, String address, String phoneNumber, String email, String cpf) {
+    public ClientCNPJ(String name, String address, String phoneNumber, String email, String cnpj) {
         this.client = new Client(name, address, phoneNumber, email);
         this.cnpj = cnpj;
     }

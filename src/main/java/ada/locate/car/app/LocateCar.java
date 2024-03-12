@@ -1,9 +1,11 @@
 package ada.locate.car.app;
 
+import ada.locate.car.app.menu.ClientMenu;
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
 import ada.locate.car.app.menu.VehicleMenu;
 import ada.locate.car.controller.api.Controller;
+import ada.locate.car.controller.impl.client.CreateClientCNPJControllerImpl;
 import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.controller.impl.client.CreateClientCPFControllerImpl;
 import ada.locate.car.infra.data.base.ClientCPFBase;
@@ -29,12 +31,15 @@ public class LocateCar {
         Input<String[]> inputMultipleFields = new ShowInputMultipleFieldsImpl();
         Input<String> inputOptionString = new ShowInputOptionsStringImpl();
         Input<String> inputCPF = new CPFInput();
+        Input<String> inputCNPJ = new CNPJInput();
         Output showInformation = new ShowInformationOutputImpl();
 
         Controller createVehicle = new CreateVehicleControllerImpl(inputOptionString, inputMultipleFields, showInformation);
         Controller createClientCPF = new CreateClientCPFControllerImpl(inputMultipleFields, showInformation, inputCPF);
+        Controller createClientCNPJ = new CreateClientCNPJControllerImpl(inputMultipleFields, showInformation, inputCNPJ);
 
         Menu vehicleMenu = new VehicleMenu(inputOptionInt, createVehicle);
+        Menu clientMenu = new ClientMenu(inputOptionInt, createClientCPF, createClientCNPJ);
 
         JFrame frame = CreateFrame.execute();
         frame.setVisible(true);
@@ -47,9 +52,7 @@ public class LocateCar {
             if(option != null){
                 //direciona para o menu com as opções específicas de Client, Vehicle ou Alocation
                 switch (option){
-                    //Client
-                    //case 1 -> Menu.;
-                    //Vehicle
+                    case 1 -> clientMenu.run();
                     case 2 -> vehicleMenu.run();
                     //Alocation
                     // case 3 -> AlocationMenu.run();
