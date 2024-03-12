@@ -23,9 +23,7 @@ public class CreateClientCNPJControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        System.out.println("Entering CreateClientCNPJControllerImpl.execute()");
         String cnpj = inputCNPJ.execute(MessagesClient.ENTER_CNPJ.get(), MessagesClient.ENTER_CNPJ.get());
-        System.out.println("CNPJ entered: " + cnpj);
         String[] clientData = inputMultipleFields.execute(MessagesClient.INSERT_CLIENT_DATA.get(), MessagesClient.ALL_CLIENT_DATA.get());
         ClientCNPJ clientCNPJ = new ClientCNPJ(clientData[0], clientData[1], clientData[2], clientData[3], cnpj);
         System.out.println("Client data entered: " + Arrays.toString(clientData));
@@ -34,6 +32,5 @@ public class CreateClientCNPJControllerImpl implements Controller {
         System.out.println(Arrays.toString(clientData));
         System.out.println(cnpj);
         System.out.println(clientCNPJ);
-        System.out.println("Exiting CreateClientCNPJControllerImpl.execute()");
     }
 }
