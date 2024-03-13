@@ -1,20 +1,30 @@
 package ada.locate.car.infra.repository;
 
-import ada.locate.car.infra.data.api.CRUD;
-import ada.locate.car.infra.repository.api.Repository;
-import ada.locate.car.model.Vehicle;
+import ada.locate.car.infra.api.Repository;
+import ada.locate.car.core.model.Vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleRepository implements Repository<Vehicle> {
-    private final CRUD<Vehicle> vehicleCRUD;
 
-    public VehicleRepository(CRUD<Vehicle> vehicleCRUD) {
-        this.vehicleCRUD = vehicleCRUD;
+    List<Vehicle> vehicleList = new ArrayList<>(10);
+    private static VehicleRepository instance;
+
+    private VehicleRepository() {
     }
+
+    public static VehicleRepository getInstance() {
+        if (instance == null) {
+            instance = new VehicleRepository();
+        }
+        return instance;
+    }
+
 
     @Override
     public void create(Vehicle o) {
+        vehicleList.add(o);
 
     }
 

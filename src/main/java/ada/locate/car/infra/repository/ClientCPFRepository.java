@@ -1,21 +1,28 @@
 package ada.locate.car.infra.repository;
 
-import ada.locate.car.infra.data.api.CRUD;
-import ada.locate.car.infra.repository.api.Repository;
-import ada.locate.car.model.ClientCPF;
+import ada.locate.car.infra.api.Repository;
+import ada.locate.car.core.model.ClientCPF;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientCPFRepository implements Repository<ClientCPF> {
-    private final CRUD<ClientCPF> clientCPFCRUD;
+    List<ClientCPF> clientCPFList = new ArrayList<>(10);
+    private static ClientCPFRepository instance;
 
-    public ClientCPFRepository(CRUD<ClientCPF> clientCPFCRUD) {
-        this.clientCPFCRUD = clientCPFCRUD;
+    private ClientCPFRepository() {
+    }
+
+    public static ClientCPFRepository getInstance() {
+        if (instance == null) {
+            instance = new ClientCPFRepository();
+        }
+        return instance;
     }
 
     @Override
     public void create(ClientCPF o) {
-        clientCPFCRUD.create(o);
+        clientCPFList.add(o);
     }
 
     @Override
