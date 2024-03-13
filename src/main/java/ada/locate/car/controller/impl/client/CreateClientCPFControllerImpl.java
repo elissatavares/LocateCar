@@ -3,8 +3,8 @@ package ada.locate.car.controller.impl.client;
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.app.messages.MessagesClient;
 import ada.locate.car.core.model.ClientCPF;
-import ada.locate.car.swing.api.Input;
-import ada.locate.car.swing.api.Output;
+import ada.locate.car.frontend.api.Input;
+import ada.locate.car.frontend.api.Output;
 
 import java.util.Arrays;
 

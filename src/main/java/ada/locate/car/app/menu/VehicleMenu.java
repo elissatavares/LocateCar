@@ -2,7 +2,7 @@ package ada.locate.car.app.menu;
 
 import ada.locate.car.app.messages.MessagesVehicle;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.swing.api.Input;
+import ada.locate.car.frontend.api.Input;
 
 public class VehicleMenu implements Menu {
     private final Input<String> inputOptionString;

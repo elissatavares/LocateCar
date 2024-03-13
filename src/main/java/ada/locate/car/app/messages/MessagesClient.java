@@ -13,7 +13,11 @@ public enum MessagesClient {
     CLIENT_MENU("Client Menu"),
     OPTION_CLIENT("Create\nRead\nUpdate\nDelete\nSearch\n"),
 
-    ALL_MODELS(Vehicle.getModels());
+    ALL_MODELS(Client.getModels()),
+    MENU_UPDATED_CLIENT("Client update menu"),
+    UPDATED_CLIENT("Nome\nEndereço\nTelefone\nEmail\n");
+
+
 
     private final String message;
 
