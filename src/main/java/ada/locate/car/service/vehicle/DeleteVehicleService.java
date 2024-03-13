@@ -2,9 +2,10 @@ package ada.locate.car.service.vehicle;
 
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.DeleteVehicle;
+import ada.locate.car.dto.VehicleDTO;
 import ada.locate.car.infra.api.Repository;
 
-public class DeleteVehicleService implements DeleteVehicle {
+public class DeleteVehicleService implements DeleteVehicle<VehicleDTO> {
 
     private final Repository<Vehicle> vehicleRepository;
 
@@ -14,7 +15,7 @@ public class DeleteVehicleService implements DeleteVehicle {
 
 
     @Override
-    public void delete() {
-    
+    public void delete(VehicleDTO o) {
+
     }
 }

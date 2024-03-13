@@ -3,6 +3,7 @@ package ada.locate.car.dto;
 import java.time.LocalDate;
 
 public record VehicleDTO(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
+
     @Override
     public String toString() {
         return "VehicleDTO{" +
@@ -14,30 +15,40 @@ public record VehicleDTO(String brand, LocalDate yearManufacture, String color, 
                 '}';
     }
 
-    @Override
-    public String brand() {
-        return brand;
-    }
+    public static class Builder {
+        private String brand;
+        private LocalDate yearManufacture;
+        private String color;
+        private String plateNumber;
+        private String model;
 
-    @Override
-    public LocalDate yearManufacture() {
-        return yearManufacture;
-    }
+        public Builder brand(String brand) {
+            this.brand = brand;
+            return this;
+        }
 
-    @Override
-    public String color() {
-        return color;
-    }
+        public Builder yearManufacture(LocalDate yearManufacture) {
+            this.yearManufacture = yearManufacture;
+            return this;
+        }
 
-    @Override
-    public String plateNumber() {
-        return plateNumber;
-    }
+        public Builder color(String color) {
+            this.color = color;
+            return this;
+        }
 
-    @Override
-    public String model() {
-        return model;
+        public Builder plateNumber(String plateNumber) {
+            this.plateNumber = plateNumber;
+            return this;
+        }
+
+        public Builder model(String model) {
+            this.model = model;
+            return this;
+        }
+
+        public VehicleDTO build() {
+            return new VehicleDTO(brand, yearManufacture, color, plateNumber, model);
+        }
     }
 }
-
-

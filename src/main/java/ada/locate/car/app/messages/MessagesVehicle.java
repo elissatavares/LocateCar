@@ -4,7 +4,7 @@ import ada.locate.car.core.model.Vehicle;
 
 public enum MessagesVehicle {
     ALL_DATA("Brand: \nYear of Manufacture: \nColor: \nPlate Number: "),
-    OPTION_VEHICLE("Create\nDelete\nSearch by model\n Search by plate\nUpdate"),
+    OPTION_VEHICLE("Create\nDelete\nSearch by model\nSearch by plate\nUpdate"),
     MENU_UPDATE_VEHICLE("Vehicle update menu"),
     DELETE_VEHICLE("Enter the license plate number of the vehicle you want to delete"),
     TITLE_DELETE_VEHICLE("Vehicle delete"),

@@ -12,7 +12,7 @@ public class UpdateClientCNPJControllerImpl implements Controller {
     private final Output showInformation;
 
     public UpdateClientCNPJControllerImpl(Input<String[]> inputMultipleFields, Output showInformation) {
-        this.inputMultipleFiel = inputMultipleFields;
+        this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;
     }
 

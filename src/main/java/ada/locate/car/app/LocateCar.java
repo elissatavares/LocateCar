@@ -12,6 +12,7 @@ import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
 import ada.locate.car.core.usecase.CreateVehicle;
 import ada.locate.car.core.usecase.DeleteVehicle;
 import ada.locate.car.core.usecase.UpdateVehicle;
+import ada.locate.car.dto.VehicleDTO;
 import ada.locate.car.infra.repository.ClientCPFRepository;
 import ada.locate.car.infra.repository.VehicleRepository;
 import ada.locate.car.infra.api.Repository;
@@ -42,9 +43,9 @@ public class LocateCar {
         Output showInformation = new ShowInformationOutputImpl();
 
 
-        CreateVehicle createVehicleService = new CreateVehicleService(vehicleRepository);
-        UpdateVehicle updateVehicleService = new UpdateVehicleService(vehicleRepository);
-        DeleteVehicle deleteVehicleService = new DeleteVehicleService(vehicleRepository);
+        CreateVehicle<VehicleDTO> createVehicleService = new CreateVehicleService(vehicleRepository);
+        UpdateVehicle<VehicleDTO> updateVehicleService = new UpdateVehicleService(vehicleRepository);
+        DeleteVehicle<VehicleDTO> deleteVehicleService = new DeleteVehicleService(vehicleRepository);
 
         Controller createVehicle = new CreateVehicleControllerImpl(inputOptionString, inputMultipleFields, showInformation, createVehicleService);
         Controller updateVehicle = new UpdateVehicleControllerImpl(inputMultipleFields, showInformation, updateVehicleService);

@@ -1,5 +1,5 @@
 package ada.locate.car.core.usecase;
 
-public interface UpdateVehicle {
-    void update();
+public interface UpdateVehicle <T>{
+    void update(T o);
 }

@@ -1,7 +1,6 @@
 package ada.locate.car.core.usecase;
 
-import ada.locate.car.dto.VehicleDTO;
 
-public interface CreateVehicle {
-    void create(VehicleDTO vehicleDTO);
+public interface CreateVehicle <T>{
+    void create(T o);
 }
