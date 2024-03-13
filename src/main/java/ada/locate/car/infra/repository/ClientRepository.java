@@ -1,19 +1,17 @@
 package ada.locate.car.infra.repository;
 
 import ada.locate.car.infra.api.Repository;
-import ada.locate.car.core.model.ClientCPF;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class ClientRepository implements Repository<Objects> {
-    List<Objects> clientList = new ArrayList<>(10);
+public class ClientRepository implements Repository<Object> {
+    private static final Map<Class<?>, Set<Object>> OBJECTS = new HashMap<>();
     private static ClientRepository instance;
+
     private ClientRepository() {
     }
 
-    public static ClientRepository getInstance() {
+    public static synchronized ClientRepository getInstance() {
         if (instance == null) {
             instance = new ClientRepository();
         }
@@ -21,32 +19,48 @@ public class ClientRepository implements Repository<Objects> {
     }
 
     @Override
-    public void create(Objects o) {
-        clientList.add(o);
+    public void create(Object o) {
+        Set<Object> objects = collectionOfObjects(o.getClass());
+        objects.add(o);
     }
 
     @Override
-    public Objects read(Objects key) {
+    public Object read(Object key) {
+        return null; // Não implementado
+    }
+
+    @Override
+    public void update(Object o, Object key) {
+        // Não implementado
+    }
+
+    @Override
+    public void delete(Object o) {
+        // Não implementado
+    }
+
+    @Override
+    public List<Object> findAll() {
+        List<Object> allObjects = new ArrayList<>();
+        for (Set<Object> objects : OBJECTS.values()) {
+            allObjects.addAll(objects);
+        }
+        return allObjects;
+    }
+
+    @Override
+    public List<Object> findAllBySpecification(Object o) {
+        // Não implementado
         return null;
     }
 
-    @Override
-    public void update(Objects o, Objects key) {
-
-    }
-
-    @Override
-    public void delete(Objects o) {
-
-    }
-
-    @Override
-    public List<Objects> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<Objects> findAllBySpecification(Objects o) {
-        return null;
+    private Set<Object> collectionOfObjects(Class<?> clazz) {
+        Set<Object> objects = OBJECTS.get(clazz);
+        if (objects == null) {
+            objects = new HashSet<>();
+            OBJECTS.put(clazz, objects);
+        }
+        return objects;
     }
 }
+
