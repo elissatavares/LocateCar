@@ -2,12 +2,10 @@ package ada.locate.car.controller.impl.client;
 
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.app.messages.MessagesClient;
-import ada.locate.car.model.ClientCNPJ;
+import ada.locate.car.core.model.ClientCNPJ;
 import ada.locate.car.swing.api.Input;
 import ada.locate.car.swing.api.Output;
-import ada.locate.car.swing.impl.CNPJInput;
 
-import javax.swing.*;
 import java.util.Arrays;
 
 public class CreateClientCNPJControllerImpl implements Controller {
