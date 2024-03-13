@@ -1,4 +1,4 @@
-package ada.locate.car.model;
+package ada.locate.car.core.model;
 
 public class Client {
     private String name;

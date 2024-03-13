@@ -1,4 +1,6 @@
-package ada.locate.car.model;
+package ada.locate.car.core.model;
+
+import ada.locate.car.core.model.Client;
 
 public class ClientCNPJ {
     private Client client;

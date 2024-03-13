@@ -1,6 +1,6 @@
 package ada.locate.car.app.messages;
 
-import ada.locate.car.model.Vehicle;
+import ada.locate.car.core.model.Client;
 
 public enum MessagesClient {
     ALL_CLIENT_DATA("Name: \nAddress: \nPhone Number: \nEmail: "),
@@ -11,7 +11,7 @@ public enum MessagesClient {
     INSERT_CLIENT_DATA("Insert client data"),
     CLIENT_DETAILS("Client details"),
     CLIENT_MENU("Client Menu"),
-    OPTION_CLIENT("Client with CPF\n Client with CNPJ"),
+    OPTION_CLIENT("Create\nRead\nUpdate\nDelete\nSearch\n"),
 
     ALL_MODELS(Vehicle.getModels());
 
