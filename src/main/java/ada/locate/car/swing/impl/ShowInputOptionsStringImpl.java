@@ -13,7 +13,7 @@ public class ShowInputOptionsStringImpl implements Input<String> {
                 title, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                 options, options[0]);
 
-        return selectedOption == JOptionPane.CLOSED_OPTION ? null : options[selectedOption];
+        return selectedOption == JOptionPane.CLOSED_OPTION ? "" : options[selectedOption];
     }
 }
 
