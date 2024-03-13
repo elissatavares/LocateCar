@@ -1,5 +1,6 @@
 package ada.locate.car.app;
 
+import ada.locate.car.app.menu.ClientMenu;
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
 import ada.locate.car.app.menu.VehicleMenu;
@@ -11,15 +12,15 @@ import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.controller.impl.client.CreateClientCPFControllerImpl;
 import ada.locate.car.controller.impl.vehicle.DeleteVehicleControllerImpl;
 import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
-import ada.locate.car.core.usecase.CreateVehicle;
-import ada.locate.car.core.usecase.DeleteVehicle;
-import ada.locate.car.core.usecase.UpdateVehicle;
+import ada.locate.car.core.usecase.*;
+import ada.locate.car.infra.dto.ClientDTO;
 import ada.locate.car.infra.dto.VehicleDTO;
-import ada.locate.car.infra.repository.ClientCPFRepository;
+import ada.locate.car.infra.repository.ClientRepository;
 import ada.locate.car.infra.repository.VehicleRepository;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.core.model.ClientCPF;
 import ada.locate.car.core.model.Vehicle;
+import ada.locate.car.service.client.CreateClientService;
 import ada.locate.car.service.vehicle.CreateVehicleService;
 import ada.locate.car.service.vehicle.DeleteVehicleService;
 import ada.locate.car.service.vehicle.UpdateVehicleService;
@@ -28,10 +29,11 @@ import ada.locate.car.frontend.api.Output;
 import ada.locate.car.frontend.impl.*;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class LocateCar {
     public static void run() {
-        Repository<ClientCPF> clientCPFRepository = ClientCPFRepository.getInstance();
+        Repository<Objects> clientRepository = ClientRepository.getInstance();
         Repository<Vehicle> vehicleRepository = VehicleRepository.getInstance();
 
         Input<Integer> inputOptionInt = new ShowInputOptionsIntImpl();
@@ -49,6 +51,9 @@ public class LocateCar {
         UpdateVehicle<VehicleDTO> updateVehicleService = new UpdateVehicleService(vehicleRepository);
         DeleteVehicle<VehicleDTO> deleteVehicleService = new DeleteVehicleService(vehicleRepository);
 
+        CreateClient<ClientDTO> createClientService = new CreateClientService(clientRepository);
+//        UpdateClient<ClientDTO> updateClientService = new UpdateClientService();
+
         Controller createVehicle = new CreateVehicleControllerImpl(inputOptionString, inputMultipleFields, showInformation, createVehicleService);
         Controller updateVehicle = new UpdateVehicleControllerImpl(inputMultipleFields, showInformation, updateVehicleService);
         Controller deleteVehicle = new DeleteVehicleControllerImpl(inputOnlyField, showInformation, deleteVehicleService);
@@ -61,7 +66,7 @@ public class LocateCar {
 
 
         Menu vehicleMenu = new VehicleMenu(inputOptionString, createVehicle, updateVehicle, deleteVehicle);
-//        Menu clientMenu = new ClientMenu(inputOptionInt, createClientCPF, createClientCNPJ, updatedClientCPF, updatedClientCNPJ);
+        Menu clientMenu = new ClientMenu(inputOptionString, createClientCPF,updatedClientCPF, createClientCNPJ, updatedClientCNPJ);
 
         JFrame frame = CreateFrame.execute();
         frame.setVisible(true);
@@ -75,7 +80,7 @@ public class LocateCar {
             if(!option.isEmpty()){
                 //direciona para o menu com as opções específicas de Client, Vehicle ou Alocation
                 switch (option){
-//                    case "Client" -> clientMenu.run();
+                    case "Client" -> clientMenu.run();
                     case "Vehicle" -> vehicleMenu.run();
                     //Alocation
                     // case 3 -> AlocationMenu.run();

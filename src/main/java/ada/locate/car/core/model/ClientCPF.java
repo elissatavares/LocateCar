@@ -1,13 +1,11 @@
 package ada.locate.car.core.model;
 
-import ada.locate.car.core.model.Client;
-
 public class ClientCPF {
     private Client client;
     private String cpf;
 
     public ClientCPF(String name, String address, String phoneNumber, String email, String cpf) {
-        this.client = new Client(name, address, phoneNumber, email);
+        this.client = new Client(name, address, phoneNumber, email, clientDTO.identification());
         this.cpf = formatCpf(cpf);
     }
 

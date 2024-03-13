@@ -25,6 +25,7 @@ public class DeleteVehicleControllerImpl implements Controller {
     public void execute() {
         String plateNumber = inputField.execute(MessagesVehicle.TITLE_DELETE_VEHICLE.get(), MessagesVehicle.DELETE_VEHICLE.get());
         VehicleDTO vehicleDTO = new VehicleDTO.Builder().plateNumber(plateNumber).build();
+        deleteVehicleService.delete(vehicleDTO);
         //deleteVehicleService.delete(vehicleDTO);
         showInformation.execute("Plate Number", plateNumber);
     }

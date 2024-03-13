@@ -25,10 +25,10 @@ public class VehicleMenu implements Menu {
         if (option.isEmpty()) {
             return;
         }
-        switch (option) {
-            case "Create" -> createVehicle.execute();
-            case "Update" -> updateVehicle.execute();
-            case "Delete" -> deleteVehicle.execute();
+        switch (option.toLowerCase().trim()) {
+            case "create" -> createVehicle.execute();
+            case "update" -> updateVehicle.execute();
+            case "delete" -> deleteVehicle.execute();
         }
     }
 }

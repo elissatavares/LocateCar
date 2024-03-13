@@ -5,6 +5,7 @@ import ada.locate.car.app.messages.MessagesClient;
 import ada.locate.car.core.model.ClientCNPJ;
 import ada.locate.car.frontend.api.Input;
 import ada.locate.car.frontend.api.Output;
+import ada.locate.car.infra.dto.ClientDTO;
 
 import java.util.Arrays;
 
@@ -23,12 +24,18 @@ public class CreateClientCNPJControllerImpl implements Controller {
     public void execute() {
         String cnpj = inputCNPJ.execute(MessagesClient.ENTER_CNPJ.get(), MessagesClient.ENTER_CNPJ.get());
         String[] clientData = inputMultipleFields.execute(MessagesClient.INSERT_CLIENT_DATA.get(), MessagesClient.ALL_CLIENT_DATA.get());
-        ClientCNPJ clientCNPJ = new ClientCNPJ(clientData[0], clientData[1], clientData[2], clientData[3], cnpj);
+        ClientDTO clientDTO = new ClientDTO.Builder().
+                name(clientData[0]).
+                address(clientData[1]).
+                phoneNumber(clientData[2]).
+                email(clientData[3]).
+                identification(cnpj).build();
+
         System.out.println("Client data entered: " + Arrays.toString(clientData));
-        showInformation.execute(clientCNPJ.toString(), MessagesClient.CLIENT_DETAILS.get());
+        showInformation.execute(clientDTO.toString(), MessagesClient.CLIENT_DETAILS.get());
 
         System.out.println(Arrays.toString(clientData));
         System.out.println(cnpj);
-        System.out.println(clientCNPJ);
+        System.out.println(clientDTO);
     }
 }
