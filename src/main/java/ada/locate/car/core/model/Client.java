@@ -6,6 +6,8 @@ public class Client {
     private String phoneNumber;
     private String email;
 
+    private String identification;
+
     public Client(String name, String address, String phoneNumber, String email, String identification) {
         this.name = name;
         this.address = address;
@@ -24,8 +26,8 @@ public class Client {
     }
 
     private enum Model {
-        CPF("Client with CPF"),
-        CNPJ("Client with CNPJ");
+        CPF("CPF"),
+        CNPJ("CNPJ");
 
         private String description;
 

@@ -2,6 +2,7 @@ package ada.locate.car.controller.impl.client;
 
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.app.messages.MessagesClient;
+import ada.locate.car.core.usecase.UpdateClient;
 import ada.locate.car.frontend.api.Input;
 import ada.locate.car.frontend.api.Output;
 
@@ -11,9 +12,12 @@ public class UpdateClientCNPJControllerImpl implements Controller {
     private final Input<String[]> inputMultipleFields;
     private final Output showInformation;
 
-    public UpdateClientCNPJControllerImpl(Input<String[]> inputMultipleFields, Output showInformation) {
+    private final UpdateClient updateClient;
+
+    public UpdateClientCNPJControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateClient updateClient) {
         this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;
+        this.updateClient = updateClient;
     }
 
     @Override

@@ -12,9 +12,9 @@ public class DeleteVehicleControllerImpl implements Controller {
     private final Input<String> inputField;
     private final Output showInformation;
 
-    private final DeleteVehicle<VehicleDTO> deleteVehicleService;
+    private final DeleteVehicle deleteVehicleService;
 
-    public DeleteVehicleControllerImpl(Input<String> inputField, Output showInformation, DeleteVehicle<VehicleDTO> deleteVehicleService) {
+    public DeleteVehicleControllerImpl(Input<String> inputField, Output showInformation, DeleteVehicle deleteVehicleService) {
         this.inputField = inputField;
         this.showInformation = showInformation;
         this.deleteVehicleService = deleteVehicleService;

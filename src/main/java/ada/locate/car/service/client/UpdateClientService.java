@@ -4,16 +4,19 @@ import ada.locate.car.core.model.Client;
 import ada.locate.car.core.usecase.UpdateClient;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.infra.dto.ClientDTO;
+import ada.locate.car.infra.dto.VehicleDTO;
 
 
-public class UpdateClientService implements UpdateClient<ClientDTO> {
-    private final Repository<Client> clientRepository;
+public class UpdateClientService implements UpdateClient {
+    private final Repository<Client> repository;
 
-    public UpdateClientService(Repository<Client> clientRepository) {
-        this.clientRepository = clientRepository;
+    public UpdateClientService(Repository<Client> repository) {
+        this.repository = repository;
     }
 
-    public void update( o) {
+
+    @Override
+    public void update(ClientDTO o) {
 
     }
 }

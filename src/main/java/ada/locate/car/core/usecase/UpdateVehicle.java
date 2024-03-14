@@ -1,5 +1,7 @@
 package ada.locate.car.core.usecase;
 
-public interface UpdateVehicle <T>{
-    void update(T o);
+import ada.locate.car.infra.dto.VehicleDTO;
+
+public interface UpdateVehicle {
+    void update(VehicleDTO vehicleDTO);
 }

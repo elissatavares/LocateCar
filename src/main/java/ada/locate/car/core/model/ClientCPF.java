@@ -1,20 +1,9 @@
 package ada.locate.car.core.model;
 
-public class ClientCPF {
-    private Client client;
-    private String cpf;
+public class ClientCPF extends Client{
 
-    public ClientCPF(String name, String address, String phoneNumber, String email, String cpf) {
-        this.client = new Client(name, address, phoneNumber, email, clientDTO.identification());
-        this.cpf = formatCpf(cpf);
-    }
-
-    @Override
-    public String toString() {
-        return "ClientCPF{" +
-                "client=" + client +
-                ", cpf='" + cpf + '\'' +
-                '}';
+    public ClientCPF(String name, String address, String phoneNumber, String email, String identification) {
+        super(name, address, phoneNumber, email, identification);
     }
 
     private String formatCpf(String cpf) {

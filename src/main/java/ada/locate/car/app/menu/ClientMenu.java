@@ -41,11 +41,10 @@ import ada.locate.car.controller.api.Controller;
 import ada.locate.car.frontend.api.Input;
 
 public class ClientMenu implements Menu {
-    private  final Input<String> inputOptionString;
+    private final Input<String> inputOptionString;
 
     private final Controller createClientCPF;
     private final Controller updateClientCPF;
-
     private final Controller createClientCNPJ;
     private final Controller updateClientCNPJ;
 
@@ -62,31 +61,29 @@ public class ClientMenu implements Menu {
         String option = inputOptionString.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.OPTION_CLIENT.get());
         String type = inputOptionString.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.ALL_TYPES.get());
 
-        option = option.toLowerCase().trim();
-        type = type.toUpperCase().trim();
 
         if (option.isEmpty() || type.isEmpty()) {
             return;
         }
 
-        switch (option) {
+        switch (option.toLowerCase().trim()) {
             case "create" -> {
-                if ((type.equals("CNPJ"))) {
+                if (type.equalsIgnoreCase("CNPJ")) {
                     createClientCNPJ.execute();
                 } else {
                     createClientCPF.execute();
                 }
             }
             case "update" -> {
-                if ((type.equals("CNPJ"))) {
+                if (type.equalsIgnoreCase("CNPJ")) {
                     updateClientCNPJ.execute();
                 } else {
                     updateClientCPF.execute();
                 }
             }
             //case "delete" -> (type.equalsIgnoreCase("CNPJ")) ? deleteCNPJ() : deleteCPF();
-    }
         }
+    }
 
 //    private void runCreateMenu() {
 //        Integer createOption = inputOptionInt.execute(MessagesClient.MENU_UPDATED_CLIENT.get(), MessagesClient.OPTION_CLIENT.get());

@@ -12,9 +12,9 @@ import java.util.Arrays;
 public class UpdateVehicleControllerImpl implements Controller {
     private final Input<String[]> inputMultipleFields;
     private final Output showInformation;
-    private final UpdateVehicle<VehicleDTO> updateVehicleService;
+    private final UpdateVehicle updateVehicleService;
 
-    public UpdateVehicleControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateVehicle<VehicleDTO> updateVehicleService) {
+    public UpdateVehicleControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateVehicle updateVehicleService) {
         this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;
         this.updateVehicleService = updateVehicleService;

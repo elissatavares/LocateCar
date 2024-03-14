@@ -1,20 +1,19 @@
 package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
-import ada.locate.car.core.model.ClientCPF;
 import ada.locate.car.core.usecase.CreateClient;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.infra.dto.ClientDTO;
 
-import java.util.Objects;
 
-public class CreateClientService implements CreateClient<ClientDTO> {
+public class CreateClientService implements CreateClient {
 
-    private final Repository<Objects> clientRepository;
+    private final Repository<Client> repository;
 
-    public CreateClientService(Repository<Objects> clientRepository) {
-        this.clientRepository = clientRepository;
+    public CreateClientService(Repository<Client> repository) {
+        this.repository = repository;
     }
+
 
     @Override
     public void create(ClientDTO clientDTO) {
@@ -24,6 +23,6 @@ public class CreateClientService implements CreateClient<ClientDTO> {
                 clientDTO.phoneNumber(),
                 clientDTO.email(),
                 clientDTO.identification());
-        clientRepository.create(client);
+        repository.create(client);
     }
 }

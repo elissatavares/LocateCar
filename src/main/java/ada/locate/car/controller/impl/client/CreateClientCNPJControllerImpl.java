@@ -2,7 +2,9 @@ package ada.locate.car.controller.impl.client;
 
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.app.messages.MessagesClient;
+import ada.locate.car.core.model.Client;
 import ada.locate.car.core.model.ClientCNPJ;
+import ada.locate.car.core.usecase.CreateClient;
 import ada.locate.car.frontend.api.Input;
 import ada.locate.car.frontend.api.Output;
 import ada.locate.car.infra.dto.ClientDTO;
@@ -14,10 +16,13 @@ public class CreateClientCNPJControllerImpl implements Controller {
     private final Output showInformation;
     private final Input<String> inputCNPJ;
 
-    public CreateClientCNPJControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, Input<String> inputCNPJ) {
+    private final CreateClient clientCreateService;
+
+    public CreateClientCNPJControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, Input<String> inputCNPJ, CreateClient clientCreateService) {
         this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;
         this.inputCNPJ = inputCNPJ;
+        this.clientCreateService = clientCreateService;
     }
 
     @Override

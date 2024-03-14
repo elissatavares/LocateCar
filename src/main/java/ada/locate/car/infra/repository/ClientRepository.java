@@ -1,66 +1,52 @@
 package ada.locate.car.infra.repository;
 
+import ada.locate.car.core.model.Client;
 import ada.locate.car.infra.api.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ClientRepository implements Repository<Object> {
-    private static final Map<Class<?>, Set<Object>> OBJECTS = new HashMap<>();
+public class ClientRepository implements Repository<Client> {
+
+    List<Client> clientCPFList = new ArrayList<>(10);
     private static ClientRepository instance;
 
     private ClientRepository() {
     }
 
-    public static synchronized ClientRepository getInstance() {
+    public static ClientRepository getInstance() {
         if (instance == null) {
             instance = new ClientRepository();
         }
         return instance;
     }
-
     @Override
-    public void create(Object o) {
-        Set<Object> objects = collectionOfObjects(o.getClass());
-        objects.add(o);
+    public void create(Client o) {
+
     }
 
     @Override
-    public Object read(Object key) {
-        return null; // Não implementado
-    }
-
-    @Override
-    public void update(Object o, Object key) {
-        // Não implementado
-    }
-
-    @Override
-    public void delete(Object o) {
-        // Não implementado
-    }
-
-    @Override
-    public List<Object> findAll() {
-        List<Object> allObjects = new ArrayList<>();
-        for (Set<Object> objects : OBJECTS.values()) {
-            allObjects.addAll(objects);
-        }
-        return allObjects;
-    }
-
-    @Override
-    public List<Object> findAllBySpecification(Object o) {
-        // Não implementado
+    public Client read(Client key) {
         return null;
     }
 
-    private Set<Object> collectionOfObjects(Class<?> clazz) {
-        Set<Object> objects = OBJECTS.get(clazz);
-        if (objects == null) {
-            objects = new HashSet<>();
-            OBJECTS.put(clazz, objects);
-        }
-        return objects;
+    @Override
+    public void update(Client o, Client key) {
+
+    }
+
+    @Override
+    public void delete(Client o) {
+
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllBySpecification(Client o) {
+        return null;
     }
 }
-
