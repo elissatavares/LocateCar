@@ -1,5 +1,7 @@
 package ada.locate.car.core.usecase;
 
-public interface DeleteVehicle <T> {
-    void delete(T o);
+import ada.locate.car.infra.dto.VehicleDTO;
+
+public interface DeleteVehicle {
+    void delete(VehicleDTO vehicleDTO);
 }

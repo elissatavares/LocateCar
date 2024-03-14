@@ -5,7 +5,7 @@ import ada.locate.car.core.usecase.UpdateVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;
 import ada.locate.car.infra.api.Repository;
 
-public class UpdateVehicleService implements UpdateVehicle<VehicleDTO> {
+public class UpdateVehicleService implements UpdateVehicle {
 
     private final Repository<Vehicle> vehicleRepository;
 

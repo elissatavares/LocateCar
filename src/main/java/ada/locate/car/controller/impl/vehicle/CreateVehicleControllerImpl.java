@@ -14,9 +14,9 @@ public class CreateVehicleControllerImpl implements Controller {
     private final Input<String[]> inputMultipleFields;
     private final Output showInformation;
 
-    private final CreateVehicle<VehicleDTO> createVehicleService;
+    private final CreateVehicle createVehicleService;
 
-    public CreateVehicleControllerImpl(Input<String> inputOptionString, Input<String[]> inputMultipleFields, Output showInformation, CreateVehicle<VehicleDTO> createVehicleService) {
+    public CreateVehicleControllerImpl(Input<String> inputOptionString, Input<String[]> inputMultipleFields, Output showInformation, CreateVehicle createVehicleService) {
         this.inputOptionString = inputOptionString;
         this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;

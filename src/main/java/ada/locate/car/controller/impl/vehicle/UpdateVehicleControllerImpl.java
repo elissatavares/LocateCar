@@ -12,9 +12,9 @@ import java.util.Arrays;
 public class UpdateVehicleControllerImpl implements Controller {
     private final Input<String[]> inputMultipleFields;
     private final Output showInformation;
-    private final UpdateVehicle<VehicleDTO> updateVehicleService;
+    private final UpdateVehicle updateVehicleService;
 
-    public UpdateVehicleControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateVehicle<VehicleDTO> updateVehicleService) {
+    public UpdateVehicleControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateVehicle updateVehicleService) {
         this.inputMultipleFields = inputMultipleFields;
         this.showInformation = showInformation;
         this.updateVehicleService = updateVehicleService;
@@ -24,6 +24,11 @@ public class UpdateVehicleControllerImpl implements Controller {
     @Override
     public void execute() {
         String[] data = inputMultipleFields.execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.UPDATE_VEHICLE.get());
+        VehicleDTO vehicleDTO = new VehicleDTO.Builder().
+                color(data[0]).
+                plateNumber(data[1]).
+                build();
+        updateVehicleService.update(vehicleDTO);
         showInformation.execute("atualizado", Arrays.toString(data));
         System.out.println(Arrays.toString(data));
     }

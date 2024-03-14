@@ -34,3 +34,78 @@
 //        }
 //    }
 //}
+package ada.locate.car.app.menu;
+
+import ada.locate.car.app.messages.MessagesClient;
+import ada.locate.car.controller.api.Controller;
+import ada.locate.car.frontend.api.Input;
+
+public class ClientMenu implements Menu {
+    private final Input<String> inputOptionString;
+
+    private final Controller createClientCPF;
+    private final Controller updateClientCPF;
+    private final Controller createClientCNPJ;
+    private final Controller updateClientCNPJ;
+
+    public ClientMenu(Input<String> inputOptionString, Controller createClientControllerCPF, Controller updateClientControllerCPF, Controller createClientControllerCNPJ, Controller updateClientControllerCNPJ) {
+        this.inputOptionString = inputOptionString;
+        this.createClientCPF = createClientControllerCPF;
+        this.updateClientCPF = updateClientControllerCPF;
+        this.createClientCNPJ = createClientControllerCNPJ;
+        this.updateClientCNPJ = updateClientControllerCNPJ;
+    }
+
+    @Override
+    public void run() {
+        String option = inputOptionString.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.OPTION_CLIENT.get());
+        String type = inputOptionString.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.ALL_TYPES.get());
+
+
+        if (option.isEmpty() || type.isEmpty()) {
+            return;
+        }
+
+        switch (option.toLowerCase().trim()) {
+            case "create" -> {
+                if (type.equalsIgnoreCase("CNPJ")) {
+                    createClientCNPJ.execute();
+                } else {
+                    createClientCPF.execute();
+                }
+            }
+            case "update" -> {
+                if (type.equalsIgnoreCase("CNPJ")) {
+                    updateClientCNPJ.execute();
+                } else {
+                    updateClientCPF.execute();
+                }
+            }
+            //case "delete" -> (type.equalsIgnoreCase("CNPJ")) ? deleteCNPJ() : deleteCPF();
+        }
+    }
+
+//    private void runCreateMenu() {
+//        Integer createOption = inputOptionInt.execute(MessagesClient.MENU_UPDATED_CLIENT.get(), MessagesClient.OPTION_CLIENT.get());
+//        if (createOption == null) {
+//            return;
+//        }
+//
+//        switch (createOption) {
+//            case 1 -> createClientController.execute();
+//            case 2 -> createClientController.execute();
+//        }
+//    }
+//
+//    private void runUpdateMenu() {
+//        Integer updateOption = inputOptionInt.execute(MessagesClient.UPDATE_MENU.get(), MessagesClient.OPTION_UPDATE.get());
+//        if (updateOption == null) {
+//            return;
+//        }
+//
+//        switch (updateOption) {
+//            case 1 -> updateClientControllerCNPJ.execute();
+//            case 2 -> updateClientControllerCNPJ.execute();
+//        }
+//    }
+}

@@ -1,7 +1,8 @@
 package ada.locate.car.core.usecase;
 
-import ada.locate.car.infra.dto.VehicleDTO;
 
-public interface DeleteClient {
-    void delete(VehicleDTO vehicleDTO);
+import ada.locate.car.infra.dto.ClientDTO;
+
+public interface DeleteClient{
+    void delete(ClientDTO clientDTO);
 }

@@ -12,9 +12,9 @@ public class DeleteVehicleControllerImpl implements Controller {
     private final Input<String> inputField;
     private final Output showInformation;
 
-    private final DeleteVehicle<VehicleDTO> deleteVehicleService;
+    private final DeleteVehicle deleteVehicleService;
 
-    public DeleteVehicleControllerImpl(Input<String> inputField, Output showInformation, DeleteVehicle<VehicleDTO> deleteVehicleService) {
+    public DeleteVehicleControllerImpl(Input<String> inputField, Output showInformation, DeleteVehicle deleteVehicleService) {
         this.inputField = inputField;
         this.showInformation = showInformation;
         this.deleteVehicleService = deleteVehicleService;
@@ -25,6 +25,7 @@ public class DeleteVehicleControllerImpl implements Controller {
     public void execute() {
         String plateNumber = inputField.execute(MessagesVehicle.TITLE_DELETE_VEHICLE.get(), MessagesVehicle.DELETE_VEHICLE.get());
         VehicleDTO vehicleDTO = new VehicleDTO.Builder().plateNumber(plateNumber).build();
+        deleteVehicleService.delete(vehicleDTO);
         //deleteVehicleService.delete(vehicleDTO);
         showInformation.execute("Plate Number", plateNumber);
     }

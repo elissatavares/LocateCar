@@ -5,7 +5,7 @@ import ada.locate.car.core.usecase.DeleteVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;
 import ada.locate.car.infra.api.Repository;
 
-public class DeleteVehicleService implements DeleteVehicle<VehicleDTO> {
+public class DeleteVehicleService implements DeleteVehicle {
 
     private final Repository<Vehicle> vehicleRepository;
 
