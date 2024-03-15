@@ -23,7 +23,7 @@ public class ReadVehicleControllerImpl implements Controller {
             case "search by model" -> vehicleDTO = new VehicleDTO.Builder().model(searchModel()).description(searchType).build();
             case "search by plate" -> vehicleDTO = new VehicleDTO.Builder().plateNumber(searchPlate()).description(searchType).build();
             case "search by color" -> vehicleDTO = new VehicleDTO.Builder().color(searchColor()).description(searchType).build();
-            case "search all" -> vehicleDTO = new VehicleDTO.Builder().description(searchType).build();
+            case "search all", "search for available vehicles" -> vehicleDTO = new VehicleDTO.Builder().description(searchType).build();
         }
         List<VehicleDTO> vehicleDTOList = config.service().read().read(vehicleDTO);
         config.front().showInformation().execute(MessagesVehicle.RESULTS_SEARCH_FILTER.get(), vehicleDTOList.toString());
