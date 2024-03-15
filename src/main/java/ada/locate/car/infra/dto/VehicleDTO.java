@@ -1,10 +1,30 @@
 package ada.locate.car.infra.dto;
 
+import ada.locate.car.core.model.Vehicle;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public record VehicleDTO(String brand, LocalDate yearManufacture,
                          String color, String plateNumber,
                          String model, String description, String oldPlateNumber) {
+
+    @Override
+    public String color() {
+        return color;
+    }
+
+    @Override
+    public String plateNumber() {
+        return plateNumber;
+    }
+
+    @Override
+    public String model() {
+        return model;
+    }
+
 
     @Override
     public String toString() {
@@ -23,8 +43,8 @@ public record VehicleDTO(String brand, LocalDate yearManufacture,
         private String color;
         private String plateNumber;
         private String model;
+        private String newPlateNumber;
         private String description;
-        private String oldPlateNumber;
 
         public Builder brand(String brand) {
             this.brand = brand;
@@ -54,15 +74,25 @@ public record VehicleDTO(String brand, LocalDate yearManufacture,
             this.description = description;
             return this;
         }
-        public Builder oldPlateNumber(String oldPlateNumber) {
-            this.oldPlateNumber = oldPlateNumber;
+        public Builder newPlateNumber(String newPlateNumber) {
+            this.newPlateNumber = newPlateNumber;
             return this;
         }
 
         public VehicleDTO build() {
-            return new VehicleDTO(brand, yearManufacture, color, plateNumber, model, description, oldPlateNumber);
+            return new VehicleDTO(brand, yearManufacture, color, plateNumber, model, description, newPlateNumber);
         }
     }
-
+    public List<VehicleDTO> convertToVehicleDTO(List<Vehicle> vehicleList){
+        return vehicleList.stream()
+                .map(vehicle -> new Builder().
+                        brand(vehicle.getBrand()).
+                        yearManufacture(vehicle.getYearManufacture()).
+                        color(vehicle.getColor()).
+                        plateNumber(vehicle.getPlateNumber()).
+                        model(vehicle.getModel()).
+                        build()).
+                collect(Collectors.toList());
+    }
 
 }

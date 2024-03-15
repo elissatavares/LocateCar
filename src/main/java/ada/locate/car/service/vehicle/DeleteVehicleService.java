@@ -16,6 +16,7 @@ public class DeleteVehicleService implements DeleteVehicle {
 
     @Override
     public void execute(VehicleDTO o) {
-
+        Vehicle vehicle = repository.read(o.color());
+        repository.delete(vehicle);
     }
 }

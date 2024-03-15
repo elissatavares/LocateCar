@@ -60,4 +60,27 @@ public class Vehicle {
     public static String getModels(){
         return Model.allModels();
     }
+
+    public String getBrand() {
+        return brand;
+    }
+    public String getModel() {
+        return model;
+    }
+
+    public LocalDate getYearManufacture() {
+        return yearManufacture;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
 }

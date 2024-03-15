@@ -17,6 +17,25 @@ public class ReadVehicleService implements ReadVehicle {
 
     @Override
     public List<VehicleDTO> read(VehicleDTO vehicleDTO) {
-        return new ArrayList<>();
+        List<Vehicle> list = new ArrayList<>(10);
+        switch (vehicleDTO.description().toLowerCase()){
+            case "search by model" -> list = searchByModel(vehicleDTO.model());
+            case "search by plate" -> list = searchByPlate(vehicleDTO.plateNumber());
+            case "search by color" -> list = searchByColor(vehicleDTO.color());
+            case "search all" -> list = repository.findAll();
+        }
+        return vehicleDTO.convertToVehicleDTO(list);
+    }
+
+    private List<Vehicle> searchByModel(String model) {
+        return repository.findAllByPredicate(vehicle -> vehicle.getModel().equalsIgnoreCase(model) && vehicle.isAvailable());
+    }
+
+    private List<Vehicle> searchByPlate(String plate) {
+        return repository.findAllByPredicate(vehicle -> vehicle.getPlateNumber().equalsIgnoreCase(plate)&& vehicle.isAvailable());
+    }
+
+    private List<Vehicle> searchByColor(String color) {
+        return repository.findAllByPredicate(vehicle -> vehicle.getColor().equalsIgnoreCase(color)&& vehicle.isAvailable());
     }
 }

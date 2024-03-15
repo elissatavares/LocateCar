@@ -5,6 +5,8 @@ import ada.locate.car.core.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class VehicleRepository implements Repository<Vehicle> {
 
@@ -29,7 +31,7 @@ public class VehicleRepository implements Repository<Vehicle> {
     }
 
     @Override
-    public Vehicle read(Vehicle key) {
+    public Vehicle read(String key) {
         return null;
     }
 
@@ -43,13 +45,16 @@ public class VehicleRepository implements Repository<Vehicle> {
 
     }
 
-    @Override
-    public List<Vehicle> findAllBySpecification(Vehicle o) {
-        return null;
-    }
 
     @Override
     public List<Vehicle> findAll() {
-        return null;
+        return vehicleList;
+    }
+
+    @Override
+    public List<Vehicle> findAllByPredicate(Predicate<Vehicle> predicate) {
+        return vehicleList.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
     }
 }

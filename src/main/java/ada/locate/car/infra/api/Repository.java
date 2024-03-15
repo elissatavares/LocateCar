@@ -2,12 +2,13 @@ package ada.locate.car.infra.api;
 
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public interface Repository<T>  {
 
     void create(T o);
 
-    T read(T key);
+    T read(String key);
 
     void update(T o, T key);
 
@@ -15,5 +16,5 @@ public interface Repository<T>  {
 
     List<T> findAll();
 
-    List<T> findAllBySpecification(T o);
+    List<T> findAllByPredicate(Predicate<T> predicate);
 }

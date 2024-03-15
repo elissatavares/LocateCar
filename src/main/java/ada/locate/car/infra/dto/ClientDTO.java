@@ -1,5 +1,9 @@
 package ada.locate.car.infra.dto;
 
+import ada.locate.car.core.model.Vehicle;
+
+import java.util.List;
+
 public record ClientDTO(String name, String address, String phoneNumber, String email, String identification) {
 
     @Override
@@ -48,4 +52,6 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
             return new ClientDTO(name, address, phoneNumber, email, identification);
         }
     }
+
+
 }

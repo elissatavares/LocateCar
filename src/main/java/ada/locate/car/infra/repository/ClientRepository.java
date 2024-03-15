@@ -5,6 +5,7 @@ import ada.locate.car.infra.api.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ClientRepository implements Repository<Client> {
 
@@ -26,7 +27,7 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
-    public Client read(Client key) {
+    public Client read(String key) {
         return null;
     }
 
@@ -46,7 +47,7 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
-    public List<Client> findAllBySpecification(Client o) {
+    public List<Client> findAllByPredicate(Predicate<Client> predicate) {
         return null;
     }
 }
