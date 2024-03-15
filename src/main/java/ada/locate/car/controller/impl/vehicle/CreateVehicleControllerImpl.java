@@ -17,11 +17,11 @@ public class CreateVehicleControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String[] data = config.front().inputMultipleFields().execute(MessagesVehicle.DESCRIPTION_INSERT_DATA.get(), MessagesVehicle.DESCRIPTION_ALL_DATA.get());
-        String model = config.front().inputOptionString().execute(MessagesVehicle.MENU_SELECT_MODEL.get(), MessagesVehicle.OPTION_ALL_MODELS.get());
+        String[] data = config.front().showDataVehicleEntry().execute();
+        String model = config.front().showInputOptionsModel().execute();
         VehicleDTO vehicleDTO = buildVehicleDTO(data, model);
         config.service().create().execute(vehicleDTO);
-        config.front().showInformation().execute(MessagesVehicle.VEHICLE_DETAILS.get(), vehicleDTO.toString());
+        //config.front().showInformation().execute(MessagesVehicle.VEHICLE_DETAILS.get(), vehicleDTO.toString());
     }
     private VehicleDTO buildVehicleDTO(String[] data, String model) {
         return new VehicleDTO.Builder()

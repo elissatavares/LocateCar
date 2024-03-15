@@ -17,10 +17,10 @@ public class ReadVehicleControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String searchType = config.front().inputOptionString().execute(MessagesVehicle.MENU_READ_VEHICLE.get(), MessagesVehicle.OPTION_READ.get());
+        String searchType = config.front().showInputOptionsReadVehicle().execute();
         VehicleDTO vehicleDTO = buildSearchDTO(searchType);
         List<VehicleDTO> vehicleDTOList = config.service().read().execute(vehicleDTO);
-        config.front().showInformation().execute(MessagesVehicle.RESULTS_SEARCH_FILTER.get(), vehicleDTOList.toString());
+        //config.front().showInformation().execute(MessagesVehicle.RESULTS_SEARCH_FILTER.get(), vehicleDTOList.toString());
     }
 
     private VehicleDTO buildSearchDTO(String searchType) {
@@ -35,14 +35,14 @@ public class ReadVehicleControllerImpl implements Controller {
     }
 
     private String searchModel() {
-        return config.front().inputOptionString().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.OPTION_ALL_MODELS.get());
+        return config.front().showInputOptionsInsertModelFilter().execute();
     }
 
     private String searchPlate() {
-        return config.front().inputOnlyField().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.DESCRIPTION_ENTER_PLATE.get());
+        return config.front().showFilterPlateEntry().execute();
     }
 
     private String searchColor() {
-        return config.front().inputOnlyField().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.DESCRIPTION_ENTER_COLOR.get());
+        return config.front().showFilterColorEntry().execute();
     }
 }

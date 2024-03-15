@@ -1,6 +1,6 @@
-package ada.locate.car.frontend.impl;
+package ada.locate.car.backup.frontend.impl;
 
-import ada.locate.car.frontend.api.Output;
+import ada.locate.car.backup.frontend.api.Output;
 
 import javax.swing.*;
 

@@ -38,7 +38,7 @@ package ada.locate.car.app.menu;
 
 import ada.locate.car.app.messages.MessagesClient;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.frontend.api.Input;
+import ada.locate.car.backup.frontend.api.Input;
 
 public class ClientMenu implements Menu {
     private final Input<String> inputOptionString;

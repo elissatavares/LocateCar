@@ -1,10 +1,10 @@
 package ada.locate.car.app;
 
+import ada.locate.car.app.config.front.FrontConfig;
 import ada.locate.car.app.menu.ClientMenu;
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
 import ada.locate.car.app.menu.VehicleMenu;
-import ada.locate.car.app.config.front.FrontConfig;
 import ada.locate.car.app.config.vehicle.VehicleControllerConfig;
 import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
 import ada.locate.car.app.config.vehicle.VehicleMenuConfig;
@@ -18,6 +18,7 @@ import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
 import ada.locate.car.core.model.Client;
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.*;
+import ada.locate.car.frontend.impl.*;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.infra.repository.ClientRepository;
 import ada.locate.car.infra.repository.VehicleRepository;
@@ -28,9 +29,9 @@ import ada.locate.car.service.vehicle.CreateVehicleService;
 import ada.locate.car.service.vehicle.DeleteVehicleService;
 import ada.locate.car.service.vehicle.ReadVehicleService;
 import ada.locate.car.service.vehicle.UpdateVehicleService;
-import ada.locate.car.frontend.api.Input;
-import ada.locate.car.frontend.api.Output;
-import ada.locate.car.frontend.impl.*;
+import ada.locate.car.backup.frontend.api.Input;
+import ada.locate.car.backup.frontend.api.Output;
+import ada.locate.car.backup.frontend.impl.*;
 
 import javax.swing.*;
 
@@ -38,7 +39,7 @@ public class LocateCar {
     public static void run() {
         Repository<Client> clientRepository = ClientRepository.getInstance();
 
-        FrontConfig frontConfig = createFrontConfig();
+        FrontConfig frontConfig = createFrontConfig2();
         VehicleServiceConfig vehicleServiceConfig = createVehicleServiceConfig();
         VehicleControllerImplConfig vehicleControllerImplConfig = vehicleControllerImplConfig(vehicleServiceConfig, frontConfig);
         VehicleControllerConfig vehicleControllerConfig = createVehicleControllerConfig(vehicleControllerImplConfig);
@@ -90,18 +91,6 @@ public class LocateCar {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    //injeta todas as interfaces que eu posso ter no meu front
-    private static FrontConfig createFrontConfig() {
-        return new FrontConfig(
-                new ShowInputMultipleFieldsImpl(),
-                new ShowInputOnlyFieldImpl(),
-                new ShowInputOptionsStringImpl(),
-                new CPFInput(),
-                new CNPJInput(),
-                new ShowInformationOutputImpl()
-        );
-    }
-
     //injeta todas as dependencias para uma chamada da camada service
     private static VehicleServiceConfig createVehicleServiceConfig() {
         Repository<Vehicle> vehicleRepository = VehicleRepository.getInstance();
@@ -124,13 +113,31 @@ public class LocateCar {
     }
 
     //injeta para que eu consiga receber os inputs pelo front e consiga passar a requisição pro service
-    private static VehicleControllerImplConfig vehicleControllerImplConfig(VehicleServiceConfig vehicleServiceConfig, FrontConfig frontConfig){
-        return new VehicleControllerImplConfig(vehicleServiceConfig, frontConfig);
+    private static VehicleControllerImplConfig vehicleControllerImplConfig(VehicleServiceConfig vehicleServiceConfig, FrontConfig front2) {
+        return new VehicleControllerImplConfig(vehicleServiceConfig, front2);
     }
 
 
     //injeta para que eu consiga passar a requisição pro controller
-    private static VehicleMenuConfig createVehicleMenuConfig(VehicleControllerConfig vehicleControllerConfig, FrontConfig frontConfig) {
-        return new VehicleMenuConfig(vehicleControllerConfig, frontConfig);
+    private static VehicleMenuConfig createVehicleMenuConfig(VehicleControllerConfig vehicleControllerConfig, FrontConfig front2) {
+        return new VehicleMenuConfig(vehicleControllerConfig, front2);
+    }
+
+    //injeta todas as interfaces que eu posso ter no meu front
+    private static FrontConfig createFrontConfig2() {
+        return new FrontConfig(
+                new ShowInputOptionsInsertModelFilter(),
+                new ShowInputOptionsModel(),
+                new ShowInputOptionsReadVehicle(),
+                new ShowInputOptionsUpdateVehicle(),
+                new ShowInputOptionsVehicle(),
+                new ShowInputDataVehicle(),
+                new ShowInputUpdateVehicleColorAndNumberPlate(),
+                new ShowInputExclusionField(),
+                new ShowInputUpdatePlate(),
+                new ShowInputUpdateColor(),
+                new ShowInputNewPlateNumber(),
+                new ShowInputInsertFilterPlate(),
+                new ShowInputInsertFilterColor());
     }
 }

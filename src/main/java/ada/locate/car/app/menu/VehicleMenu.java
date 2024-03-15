@@ -1,6 +1,5 @@
 package ada.locate.car.app.menu;
 
-import ada.locate.car.app.messages.MessagesVehicle;
 import ada.locate.car.app.config.vehicle.VehicleMenuConfig;
 
 public class VehicleMenu implements Menu {
@@ -13,8 +12,7 @@ public class VehicleMenu implements Menu {
 
     @Override
     public void run() {
-        String option = config.front().inputOptionString().execute(MessagesVehicle.MENU_VEHICLE.get(), MessagesVehicle.OPTION_VEHICLE.get());
-
+        String option = config.front().showInputOptionsVehicle().execute();
         if (option.isEmpty()) {
             return;
         }

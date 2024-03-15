@@ -12,14 +12,14 @@ public enum MessagesVehicle {
 
     MENU_UPDATE_VEHICLE("Vehicle update menu"),
     MENU_READ_VEHICLE("Choose the type of search"),
-    MENU_DELETE_VEHICLE("Vehicle execute"),
+    MENU_DELETE_VEHICLE("Vehicle delete"),
     MENU_SELECT_MODEL("Select vehicle model"),
     MENU_INSERT_FILTER("Insert the filter"),
     MENU_VEHICLE("Vehicle menu"),
 
     DESCRIPTION_UPDATE_COLOR_VEHICLE("Enter new vehicle color"),
     DESCRIPTION_UPDATE_PLATE_VEHICLE("Enter new vehicle plate"),
-    DESCRIPTION_DELETE_VEHICLE("Enter the license plate number of the vehicle you want to update"),
+    DESCRIPTION_DELETE_VEHICLE("Enter the license plate number of the vehicle you want to delete"),
     DESCRIPTION_INSERT_DATA("Insert vehicle data"),
     DESCRIPTION_ENTER_PLATE("Enter the license plate number you want to search for"),
     DESCRIPTION_ALL_DATA("Brand: \nYear of Manufacture: \nColor: \nPlate Number: "),
