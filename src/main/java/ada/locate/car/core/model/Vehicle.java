@@ -83,4 +83,28 @@ public class Vehicle {
     public boolean isAvailable() {
         return available;
     }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setYearManufacture(LocalDate yearManufacture) {
+        this.yearManufacture = yearManufacture;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
 }

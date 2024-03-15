@@ -19,23 +19,29 @@ public class ReadVehicleService implements ReadVehicle {
     public List<VehicleDTO> read(VehicleDTO vehicleDTO) {
         List<Vehicle> list = new ArrayList<>(10);
         switch (vehicleDTO.description().toLowerCase()){
-            case "search by model" -> list = searchByModel(vehicleDTO.model());
-            case "search by plate" -> list = searchByPlate(vehicleDTO.plateNumber());
-            case "search by color" -> list = searchByColor(vehicleDTO.color());
+            case "search by model" -> list = searchByModelAvailable(vehicleDTO.model());
+            case "search by plate" -> list = searchByPlateAvailable(vehicleDTO.plateNumber());
+            case "search by color" -> list = searchByColorAvailable(vehicleDTO.color());
             case "search all" -> list = repository.findAll();
+            case "search for available vehicles" -> list = searchForAvailable();
         }
         return vehicleDTO.convertToVehicleDTO(list);
     }
 
-    private List<Vehicle> searchByModel(String model) {
+    private List<Vehicle> searchByModelAvailable(String model) {
         return repository.findAllByPredicate(vehicle -> vehicle.getModel().equalsIgnoreCase(model) && vehicle.isAvailable());
     }
 
-    private List<Vehicle> searchByPlate(String plate) {
-        return repository.findAllByPredicate(vehicle -> vehicle.getPlateNumber().equalsIgnoreCase(plate)&& vehicle.isAvailable());
+    private List<Vehicle> searchByPlateAvailable(String plate) {
+        return repository.findAllByPredicate(vehicle -> vehicle.getPlateNumber().equalsIgnoreCase(plate) && vehicle.isAvailable());
     }
 
-    private List<Vehicle> searchByColor(String color) {
-        return repository.findAllByPredicate(vehicle -> vehicle.getColor().equalsIgnoreCase(color)&& vehicle.isAvailable());
+    private List<Vehicle> searchByColorAvailable(String color) {
+        return repository.findAllByPredicate(vehicle -> vehicle.getColor().equalsIgnoreCase(color));
     }
+
+    private List<Vehicle> searchForAvailable(){
+        return repository.findAllByPredicate(Vehicle::isAvailable);
+    }
+
 }

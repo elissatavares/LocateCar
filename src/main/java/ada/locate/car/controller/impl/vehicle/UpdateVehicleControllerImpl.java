@@ -15,25 +15,29 @@ public class UpdateVehicleControllerImpl implements Controller {
 
     @Override
     public void execute() {
+        String plateNumber = config.front().inputOnlyField().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.DESCRIPTION_ENTER_PLATE.get());
         String searchType = config.front().inputOptionString().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.OPTION_UPDATE_VEHICLE.get());
         VehicleDTO vehicleDTO = null;
         switch (searchType.toLowerCase().trim()) {
             case "color" -> vehicleDTO =
                     new VehicleDTO.Builder().
-                            color(colorUpdate())
-                            .description(searchType).
+                            color(colorUpdate()).
+                            plateNumber(plateNumber).
+                            description(searchType).
                             build();
             case "plate number" -> vehicleDTO =
                     new VehicleDTO.Builder().
-                            plateNumber(plateNumberUpdate()).
+                            plateNumber(plateNumber).
                             description(searchType).
+                            newPlateNumber(plateNumberUpdate()).
                             build();
             case "plate color and number" -> {
                 String[] colorAndNumber = plateColorAndNumber();
                 vehicleDTO =
                         new VehicleDTO.Builder().
                                 color(colorAndNumber[0]).
-                                plateNumber(colorAndNumber[1]).
+                                newPlateNumber(colorAndNumber[1]).
+                                plateNumber(plateNumber).
                                 description(searchType).
                                 build();
             }

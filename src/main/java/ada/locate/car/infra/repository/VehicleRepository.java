@@ -32,17 +32,21 @@ public class VehicleRepository implements Repository<Vehicle> {
 
     @Override
     public Vehicle read(String key) {
-        return null;
+        return vehicleList.stream()
+                .filter(vehicle -> vehicle.getPlateNumber().equalsIgnoreCase(key))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
-    public void update(Vehicle o, Vehicle key) {
-
+    public void update(Vehicle newVehicle, Vehicle oldVehicle) {
+        vehicleList.remove(oldVehicle);
+        vehicleList.add(newVehicle);
     }
 
     @Override
     public void delete(Vehicle o) {
-
+        vehicleList.remove(o);
     }
 
 

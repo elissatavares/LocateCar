@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public record VehicleDTO(String brand, LocalDate yearManufacture,
                          String color, String plateNumber,
-                         String model, String description, String oldPlateNumber) {
+                         String model, String description, String newPlateNumber) {
 
     @Override
     public String color() {
