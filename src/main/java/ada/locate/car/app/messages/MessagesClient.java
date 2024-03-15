@@ -3,7 +3,7 @@ package ada.locate.car.app.messages;
 import ada.locate.car.core.model.Client;
 
 public enum MessagesClient {
-    ALL_CLIENT_DATA("Name: \nAddress: \nPhone Number: \nEmail: "),
+    ALL_CLIENT_DATA("Name:\nAddress:\nPhoneNumber:\nEmail:"),
     ENTER_CPF("Enter CPF"),
     ENTER_CNPJ("Enter CNPJ"),
 //    CPF_REGEX("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"),
@@ -15,13 +15,16 @@ public enum MessagesClient {
 
     ALL_TYPES(Client.getModels()),
     MENU_UPDATED_CLIENT("Client update menu"),
-    UPDATED_CLIENT("Nome\nEndereço\nTelefone\nEmail\n"),
-    OPTION_UPDATE("Update with CPF\n Update with CNPJ"),
+    UPDATED_CLIENT("Id\nNome\nEndereço\nTelefone\nEmail\n"),
+    OPTION_UPDATE("Update with CPF\nUpdate with CNPJ"),
     UPDATE_MENU("Update Menu"),
 
     OPTION_CREATE("Create with CPF\nCreate with CNPJ"),
     TITLE_DELETE_CLIENT("Client delete"),
-    DELETE_CLIENT("Enter the identification number of the client you want to delete");
+    DELETE_CLIENT("Enter the identification number of the client you want to delete"),
+    ENTER_CLIENT_ID("Enter client id"),
+    ENTER_UPDATED_FIELDS("Enter client data to update"),
+    UPDATED_CLIENT_DATA("Name:\nAddress:\nPhoneNumber:\nEmail:");
 
 
     private final String message;

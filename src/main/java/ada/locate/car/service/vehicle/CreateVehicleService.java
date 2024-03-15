@@ -1,6 +1,5 @@
 package ada.locate.car.service.vehicle;
 
-import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.CreateVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;

@@ -1,23 +1,31 @@
 package ada.locate.car.infra.dto;
 
-public record ClientDTO(String name, String address, String phoneNumber, String email, String identification) {
+public record ClientDTO(Long id, String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
 
     @Override
     public String toString() {
         return "Builder{" +
+                "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", identification='" + identification + '\'' +
+                ", identification='" + flagIdentification + '\'' +
                 '}';
     }
     public static class Builder {
+        private Long id;
         private String name;
         private String address;
         private String phoneNumber;
         private String email;
-        private String identification;
+        private String flagIdentification;
+        private String document;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder name(String name) {
             this.name = name;
@@ -38,14 +46,18 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
             this.email = email;
             return this;
         }
+        public Builder document(String document) {
+            this.document = document;
+            return this;
+        }
 
-        public Builder identification(String cpf) {
-            this.identification = cpf;
+        public Builder flagIdentification(String flagIdentification) {
+            this.flagIdentification = flagIdentification;
             return this;
         }
 
         public ClientDTO build() {
-            return new ClientDTO(name, address, phoneNumber, email, identification);
+            return new ClientDTO(id, name, address, phoneNumber, email, flagIdentification, document);
         }
     }
 }

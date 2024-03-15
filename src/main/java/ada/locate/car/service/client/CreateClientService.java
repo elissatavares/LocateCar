@@ -5,15 +5,14 @@ import ada.locate.car.core.usecase.CreateClient;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.infra.dto.ClientDTO;
 
-
 public class CreateClientService implements CreateClient {
 
-    private final Repository<Client> repository;
+    private final Repository<Client> clientRepository;
 
-    public CreateClientService(Repository<Client> repository) {
-        this.repository = repository;
+    public CreateClientService(Repository<Client> clientRepository) {
+
+        this.clientRepository = clientRepository;
     }
-
 
     @Override
     public void create(ClientDTO clientDTO) {
@@ -22,7 +21,9 @@ public class CreateClientService implements CreateClient {
                 clientDTO.address(),
                 clientDTO.phoneNumber(),
                 clientDTO.email(),
-                clientDTO.identification());
-        repository.create(client);
+                clientDTO.flagIdentification(),
+                clientDTO.document());
+        System.out.println(client);
+        clientRepository.create(client);
     }
 }

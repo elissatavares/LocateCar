@@ -1,6 +1,9 @@
 package ada.locate.car.infra.api;
 
 
+import ada.locate.car.core.model.Client;
+import ada.locate.car.infra.dto.ClientDTO;
+
 import java.util.List;
 
 public interface Repository<T>  {
