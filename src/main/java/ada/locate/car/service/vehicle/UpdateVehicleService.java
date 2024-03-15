@@ -7,15 +7,15 @@ import ada.locate.car.infra.api.Repository;
 
 public class UpdateVehicleService implements UpdateVehicle {
 
-    private final Repository<Vehicle> vehicleRepository;
+    private final Repository<Vehicle> repository;
 
     public UpdateVehicleService(Repository<Vehicle> vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+        this.repository = vehicleRepository;
     }
 
 
     @Override
-    public void update(VehicleDTO o) {
+    public void execute(VehicleDTO o) {
 
     }
 }

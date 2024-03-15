@@ -14,14 +14,14 @@ public enum MessagesClient {
     OPTION_CLIENT("Create\nRead\nUpdate\nDelete\nSearch\n"),
 
     ALL_TYPES(Client.getModels()),
-    MENU_UPDATED_CLIENT("Client update menu"),
+    MENU_UPDATED_CLIENT("Client execute menu"),
     UPDATED_CLIENT("Nome\nEndereço\nTelefone\nEmail\n"),
     OPTION_UPDATE("Update with CPF\n Update with CNPJ"),
     UPDATE_MENU("Update Menu"),
 
     OPTION_CREATE("Create with CPF\nCreate with CNPJ"),
-    TITLE_DELETE_CLIENT("Client delete"),
-    DELETE_CLIENT("Enter the identification number of the client you want to delete");
+    TITLE_DELETE_CLIENT("Client execute"),
+    DELETE_CLIENT("Enter the identification number of the client you want to execute");
 
 
     private final String message;

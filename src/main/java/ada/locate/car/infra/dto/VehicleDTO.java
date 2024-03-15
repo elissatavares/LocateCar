@@ -2,7 +2,9 @@ package ada.locate.car.infra.dto;
 
 import java.time.LocalDate;
 
-public record VehicleDTO(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
+public record VehicleDTO(String brand, LocalDate yearManufacture,
+                         String color, String plateNumber,
+                         String model, String description, String oldPlateNumber) {
 
     @Override
     public String toString() {
@@ -21,6 +23,8 @@ public record VehicleDTO(String brand, LocalDate yearManufacture, String color, 
         private String color;
         private String plateNumber;
         private String model;
+        private String description;
+        private String oldPlateNumber;
 
         public Builder brand(String brand) {
             this.brand = brand;
@@ -46,9 +50,19 @@ public record VehicleDTO(String brand, LocalDate yearManufacture, String color, 
             this.model = model;
             return this;
         }
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+        public Builder oldPlateNumber(String oldPlateNumber) {
+            this.oldPlateNumber = oldPlateNumber;
+            return this;
+        }
 
         public VehicleDTO build() {
-            return new VehicleDTO(brand, yearManufacture, color, plateNumber, model);
+            return new VehicleDTO(brand, yearManufacture, color, plateNumber, model, description, oldPlateNumber);
         }
     }
+
+
 }

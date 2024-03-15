@@ -1,35 +1,56 @@
 package ada.locate.car.controller.impl.vehicle;
 
 import ada.locate.car.app.messages.MessagesVehicle;
+import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.core.usecase.UpdateVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;
-import ada.locate.car.frontend.api.Input;
-import ada.locate.car.frontend.api.Output;
-
-import java.util.Arrays;
 
 public class UpdateVehicleControllerImpl implements Controller {
-    private final Input<String[]> inputMultipleFields;
-    private final Output showInformation;
-    private final UpdateVehicle updateVehicleService;
+    private final VehicleControllerImplConfig config;
 
-    public UpdateVehicleControllerImpl(Input<String[]> inputMultipleFields, Output showInformation, UpdateVehicle updateVehicleService) {
-        this.inputMultipleFields = inputMultipleFields;
-        this.showInformation = showInformation;
-        this.updateVehicleService = updateVehicleService;
+    public UpdateVehicleControllerImpl(VehicleControllerImplConfig config) {
+        this.config = config;
     }
 
 
     @Override
     public void execute() {
-        String[] data = inputMultipleFields.execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.UPDATE_VEHICLE.get());
-        VehicleDTO vehicleDTO = new VehicleDTO.Builder().
-                color(data[0]).
-                plateNumber(data[1]).
-                build();
-        updateVehicleService.update(vehicleDTO);
-        showInformation.execute("atualizado", Arrays.toString(data));
-        System.out.println(Arrays.toString(data));
+        String searchType = config.front().inputOptionString().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.OPTION_UPDATE_VEHICLE.get());
+        VehicleDTO vehicleDTO = null;
+        switch (searchType.toLowerCase().trim()) {
+            case "color" -> vehicleDTO =
+                    new VehicleDTO.Builder().
+                            color(colorUpdate())
+                            .description(searchType).
+                            build();
+            case "plate number" -> vehicleDTO =
+                    new VehicleDTO.Builder().
+                            plateNumber(plateNumberUpdate()).
+                            description(searchType).
+                            build();
+            case "plate color and number" -> {
+                String[] colorAndNumber = plateColorAndNumber();
+                vehicleDTO =
+                        new VehicleDTO.Builder().
+                                color(colorAndNumber[0]).
+                                plateNumber(colorAndNumber[1]).
+                                description(searchType).
+                                build();
+            }
+
+        }
+        config.service().update().execute(vehicleDTO);
+    }
+
+    private String colorUpdate() {
+        return config.front().inputOnlyField().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.DESCRIPTION_UPDATE_COLOR_VEHICLE.get());
+    }
+
+    private String plateNumberUpdate() {
+        return config.front().inputOnlyField().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.DESCRIPTION_UPDATE_PLATE_VEHICLE.get());
+    }
+
+    private String[] plateColorAndNumber() {
+        return config.front().inputMultipleFields().execute(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.OPTION_UPDATE_PLATE_COLOR.get());
     }
 }

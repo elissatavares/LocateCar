@@ -26,7 +26,7 @@ public class DeleteClientCPFControllerImpl implements Controller {
     public void execute() {
         String identification = inputField.execute(MessagesClient.TITLE_DELETE_CLIENT.get(), MessagesClient.DELETE_CLIENT.get());
         ClientDTO clientDTO = new ClientDTO.Builder().identification(identification).build();
-        //deleteClientService.delete(clientDTO);
+        //deleteClientService.execute(clientDTO);
         showInformation.execute("Identification", identification);
     }
 }
