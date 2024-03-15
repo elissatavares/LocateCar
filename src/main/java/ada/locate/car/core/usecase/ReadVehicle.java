@@ -5,5 +5,5 @@ import ada.locate.car.infra.dto.VehicleDTO;
 import java.util.List;
 
 public interface ReadVehicle {
-    List<VehicleDTO> read(VehicleDTO vehicleDTO);
+    List<VehicleDTO> execute(VehicleDTO vehicleDTO);
 }

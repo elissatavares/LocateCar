@@ -18,26 +18,31 @@ public class ReadVehicleControllerImpl implements Controller {
     @Override
     public void execute() {
         String searchType = config.front().inputOptionString().execute(MessagesVehicle.MENU_READ_VEHICLE.get(), MessagesVehicle.OPTION_READ.get());
-        VehicleDTO vehicleDTO = null;
-        switch (searchType.toLowerCase().trim()){
-            case "search by model" -> vehicleDTO = new VehicleDTO.Builder().model(searchModel()).description(searchType).build();
-            case "search by plate" -> vehicleDTO = new VehicleDTO.Builder().plateNumber(searchPlate()).description(searchType).build();
-            case "search by color" -> vehicleDTO = new VehicleDTO.Builder().color(searchColor()).description(searchType).build();
-            case "search all", "search for available vehicles" -> vehicleDTO = new VehicleDTO.Builder().description(searchType).build();
-        }
-        List<VehicleDTO> vehicleDTOList = config.service().read().read(vehicleDTO);
+        VehicleDTO vehicleDTO = buildSearchDTO(searchType);
+        List<VehicleDTO> vehicleDTOList = config.service().read().execute(vehicleDTO);
         config.front().showInformation().execute(MessagesVehicle.RESULTS_SEARCH_FILTER.get(), vehicleDTOList.toString());
     }
 
-    private String searchModel(){
+    private VehicleDTO buildSearchDTO(String searchType) {
+        return switch (searchType.toLowerCase()) {
+            case "search by model" -> new VehicleDTO.Builder().model(searchModel()).description(searchType).build();
+            case "search by plate" ->
+                    new VehicleDTO.Builder().plateNumber(searchPlate()).description(searchType).build();
+            case "search by color" -> new VehicleDTO.Builder().color(searchColor()).description(searchType).build();
+            case "search all", "search for available vehicles" -> new VehicleDTO.Builder().description(searchType).build();
+            default -> null;
+        };
+    }
+
+    private String searchModel() {
         return config.front().inputOptionString().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.OPTION_ALL_MODELS.get());
     }
 
-    private String searchPlate(){
+    private String searchPlate() {
         return config.front().inputOnlyField().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.DESCRIPTION_ENTER_PLATE.get());
     }
 
-    private String searchColor(){
+    private String searchColor() {
         return config.front().inputOnlyField().execute(MessagesVehicle.MENU_INSERT_FILTER.get(), MessagesVehicle.DESCRIPTION_ENTER_COLOR.get());
     }
 }

@@ -16,7 +16,7 @@ public class ReadVehicleService implements ReadVehicle {
     }
 
     @Override
-    public List<VehicleDTO> read(VehicleDTO vehicleDTO) {
+    public List<VehicleDTO> execute(VehicleDTO vehicleDTO) {
         List<Vehicle> list = new ArrayList<>(10);
         switch (vehicleDTO.description().toLowerCase()){
             case "search by model" -> list = searchByModelAvailable(vehicleDTO.model());

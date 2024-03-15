@@ -17,9 +17,14 @@ public class DeleteVehicleControllerImpl implements Controller {
     @Override
     public void execute() {
         String plateNumber = config.front().inputOnlyField().execute(MessagesVehicle.MENU_DELETE_VEHICLE.get(), MessagesVehicle.DESCRIPTION_DELETE_VEHICLE.get());
-        VehicleDTO vehicleDTO = new VehicleDTO.Builder().plateNumber(plateNumber).build();
+        VehicleDTO vehicleDTO = buildVehicleDTO(plateNumber);
         config.service().delete().execute(vehicleDTO);
         //deleteVehicleService.execute(vehicleDTO);
         config.front().showInformation().execute("Plate Number", plateNumber);
+    }
+    private VehicleDTO buildVehicleDTO(String plateNumber) {
+        return new VehicleDTO.Builder()
+                .plateNumber(plateNumber)
+                .build();
     }
 }
