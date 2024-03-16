@@ -48,7 +48,7 @@ public class LocateCar {
 //        DeleteVehicle deleteVehicleService = new DeleteVehicleService(vehicleRepository);
 
         CreateClient createClientService = new CreateClientService(clientRepository);
-      ReadClient readClientService = new ReadClientService(clientRepository);
+        ReadClient readClientService = new ReadClientService(clientRepository);
         UpdateClient updateClientService = new UpdateClientService(clientRepository);
 
 
@@ -62,9 +62,9 @@ public class LocateCar {
 
 //        Controller createClientCPF = new CreateClientCPFControllerImpl(inputMultipleFields, showInformation, inputCPF, createClientService);
 //        Controller createClientCNPJ = new CreateClientCNPJControllerImpl(inputMultipleFields, showInformation, inputCNPJ, createClientService);
-        Controller readAllClients = new ReadControllerClientImpl(readClientService , inputOptionString, inputCPF, inputCNPJ,showInformation );
-        Controller updateClient = new UpdateClientControllerImpl(inputOnlyField, inputMultipleFields, showInformation, updateClientService);
-//        Controller deleteClientCPF = new DeleteClientCPFControllerImpl(inputOnlyField, showInformation, deleteClientService);
+        Controller readAllClients = new ReadControllerClientImpl(readClientService, inputOptionString, inputCPF, inputCNPJ, showInformation);
+        Controller updateClient = new UpdateClientControllerImpl(inputOptionString, inputCPF, inputCNPJ, showInformation, updateClientService, inputOnlyField);
+        Controller deleteClient = new DeleteClientControllerImpl(inputOptionString,inputCPF, inputCNPJ, showInformation, deleteClientService);
 
 //        Controller updatedClientCPF = new UpdateClientCPFControllerImpl(inputMultipleFields, showInformation, updateClientService);
 //        Controller updatedClientCNPJ = new UpdateClientCNPJControllerImpl(inputMultipleFields, showInformation, updateClientService);
@@ -72,8 +72,6 @@ public class LocateCar {
 
         //Menu vehicleMenu = new VehicleMenu(inputOptionString, createVehicle, updateVehicle, deleteVehicle);
 //        Menu clientMenu = new ClientMenu(inputOptionString, createClientCPF, createClientCNPJ, readAllClients);
-
-
 
 
         Controller createClient = new CreateClientControllerImpl(inputMultipleFields, inputOptionString, showInformation, inputCNPJ, inputCPF, createClientService);
@@ -88,9 +86,8 @@ public class LocateCar {
 
             option = inputOptionString.execute(MessagesApp.MAIN_MENU.get(), MessagesApp.MAIN_OPTIONS_MENU.get());
 
-            if(!option.isEmpty()){
-                //direciona para o menu com as opções específicas de Client, Vehicle ou Alocation
-                switch (option){
+            if (!option.isEmpty()) {
+                switch (option) {
                     case "Client" -> clientMenu.run();
                     //case "Vehicle" -> vehicleMenu.run();
                     //Alocation

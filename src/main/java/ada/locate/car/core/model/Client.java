@@ -89,10 +89,6 @@ public class Client {
             this.description = description;
         }
 
-        public String get() {
-            return description;
-        }
-
         private static String allModels() {
             StringBuilder stringBuilder = new StringBuilder();
             for (Client.Model model : Client.Model.values()) {

@@ -51,5 +51,4 @@ public class UpdateClientService implements UpdateClient {
         }
         clientRepository.update(updatedClient, oldClient);
     }
-
 }

@@ -8,66 +8,39 @@ import ada.locate.car.infra.dto.ClientDTO;
 
 public class ClientMenu implements Menu {
 
-//    private final Controller updateClientCNPJ;
-
-//    public ClientMenu(Input<String> inputOptionString, Controller createClientControllerCPF, Controller updateClientControllerCPF, Controller createClientControllerCNPJ, Controller updateClientControllerCNPJ) {
-//        this.inputOptionString = inputOptionString;
-//        this.createClientCPF = createClientControllerCPF;
-//        this.updateClientCPF = updateClientControllerCPF;
-//        this.createClientCNPJ = createClientControllerCNPJ;
-//        this.updateClientCNPJ = updateClientControllerCNPJ;
-//    }
-private final Input<String> inputOptionString;
+    private final Input<String> inputOptionString;
 
     private final Output showInformation;
 
     private final Controller createClient;
-   private final Controller readAllClients;
+    private final Controller readAllClients;
     private final Controller updateClient;
-    public ClientMenu(Input<String> inputOptionString, Output showInformation, Controller createClient, Controller readAllClients, Controller updateClient) {
+    private final Controller deleteClient;
+
+    public ClientMenu(Input<String> inputOptionString, Output showInformation, Controller createClient, Controller readAllClients, Controller updateClient, Controller deleteClient) {
         this.inputOptionString = inputOptionString;
         this.showInformation = showInformation;
         this.createClient = createClient;
-      this.readAllClients = readAllClients;
+        this.readAllClients = readAllClients;
         this.updateClient = updateClient;
+        this.deleteClient = deleteClient;
     }
+
 
     @Override
     public void run() {
         String option = inputOptionString.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.OPTION_CLIENT.get());
 
-        if (option.isEmpty() ) {
+        if (option.isEmpty()) {
             return;
         }
 
         switch (option.toLowerCase().trim()) {
-            case "create" -> {
-                createClient.execute();
-            }
-            case "read" -> {
-                readAllClients.execute();
-            }
-//                if (clients.isEmpty()) {
-//                    showInformation.execute("No clients found.", "Client Details");
-//                } else {
-//                    StringBuilder message = new StringBuilder();
-//                    for (ClientDTO client : clients) {
-//                        message.append("Name: ").append(client.name()).append("\n")
-//                                .append("Address: ").append(client.address()).append("\n")
-//                                .append("Phone Number: ").append(client.phoneNumber()).append("\n")
-//                                .append("Email: ").append(client.email()).append("\n")
-//                                .append("Identification: ").append(client.flagIdentification()).append("\n")
-//                                .append("Document: " ).append(client.document()).append("\n");
-//                    }
-//                    showInformation.execute(message.toString(), "Client Details");
-//
-//                }
-//            }
-
-
-
-           case "update" -> updateClient.execute();
-            //case "delete" -> (type.equalsIgnoreCase("CNPJ")) ? deleteCNPJ() : deleteCPF();
+            case "create" -> createClient.execute();
+            case "read" -> readAllClients.execute();
+            case "update" -> updateClient.execute();
+            case "delete" -> deleteClient.execute();
         }
-    }}
+    }
+}
 

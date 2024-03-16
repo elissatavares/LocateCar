@@ -11,7 +11,6 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
                 ", email='" + email + '\'' +
                 ", identification='" + flagIdentification + '\'' +
                 ", document='" + document + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 

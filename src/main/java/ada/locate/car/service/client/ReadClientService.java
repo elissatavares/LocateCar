@@ -21,6 +21,7 @@ public class ReadClientService implements ReadClient {
                 .address(client.getAddress())
                 .phoneNumber(client.getPhoneNumber())
                 .email(client.getEmail())
+                .flagIdentification(client.getIdentification())
                 .document(client.getDocument())
                 .build();
     }
