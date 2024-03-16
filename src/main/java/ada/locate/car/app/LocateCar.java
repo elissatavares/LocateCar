@@ -1,6 +1,6 @@
 package ada.locate.car.app;
 
-import ada.locate.car.app.config.front.FrontConfig;
+import ada.locate.car.app.config.vehicle.front.FrontConfigVehicle;
 
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
@@ -15,25 +15,21 @@ import ada.locate.car.controller.impl.vehicle.CreateVehicleControllerImpl;
 import ada.locate.car.controller.impl.vehicle.DeleteVehicleControllerImpl;
 import ada.locate.car.controller.impl.vehicle.ReadVehicleControllerImpl;
 import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
-import ada.locate.car.core.model.Client;
 import ada.locate.car.core.model.Vehicle;
 
 import ada.locate.car.frontend.impl.*;
 import ada.locate.car.infra.api.Repository;
-import ada.locate.car.infra.repository.ClientRepository;
 import ada.locate.car.infra.repository.VehicleRepository;
 import ada.locate.car.service.vehicle.CreateVehicleService;
 import ada.locate.car.service.vehicle.DeleteVehicleService;
 import ada.locate.car.service.vehicle.ReadVehicleService;
 import ada.locate.car.service.vehicle.UpdateVehicleService;
 
-import javax.swing.*;
-
 public class LocateCar {
     public static void run() {
-        Repository<Client> clientRepository = ClientRepository.getInstance();
+        //Repository<Client> clientRepository = ClientRepository.getInstance();
 
-        FrontConfig frontConfig = createFrontConfig2();
+        FrontConfigVehicle frontConfig = createFrontConfig2();
         VehicleServiceConfig vehicleServiceConfig = createVehicleServiceConfig();
         VehicleControllerImplConfig vehicleControllerImplConfig = vehicleControllerImplConfig(vehicleServiceConfig, frontConfig);
         VehicleControllerConfig vehicleControllerConfig = createVehicleControllerConfig(vehicleControllerImplConfig);
@@ -105,19 +101,18 @@ public class LocateCar {
     }
 
     //injeta para que eu consiga receber os inputs pelo front e consiga passar a requisição pro service
-    private static VehicleControllerImplConfig vehicleControllerImplConfig(VehicleServiceConfig vehicleServiceConfig, FrontConfig front2) {
+    private static VehicleControllerImplConfig vehicleControllerImplConfig(VehicleServiceConfig vehicleServiceConfig, FrontConfigVehicle front2) {
         return new VehicleControllerImplConfig(vehicleServiceConfig, front2);
     }
 
-
     //injeta para que eu consiga passar a requisição pro controller
-    private static VehicleMenuConfig createVehicleMenuConfig(VehicleControllerConfig vehicleControllerConfig, FrontConfig front2) {
+    private static VehicleMenuConfig createVehicleMenuConfig(VehicleControllerConfig vehicleControllerConfig, FrontConfigVehicle front2) {
         return new VehicleMenuConfig(vehicleControllerConfig, front2);
     }
 
     //injeta todas as interfaces que eu posso ter no meu front
-    private static FrontConfig createFrontConfig2() {
-        return new FrontConfig(
+    private static FrontConfigVehicle createFrontConfig2() {
+        return new FrontConfigVehicle(
                 new ShowInputDataVehicle(MessagesVehicle.DESCRIPTION_INSERT_DATA.get(), MessagesVehicle.DESCRIPTION_ALL_DATA.get()),
                 new ShowInputUpdateVehicleColorAndNumberPlate(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.OPTION_UPDATE_PLATE_COLOR.get()),
                 new ShowInputExclusionField(MessagesVehicle.MENU_DELETE_VEHICLE.get(), MessagesVehicle.DESCRIPTION_DELETE_VEHICLE.get()),
