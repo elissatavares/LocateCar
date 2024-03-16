@@ -4,6 +4,19 @@ import ada.locate.car.app.config.vehicle.front.FrontConfigVehicle;
 
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
+import ada.locate.car.controller.api.Controller;
+import ada.locate.car.controller.impl.client.*;
+import ada.locate.car.core.model.Client;
+import ada.locate.car.core.usecase.*;
+import ada.locate.car.infra.api.Repository;
+import ada.locate.car.infra.repository.ClientRepository;
+import ada.locate.car.service.client.CreateClientService;
+
+import ada.locate.car.core.usecase.ReadClient;
+
+import ada.locate.car.service.client.DeleteClientService;
+import ada.locate.car.service.client.ReadClientService;
+import ada.locate.car.service.client.UpdateClientService;
 import ada.locate.car.app.menu.VehicleMenu;
 import ada.locate.car.app.config.vehicle.VehicleControllerConfig;
 import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
@@ -27,7 +40,24 @@ import ada.locate.car.service.vehicle.UpdateVehicleService;
 
 public class LocateCar {
     public static void run() {
-        //Repository<Client> clientRepository = ClientRepository.getInstance();
+        Repository<Client> clientRepository = ClientRepository.getInstance();
+        //Repository<Vehicle> vehicleRepository = VehicleRepository.getInstance();
+
+
+        Input<Integer> inputOptionInt = new ShowInputOptionsIntImpl();
+        Input<String[]> inputMultipleFields = new ShowInputMultipleFieldsImpl();
+        Input<String> inputOnlyField = new ShowInputOnlyFieldImpl();
+        Input<String> inputOptionString = new ShowInputOptionsStringImpl();
+
+        Input<String> inputCPF = new CPFInput();
+        Input<String> inputCNPJ = new CNPJInput();
+
+        Output showInformation = new ShowInformationOutputImpl();
+
+        CreateClient createClientService = new CreateClientService(clientRepository);
+        ReadClient readClientService = new ReadClientService(clientRepository);
+        UpdateClient updateClientService = new UpdateClientService(clientRepository);
+        DeleteClient deleteClientService = new DeleteClientService(clientRepository);
 
         FrontConfigVehicle frontConfig = createFrontConfig2();
         VehicleServiceConfig vehicleServiceConfig = createVehicleServiceConfig();
@@ -36,27 +66,15 @@ public class LocateCar {
         VehicleMenuConfig vehicleMenuConfig = createVehicleMenuConfig(vehicleControllerConfig, frontConfig);
         Menu vehicleMenu = new VehicleMenu(vehicleMenuConfig);
 
-//        Input<String[]> inputMultipleFields = new ShowInputMultipleFieldsImpl();
-//        Input<String> inputOnlyField = new ShowInputOnlyFieldImpl();
-//        Input<String> inputOptionString = new ShowInputOptionsStringImpl();
-//        Input<String> inputCPF = new CPFInput();
-//        Input<String> inputCNPJ = new CNPJInput();
-//        Output showInformation = new ShowInformationOutputImpl();
+
+        Controller readAllClients = new ReadControllerClientImpl(readClientService, inputOptionString, inputCPF, inputCNPJ, showInformation);
+        Controller updateClient = new UpdateClientControllerImpl(inputOptionString, inputCPF, inputCNPJ, showInformation, updateClientService, inputOnlyField);
+        Controller deleteClient = new DeleteClientControllerImpl(inputOptionString,inputCPF, inputCNPJ, showInformation, deleteClientService);
 
 
-//        CreateClient createClientService = new CreateClientService(clientRepository);
-//        UpdateClient updateClientService = new UpdateClientService(clientRepository);
-//        DeleteClient deleteClientService = new DeleteClientService(clientRepository);
-//        UpdateClient updateClientService = new UpdateClientService();
-//        Controller createClientCPF = new CreateClientCPFControllerImpl(inputMultipleFields, showInformation, inputCPF, createClientService);
-//        Controller createClientCNPJ = new CreateClientCNPJControllerImpl(inputMultipleFields, showInformation, inputCNPJ, createClientService);
-//        Controller deleteClientCPF = new DeleteClientCPFControllerImpl(inputOnlyField, showInformation, deleteClientService);
-//        Controller updatedClientCPF = new UpdateClientCPFControllerImpl(inputMultipleFields, showInformation, updateClientService);
-//        Controller updatedClientCNPJ = new UpdateClientCNPJControllerImpl(inputMultipleFields, showInformation, updateClientService);
-//        Menu clientMenu = new ClientMenu(inputOptionString, createClientCPF, updatedClientCPF, createClientCNPJ, updatedClientCNPJ);
+        Controller createClient = new CreateClientControllerImpl(inputMultipleFields, inputOptionString, showInformation, inputCNPJ, inputCPF, createClientService);
 
-//        JFrame frame = CreateFrame.execute();
-//        frame.setVisible(true);
+        Menu clientMenu = new ClientMenu(inputOptionString, showInformation, createClient, readAllClients, updateClient, deleteClient);
 
         String option;
         do {
@@ -67,7 +85,7 @@ public class LocateCar {
             if (!option.isEmpty()) {
                 //direciona para o menu com as opções específicas de Client, Vehicle ou Alocation
                 switch (option) {
-                    //case "Client" -> clientMenu.run();
+                    case "Client" -> clientMenu.run();
                     case "Vehicle" -> vehicleMenu.run();
                     //Alocation
                     // case 3 -> AlocationMenu.run();
@@ -75,8 +93,6 @@ public class LocateCar {
             }
         } while (!option.isEmpty());
 
-//        frame.dispose();
-//        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     //injeta todas as dependencias para uma chamada da camada service

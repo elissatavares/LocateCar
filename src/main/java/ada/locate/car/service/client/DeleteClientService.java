@@ -14,7 +14,8 @@ public class DeleteClientService implements DeleteClient {
 
 
     @Override
-    public void delete(ClientDTO o) {
-
+    public void execute(ClientDTO clientDTO) {
+        Client client = repository.read(clientDTO.document());
+        repository.delete(client);
     }
 }

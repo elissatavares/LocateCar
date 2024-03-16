@@ -1,10 +1,6 @@
 package ada.locate.car.infra.dto;
 
-import ada.locate.car.core.model.Vehicle;
-
-import java.util.List;
-
-public record ClientDTO(String name, String address, String phoneNumber, String email, String identification) {
+public record ClientDTO(String name, String address, String phoneNumber, String email, String flagIdentification, String document, String description) {
 
     @Override
     public String toString() {
@@ -13,15 +9,21 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                ", identification='" + identification + '\'' +
+                ", identification='" + flagIdentification + '\'' +
+                ", document='" + document + '\'' +
                 '}';
     }
+
+
+
     public static class Builder {
         private String name;
         private String address;
         private String phoneNumber;
         private String email;
-        private String identification;
+        private String flagIdentification;
+        private String document;
+        private String description;
 
         public Builder name(String name) {
             this.name = name;
@@ -42,16 +44,23 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
             this.email = email;
             return this;
         }
+        public Builder document(String document) {
+            this.document = document;
+            return this;
+        }
 
-        public Builder identification(String cpf) {
-            this.identification = cpf;
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+        public Builder flagIdentification(String flagIdentification) {
+            this.flagIdentification = flagIdentification;
             return this;
         }
 
         public ClientDTO build() {
-            return new ClientDTO(name, address, phoneNumber, email, identification);
+            return new ClientDTO(name, address, phoneNumber, email, flagIdentification, document, description);
         }
     }
-
 
 }
