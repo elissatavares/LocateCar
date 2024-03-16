@@ -1,20 +1,12 @@
 package ada.locate.car.frontend.impl;
 
 import ada.locate.car.app.messages.MessagesVehicle;
-import ada.locate.car.frontend.api.Input;
+import ada.locate.car.frontend.api.ShowInputOnlyField;
 
-import javax.swing.*;
+public class ShowInputExclusionField extends ShowInputOnlyField {
 
-public class ShowInputExclusionField implements Input<String> {
 
-    @Override
-    public String execute() {
-        String title = MessagesVehicle.MENU_DELETE_VEHICLE.get();
-        String description = MessagesVehicle.DESCRIPTION_DELETE_VEHICLE.get();
-        JTextField inputField = new JTextField(1);
-
-        int result = JOptionPane.showConfirmDialog(null, new Object[]{description, inputField}, title, JOptionPane.OK_CANCEL_OPTION);
-
-        return result == JOptionPane.OK_OPTION ? inputField.getText() : null;
+    public ShowInputExclusionField(String title, String description) {
+        super(title, description);
     }
 }

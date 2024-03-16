@@ -1,20 +1,25 @@
 package ada.locate.car.app.config.front;
 
-import ada.locate.car.frontend.api.Input;
+import ada.locate.car.frontend.api.ShowInputMultipleFields;
+import ada.locate.car.frontend.api.ShowInputOnlyField;
+import ada.locate.car.frontend.api.ShowInputOptionsString;
 
 public record FrontConfig(
-        Input<String> showInputOptionsInsertModelFilter,
-        Input<String> showInputOptionsModel,
-        Input<String> showInputOptionsReadVehicle,
-        Input<String> showInputOptionsUpdateVehicle,
-        Input<String> showInputOptionsVehicle,
-        Input<String[]> showDataVehicleEntry,
-        Input<String[]> showColorAndPlateNumberUpdateDataEntry,
-        Input<String> showExclusionField,
-        Input <String> showUpdatePlateEntry,
-        Input <String> showUpdateColorEntry,
-        Input <String> showNewPlateNumberEntry,
-        Input <String> showFilterPlateEntry,
-        Input <String> showFilterColorEntry
+        ShowInputMultipleFields showDataVehicleEntry,
+        ShowInputMultipleFields showColorAndPlateNumberUpdateDataEntry,
+
+        ShowInputOnlyField showExclusionField,
+        ShowInputOnlyField showUpdatePlateEntry,
+        ShowInputOnlyField showUpdateColorEntry,
+        ShowInputOnlyField showNewPlateNumberEntry,
+        ShowInputOnlyField showFilterPlateEntry,
+        ShowInputOnlyField showFilterColorEntry,
+
+        ShowInputOptionsString showInputOptionsModel,
+        ShowInputOptionsString showInputOptionsReadVehicle,
+        ShowInputOptionsString showInputOptionsUpdateVehicle,
+        ShowInputOptionsString showInputOptionsVehicle,
+        ShowInputOptionsString showInputOptionsInsertModelFilter,
+        ShowInputOptionsString showMainMenu
 ) {
 }
