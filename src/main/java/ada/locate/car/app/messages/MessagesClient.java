@@ -22,7 +22,15 @@ public enum MessagesClient {
     ENTER_UPDATED_FIELDS("Enter client data to update"),
     UPDATED_CLIENT_DATA("Name\nAddress\nPhone Number\nEmail"),
     ENTER_SEARCH_OPTION("Read by CPF\nRead by CNPJ"),
-    SEARCH_OPTION_PROMPT("CPF\nCNPJ");
+    SEARCH_OPTION_PROMPT("CPF\nCNPJ"),
+    MENU_UPDATED_CLIENT("Client execute menu"),
+    UPDATED_CLIENT("Nome\nEndereço\nTelefone\nEmail\n"),
+    OPTION_UPDATE("Update with CPF\n Update with CNPJ"),
+    UPDATE_MENU("Update Menu"),
+
+    OPTION_CREATE("Create with CPF\nCreate with CNPJ"),
+    TITLE_DELETE_CLIENT("Client execute"),
+    DELETE_CLIENT("Enter the identification number of the client you want to execute");
 
 
     private final String message;

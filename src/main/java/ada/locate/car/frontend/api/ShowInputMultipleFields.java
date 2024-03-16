@@ -1,14 +1,16 @@
-package ada.locate.car.frontend.impl;
-
-import ada.locate.car.frontend.api.Input;
+package ada.locate.car.frontend.api;
 
 import javax.swing.*;
 
-public class ShowInputMultipleFieldsImpl implements Input<String[]> {
-    // precisa trantar quando receber cancel ou apertar no x
-    @Override
-    public String[] execute(String title, String fields) {
-        String[] fieldNames = fields.split("\n");
+public abstract class ShowInputMultipleFields {
+    protected String title;
+    protected String description;
+    public ShowInputMultipleFields(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+    public String[] execute() {
+        String[] fieldNames = description.split("\n");
         String[] inputs = new String[fieldNames.length];
 
         JPanel panel = new JPanel();

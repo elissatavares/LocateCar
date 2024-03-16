@@ -2,6 +2,7 @@ package ada.locate.car.infra.api;
 
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public interface Repository<T>  {
 
@@ -14,4 +15,6 @@ public interface Repository<T>  {
     void delete(T o);
 
     List<T> findAll();
+
+    List<T> findAllByPredicate(Predicate<T> predicate);
 }

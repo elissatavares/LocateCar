@@ -60,4 +60,51 @@ public class Vehicle {
     public static String getModels(){
         return Model.allModels();
     }
+
+    public String getBrand() {
+        return brand;
+    }
+    public String getModel() {
+        return model;
+    }
+
+    public LocalDate getYearManufacture() {
+        return yearManufacture;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setYearManufacture(LocalDate yearManufacture) {
+        this.yearManufacture = yearManufacture;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
 }
