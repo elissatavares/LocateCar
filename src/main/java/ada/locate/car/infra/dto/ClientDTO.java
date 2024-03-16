@@ -1,31 +1,30 @@
 package ada.locate.car.infra.dto;
 
-public record ClientDTO(Long id, String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
+public record ClientDTO(String name, String address, String phoneNumber, String email, String flagIdentification, String document, String description) {
 
     @Override
     public String toString() {
         return "Builder{" +
-                "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", identification='" + flagIdentification + '\'' +
+                ", document='" + document + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
+
+
+
     public static class Builder {
-        private Long id;
         private String name;
         private String address;
         private String phoneNumber;
         private String email;
         private String flagIdentification;
         private String document;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
+        private String description;
 
         public Builder name(String name) {
             this.name = name;
@@ -51,13 +50,18 @@ public record ClientDTO(Long id, String name, String address, String phoneNumber
             return this;
         }
 
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
         public Builder flagIdentification(String flagIdentification) {
             this.flagIdentification = flagIdentification;
             return this;
         }
 
         public ClientDTO build() {
-            return new ClientDTO(id, name, address, phoneNumber, email, flagIdentification, document);
+            return new ClientDTO(name, address, phoneNumber, email, flagIdentification, document, description);
         }
     }
+
 }

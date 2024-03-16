@@ -28,5 +28,6 @@ public class DeleteVehicleControllerImpl implements Controller {
         deleteVehicleService.delete(vehicleDTO);
         //deleteVehicleService.delete(vehicleDTO);
         showInformation.execute("Plate Number", plateNumber);
+
     }
 }

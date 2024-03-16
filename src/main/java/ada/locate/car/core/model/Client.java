@@ -1,8 +1,6 @@
 package ada.locate.car.core.model;
 
 public class Client {
-    private static Long lastClientId = 0L;
-    private Long id;
     private String flagIdentification;
     private String name;
     private String address;
@@ -10,8 +8,9 @@ public class Client {
     private String email;
     private String document;
 
+
+
     public Client(String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
-        this.id = generateNextId();
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -20,14 +19,18 @@ public class Client {
         this.document = document;
     }
 
-
-    public Long getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Client{" +
+                "type='" + flagIdentification + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", document='" + document + '\'' +
+                '}';
     }
 
-    private Long generateNextId() {
-        return ++lastClientId;
-    }
     public String getName() {
         return name;
     }
@@ -67,18 +70,14 @@ public class Client {
     public void setIdentification(String identification) {
         this.flagIdentification = identification;
     }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id='" + id + '\'' +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                "identification='" + flagIdentification + '\'' +
-                '}';
+    public String getDocument() {
+        return document;
     }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
 
     private enum Model {
         CPF("CPF"),

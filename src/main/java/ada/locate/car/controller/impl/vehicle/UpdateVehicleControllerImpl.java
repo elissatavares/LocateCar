@@ -31,5 +31,6 @@ public class UpdateVehicleControllerImpl implements Controller {
         updateVehicleService.update(vehicleDTO);
         showInformation.execute("atualizado", Arrays.toString(data));
         System.out.println(Arrays.toString(data));
+
     }
 }

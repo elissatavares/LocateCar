@@ -53,16 +53,10 @@ public class CreateClientControllerImpl implements Controller {
                     .document(cnpj)
                     .build();
         }
-        clientCreateService.create(clientDTO);
+        clientCreateService.execute(clientDTO);
 
         showInformation.execute("Client created successfully.", MessagesClient.CLIENT_DETAILS.get());
 
-        System.out.println("Client Details:");
-        System.out.println("Id: " + clientDTO.id());
-        System.out.println("Name: " + clientDTO.name());
-        System.out.println("Address: " + clientDTO.address());
-        System.out.println("Phone Number: " + clientDTO.phoneNumber());
-        System.out.println("Email: " + clientDTO.email());
-        System.out.println("Identification: " + clientDTO.flagIdentification());
+        System.out.println("SUCESS! Enter Read option to see details.");
     }
 }

@@ -9,49 +9,47 @@ public class UpdateClientService implements UpdateClient {
 
     private final Repository<Client> clientRepository;
 
-    public UpdateClientService(Repository<Client> repository) {
-        this.clientRepository = repository;
+    public UpdateClientService(Repository<Client> clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
-    public void update(String clientId, String[] updatedFields) {
-        Client clientToUpdate = clientRepository.read(new Client(clientId, null, null, null, null));
-        if (clientToUpdate != null) {
-            for (int i = 0; i < updatedFields.length; i++) {
-                switch (i) {
-                    case 0:
-                        clientToUpdate.setName(updatedFields[i]);
-                        break;
-                    case 1:
-                        clientToUpdate.setAddress(updatedFields[i]);
-                        break;
-                    case 2:
-                        clientToUpdate.setPhoneNumber(updatedFields[i]);
-                        break;
-                    case 3:
-                        clientToUpdate.setEmail(updatedFields[i]);
-                        break;
-                    case 4:
-                        clientToUpdate.setIdentification(updatedFields[i]);
-                        break;
-                }
-            }
-            clientRepository.update(clientToUpdate, null);
+    public void execute(ClientDTO clientDTO) {
+        Client oldClient = clientRepository.read(clientDTO.document());
+        Client updatedClient = null;
+        switch (clientDTO.description().toLowerCase()){
+            case "name" -> updatedClient = new Client(
+                    clientDTO.name(),
+                    oldClient.getAddress(),
+                    oldClient.getPhoneNumber(),
+                    oldClient.getEmail(),
+                    oldClient.getIdentification(),
+                    oldClient.getDocument());
+            case "address" ->
+                    updatedClient = new Client(
+                            oldClient.getName(),
+                            clientDTO.address(),
+                            oldClient.getPhoneNumber(),
+                            oldClient.getEmail(),
+                            oldClient.getIdentification(),
+                            oldClient.getDocument());
+            case "phone number" ->
+                    updatedClient = new Client(
+                            oldClient.getName(),
+                            oldClient.getAddress(),
+                            clientDTO.phoneNumber(),
+                            oldClient.getEmail(),
+                            oldClient.getIdentification(),
+                            oldClient.getDocument());
+            case "email" -> updatedClient = new Client(
+                    oldClient.getName(),
+                    oldClient.getAddress(),
+                    oldClient.getPhoneNumber(),
+                    clientDTO.email(),
+                    oldClient.getIdentification(),
+                    oldClient.getDocument());
         }
+        clientRepository.update(updatedClient, oldClient);
     }
 
-//    @Override
-//    public void update(Client clientToUpdate, Client updatedClient) {
-//        clientRepository.update(clientToUpdate, updatedClient);
-//    }
-
-
 }
-//public void create(ClientDTO clientDTO) {
-//    Client client = new Client(
-//            clientDTO.name(),
-//            clientDTO.address(),
-//            clientDTO.phoneNumber(),
-//            clientDTO.email(),
-//            clientDTO.identification());
-//    clientRepository.create(client);

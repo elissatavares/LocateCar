@@ -2,7 +2,6 @@ package ada.locate.car.infra.repository;
 
 import ada.locate.car.core.model.Client;
 import ada.locate.car.infra.api.Repository;
-import ada.locate.car.infra.dto.ClientDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,34 +25,29 @@ public class ClientRepository implements Repository<Client> {
     @Override
     public void create(Client client) {
         clientList.add(client);
+
     }
 
-
-    // Lê cliente por Id | to do: trocar nome e atualizar onde é usado
     @Override
-    public Client read(Client key) {
-        for (Client client : clientList) {
-            if (client.getId().equals(key.getId())) {
-                return client;
-            }
-        }
-        return null;
+    public Client read(String key) {
+        return clientList.stream()
+                .filter(client -> client.getDocument().equals(key))
+                .findFirst()
+                .orElse(null);
     }
 
 
 
     @Override
-    public void update(Client oldClient, Client updatedClient) {
-        int index = clientList.indexOf(oldClient);
-        if (index != -1) {
-            clientList.set(index, updatedClient);
-        }
+    public void update(Client updatedClient, Client oldClient) {
+        clientList.add(updatedClient);
+        clientList.remove(oldClient);
     }
 
 
     @Override
     public void delete(Client client) {
-        // Implementar lógica para excluir um cliente
+        clientList.remove(client);
     }
 
     @Override
@@ -61,9 +55,4 @@ public class ClientRepository implements Repository<Client> {
         return clientList;
     }
 
-    @Override
-    public List<Client> findAllBySpecification(Client client) {
-        // Implementar lógica para buscar clientes por especificação
-        return null;
-    }
 }

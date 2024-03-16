@@ -5,6 +5,6 @@ import ada.locate.car.infra.dto.ClientDTO;
 
 public interface UpdateClient {
 
-  void update(String clientId, String[] updatedFields);
+  void execute(ClientDTO clientDTO);
 //    void update(String id, ClientDTO clientDTO);
 }

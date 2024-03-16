@@ -24,7 +24,7 @@ public enum MessagesClient {
     DELETE_CLIENT("Enter the identification number of the client you want to delete"),
     ENTER_CLIENT_ID("Enter client id"),
     ENTER_UPDATED_FIELDS("Enter client data to update"),
-    UPDATED_CLIENT_DATA("Name:\nAddress:\nPhoneNumber:\nEmail:");
+    UPDATED_CLIENT_DATA("Name:\nAddress:\nPhoneNumber:\nEmail:"), ENTER_SEARCH_OPTION("Read by CPF\nRead by CNPJ"), SEARCH_OPTION_PROMPT("CPF\nCNPJ");
 
 
     private final String message;

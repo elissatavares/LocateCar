@@ -15,7 +15,7 @@ public class CreateClientService implements CreateClient {
     }
 
     @Override
-    public void create(ClientDTO clientDTO) {
+    public void execute(ClientDTO clientDTO) {
         Client client = new Client(
                 clientDTO.name(),
                 clientDTO.address(),
