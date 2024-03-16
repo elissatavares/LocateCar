@@ -131,7 +131,8 @@ public class LocateCar {
                 new ShowInputOptionsUpdateVehicle(MessagesVehicle.MENU_UPDATE_VEHICLE.get(), MessagesVehicle.OPTION_UPDATE_VEHICLE.get()),
                 new ShowInputOptionsVehicle(MessagesVehicle.MENU_VEHICLE.get(), MessagesVehicle.OPTION_VEHICLE.get()),
                 new ShowInputOptionsInsertModelFilter(MessagesVehicle.MENU_INSERT_FILTER.get(),MessagesVehicle.OPTION_ALL_MODELS.get()),
-                new ShowMainMenu(MessagesApp.MAIN_MENU.get(), MessagesApp.MAIN_OPTIONS_MENU.get())
+                new ShowMainMenu(MessagesApp.MAIN_MENU.get(), MessagesApp.MAIN_OPTIONS_MENU.get()),
+                new ShowReadVehicle(MessagesVehicle.VEHICLE_DETAILS.get())
         );
     }
 }

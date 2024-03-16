@@ -20,7 +20,7 @@ public class ReadVehicleControllerImpl implements Controller {
         String searchType = config.front().showInputOptionsReadVehicle().execute();
         VehicleDTO vehicleDTO = buildSearchDTO(searchType);
         List<VehicleDTO> vehicleDTOList = config.service().read().execute(vehicleDTO);
-        //config.front().showInformation().execute(MessagesVehicle.RESULTS_SEARCH_FILTER.get(), vehicleDTOList.toString());
+        config.front().readVehicle().execute(vehicleDTOList.toString());
     }
 
     private VehicleDTO buildSearchDTO(String searchType) {

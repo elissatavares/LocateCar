@@ -3,7 +3,7 @@ package ada.locate.car.app.messages;
 import ada.locate.car.core.model.Vehicle;
 
 public enum MessagesVehicle {
-    OPTION_VEHICLE("Create\nDelete\nRead\nUpdate"),
+    OPTION_VEHICLE("Create\nRead\nUpdate\nDelete"),
     OPTION_READ("Search by model\nSearch by plate\nSearch by color\nSearch all\nSearch for available vehicles"),
     OPTION_UPDATE_VEHICLE("Color\nPlate Number\nPlate Color and Number"),
     OPTION_UPDATE_PLATE_COLOR("Color\nPlateNumber"),
