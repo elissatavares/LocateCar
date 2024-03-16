@@ -24,8 +24,6 @@ public class ReadControllerClientImpl implements Controller {
 
     @Override
     public void execute() {
-        //buscar client por cnpj, cpf
-        //colocar pra selecionar cpf ou cnpj
         String option = stringOption.execute(MessagesClient.ENTER_SEARCH_OPTION.get(), MessagesClient.SEARCH_OPTION_PROMPT.get());
 
         String document;

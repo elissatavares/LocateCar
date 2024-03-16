@@ -15,6 +15,7 @@ import ada.locate.car.service.client.CreateClientService;
 //import ada.locate.car.service.client.UpdateClientService;
 import ada.locate.car.core.usecase.ReadClient;
 //import ada.locate.car.service.client.ReadAllClientsService;
+import ada.locate.car.service.client.DeleteClientService;
 import ada.locate.car.service.client.ReadClientService;
 import ada.locate.car.service.client.UpdateClientService;
 import ada.locate.car.service.vehicle.CreateVehicleService;
@@ -50,7 +51,7 @@ public class LocateCar {
         CreateClient createClientService = new CreateClientService(clientRepository);
         ReadClient readClientService = new ReadClientService(clientRepository);
         UpdateClient updateClientService = new UpdateClientService(clientRepository);
-
+        DeleteClient deleteClientService = new DeleteClientService(clientRepository);
 
 //        UpdateClient updateClientService = new UpdateClientService(clientRepository);
 //        DeleteClient deleteClientService = new DeleteClientService(clientRepository);
@@ -76,7 +77,7 @@ public class LocateCar {
 
         Controller createClient = new CreateClientControllerImpl(inputMultipleFields, inputOptionString, showInformation, inputCNPJ, inputCPF, createClientService);
 
-        Menu clientMenu = new ClientMenu(inputOptionString, showInformation, createClient, readAllClients, updateClient);
+        Menu clientMenu = new ClientMenu(inputOptionString, showInformation, createClient, readAllClients, updateClient, deleteClient);
 
         JFrame frame = CreateFrame.execute();
         frame.setVisible(true);
