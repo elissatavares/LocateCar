@@ -275,7 +275,7 @@ public class LocateCar {
     private static AllocationControllerConfig createAllocationControllerConfig(AllocationControllerImplConfig allocationControllerImplConfig) {
         return new AllocationControllerConfig(
                 new RentVehicleControllerImpl(allocationControllerImplConfig),
-                new ReturnRentedVehicleControllerImpl()
+                new ReturnRentedVehicleControllerImpl(allocationControllerImplConfig)
         );
     }
 

@@ -29,13 +29,14 @@ public class CreateAllocationService implements CreateAllocation{
 
     @Override
     public void execute(AllocationDTO allocationDTO) {
-        //sempre vai me retorna um unico veiculo, pois estou buscando por placa;
+        //vai chamar a função do meu service que me retorna o client com o documento que eu especifiquei
+        ClientDTO client = readClientService.execute(allocationDTO.clientDocument());
+
+        //sempre vai me retorna um unico veiculo, pois estou buscando por placa; ou vai retornar vazia
         List<VehicleDTO> vehicleToAllocation =  readVehicleService.execute(allocationDTO.plateNumberVehicle());
         VehicleDTO vehicleDTO = vehicleToAllocation.getFirst();
 
         Vehicle vehicle = repositoryVehicle.read(vehicleDTO.plateNumber());
-        //vai chamar a função do meu service que me retorna o client com o documento que eu especifiquei
-        ClientDTO client = readClientService.execute(allocationDTO.clientDocument());
         String[] dataAllocation = allocationDTO.data();
         Allocation allocation = new Allocation(dataAllocation[0], dataAllocation[1], vehicle);
         clientRepository.createAllocation(allocation, client.document());

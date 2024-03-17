@@ -14,14 +14,13 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "brand='" + brand + '\'' +
-                ", available=" + available +
-                ", model='" + model + '\'' +
-                ", yearManufacture=" + yearManufacture +
-                ", color='" + color + '\'' +
-                ", plateNumber='" + plateNumber + '\'' +
-                '}';
+        return "Vehicle: " +
+                "Brand: " + brand +
+                ", YearManufacture: " + yearManufacture +
+                ", Color: " + color +
+                ", PlateNumber: " + plateNumber +
+                ", Model: " + model;
+
     }
 
     public Vehicle(String brand, String yearManufacture, String color, String plateNumber, String model) {
@@ -90,25 +89,13 @@ public class Vehicle {
         this.available = false;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 
     public void setModel(String model) {
         this.model = model;
     }
 
-    public void setYearManufacture(LocalDate yearManufacture) {
-        this.yearManufacture = yearManufacture;
-    }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;

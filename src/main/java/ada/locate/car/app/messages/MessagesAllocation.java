@@ -9,8 +9,8 @@ public enum MessagesAllocation {
     MENU_RETURN("Return Menu"),
     VEHICLE_IDENTIFICATION("Enter the vehicle license plate number"),
     ALL_ALLOCATION_DATA("Date & Hour(yyyy-mm-dd HH:mm)\nLocale"),
-    CREATED_SUCESS_MSG("Allocation created successfully!");
-
+    ALLOCATION_SUCESS_MSG("Vehicle successfully allocated!"),
+   RETURN_SUCESS_MSG("Vehicle returned successfully!");
 
     private final String message;
 

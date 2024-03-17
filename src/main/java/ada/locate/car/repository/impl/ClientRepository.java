@@ -7,6 +7,8 @@ import ada.locate.car.repository.api.RepositoryClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ClientRepository implements RepositoryClient {
 
@@ -63,5 +65,24 @@ public class ClientRepository implements RepositoryClient {
         allocation.getVehicle().wasRented();
         client.setAllocationList(allocation);
         System.out.println(client);
+    }
+
+    @Override
+    public void returnAllocation(Allocation allocation, String key) {
+        Client client = read(key);
+        client.getAllocationList().remove(allocation);
+    }
+
+    @Override
+    public List<Allocation> findAllAllocation(String key) {
+        Client client = read(key);
+        return client.getAllocationList();
+    }
+
+    @Override
+    public Allocation findAllocation(List<Allocation> allocationList, String plateNumber) {
+        return allocationList.stream().
+                filter(allocation -> allocation.getVehicle().getPlateNumber().equalsIgnoreCase(plateNumber))
+                .findFirst().orElse(null);
     }
 }

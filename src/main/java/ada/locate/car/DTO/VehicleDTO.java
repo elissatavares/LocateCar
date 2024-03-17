@@ -31,7 +31,7 @@ public record VehicleDTO(String brand, String yearManufacture,
         return "Vehicle: " +
                 "Brand: " + brand +
                 ", YearManufacture: " + yearManufacture +
-                ", Colo: " + color +
+                ", Color: " + color +
                 ", PlateNumber: " + plateNumber +
                 ", Model: " + model;
     }

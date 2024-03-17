@@ -12,11 +12,10 @@ public class Allocation {
 
     @Override
     public String toString() {
-        return "Allocation{" +
-                "localDateTimeRent=" + localDateTimeRent +
-                ", local='" + local + '\'' +
-                ", vehicle=" + vehicle +
-                '}';
+        return "Allocation: " +
+                "LocalDateTimeRent: " + localDateTimeRent +
+                ", Local: " + local +
+                ", vehicle: " + "\n" + vehicle;
     }
 
     public Allocation(String localDateTimeRent, String local, Vehicle vehicle) {
@@ -29,6 +28,14 @@ public class Allocation {
         LocalDateTime localDateTimeDevolution = LocalDateTime.parse(today, formatter);
         Duration duration = Duration.between(localDateTimeDevolution, this.localDateTimeRent);
         return duration.toDays();
+    }
+
+    public String getLocalDate() {
+        return localDateTimeRent.format(formatter);
+    }
+
+    public String getLocal() {
+        return local;
     }
 
     public Vehicle getVehicle() {
