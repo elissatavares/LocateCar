@@ -2,7 +2,7 @@ package ada.locate.car.controller.impl.vehicle;
 
 import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.infra.dto.VehicleDTO;
+import ada.locate.car.DTO.VehicleDTO;
 
 public class CreateVehicleControllerImpl implements Controller {
 

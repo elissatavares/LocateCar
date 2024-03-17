@@ -21,6 +21,19 @@ public class Client {
         this.document = document;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "flagIdentification='" + flagIdentification + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", document='" + document + '\'' +
+                ", allocationList=" + allocationList +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

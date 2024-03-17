@@ -1,6 +1,7 @@
 package ada.locate.car.core.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Vehicle {
     private String brand;
@@ -9,13 +10,25 @@ public class Vehicle {
     private LocalDate yearManufacture;
     private String color;
     private String plateNumber;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "brand='" + brand + '\'' +
+                ", available=" + available +
+                ", model='" + model + '\'' +
+                ", yearManufacture=" + yearManufacture +
+                ", color='" + color + '\'' +
+                ", plateNumber='" + plateNumber + '\'' +
+                '}';
+    }
 
-    public Vehicle(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
+    public Vehicle(String brand, String yearManufacture, String color, String plateNumber, String model) {
         this.brand = brand;
         this.available = true;
         this.model = model;
-        this.yearManufacture = yearManufacture;
+        this.yearManufacture = LocalDate.parse(yearManufacture);
         this.color = color;
         this.plateNumber = plateNumber;
     }
@@ -57,8 +70,8 @@ public class Vehicle {
         return model;
     }
 
-    public LocalDate getYearManufacture() {
-        return yearManufacture;
+    public String getYearManufacture() {
+        return yearManufacture.format(formatter);
     }
 
     public String getColor() {
@@ -71,6 +84,10 @@ public class Vehicle {
 
     public boolean isAvailable() {
         return available;
+    }
+
+    public void wasRented(){
+        this.available = false;
     }
 
     public void setBrand(String brand) {

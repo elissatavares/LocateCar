@@ -8,7 +8,7 @@ public enum MessagesAllocation {
     MENU_RENT("Rent Menu"),
     MENU_RETURN("Return Menu"),
     VEHICLE_IDENTIFICATION("Enter the vehicle license plate number"),
-    ALL_ALLOCATION_DATA("Local\nDate & Hour(yyyy-mm-dd HH:mm)"),
+    ALL_ALLOCATION_DATA("Date & Hour(yyyy-mm-dd HH:mm)\nLocale"),
     CREATED_SUCESS_MSG("Allocation created successfully!");
 
 

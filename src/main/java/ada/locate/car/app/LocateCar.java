@@ -1,5 +1,7 @@
 package ada.locate.car.app;
 
+import ada.locate.car.DTO.utils.allocation.CreateAllocationDTO;
+import ada.locate.car.DTO.utils.vehicle.*;
 import ada.locate.car.app.config.allocation.*;
 import ada.locate.car.app.config.client.*;
 import ada.locate.car.app.config.vehicle.*;
@@ -34,15 +36,15 @@ import ada.locate.car.frontend.impl.client.read.ShowClient;
 import ada.locate.car.frontend.impl.client.read.ShowInputOptionsReadClient;
 import ada.locate.car.frontend.impl.client.update.*;
 import ada.locate.car.frontend.impl.vehicle.create.ShowInputDataCreateVehicle;
-import ada.locate.car.infra.provider.builder.client.ClientCreateBuilder;
-import ada.locate.car.infra.provider.builder.client.ClientDeleteBuilder;
-import ada.locate.car.infra.provider.builder.client.ClientReadBuilder;
-import ada.locate.car.infra.provider.builder.client.ClientUpdateBuilder;
-import ada.locate.car.infra.provider.data.allocation.AllocationCreateInputProvider;
-import ada.locate.car.infra.provider.data.client.*;
-import ada.locate.car.infra.provider.data.vehicle.*;
-import ada.locate.car.infra.repository.api.Repository;
-import ada.locate.car.infra.repository.api.RepositoryVehicle;
+import ada.locate.car.DTO.utils.client.ClientCreateBuilder;
+import ada.locate.car.DTO.utils.client.ClientDeleteBuilder;
+import ada.locate.car.DTO.utils.client.ClientReadBuilder;
+import ada.locate.car.DTO.utils.client.ClientUpdateBuilder;
+import ada.locate.car.provider.allocation.AllocationCreateInputProvider;
+import ada.locate.car.provider.client.*;
+import ada.locate.car.repository.api.Repository;
+import ada.locate.car.repository.api.RepositoryClient;
+import ada.locate.car.repository.api.RepositoryVehicle;
 import ada.locate.car.app.menu.VehicleMenu;
 import ada.locate.car.app.messages.MessagesVehicle;
 
@@ -52,12 +54,11 @@ import ada.locate.car.controller.impl.vehicle.ReadVehicleControllerImpl;
 import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
 
 import ada.locate.car.frontend.impl.vehicle.*;
-import ada.locate.car.infra.provider.builder.vehicle.VehicleCreateBuilder;
-import ada.locate.car.infra.provider.builder.vehicle.VehicleDeleteBuilder;
-import ada.locate.car.infra.provider.builder.vehicle.VehicleReadBuilder;
-import ada.locate.car.infra.provider.builder.vehicle.VehicleUpdateBuilder;
-import ada.locate.car.infra.repository.ClientRepository;
-import ada.locate.car.infra.repository.VehicleRepository;
+import ada.locate.car.DTO.utils.vehicle.VehicleCreateBuilder;
+import ada.locate.car.DTO.utils.vehicle.VehicleUpdateBuilder;
+import ada.locate.car.repository.impl.ClientRepository;
+import ada.locate.car.repository.impl.VehicleRepository;
+import ada.locate.car.provider.vehicle.*;
 import ada.locate.car.service.allocation.*;
 import ada.locate.car.service.client.CreateClientService;
 import ada.locate.car.service.client.DeleteClientService;
@@ -221,7 +222,7 @@ public class LocateCar {
     }
 
     private static ClientServiceConfig createClientServiceConfig() {
-        Repository<Client> clientRepository = ClientRepository.getInstance();
+        RepositoryClient clientRepository = ClientRepository.getInstance();
         return new ClientServiceConfig(
                 new CreateClientService(clientRepository),
                 new ReadClientService(clientRepository),
@@ -294,13 +295,17 @@ public class LocateCar {
                 dtoClient,
                 providerClient,
                 providerAllocationConfig,
+                new CreateAllocationDTO(),
                 service);
     }
 
     private static AllocationServiceConfig createAllocationServiceConfig(VehicleServiceConfig vehicleServiceConfig,
                                                                          ClientServiceConfig clientServiceConfig) {
         return new AllocationServiceConfig(
-                new CreateAllocationService(vehicleServiceConfig.read(), clientServiceConfig.read())
+                new CreateAllocationService(vehicleServiceConfig.read(),
+                        clientServiceConfig.read(),
+                        ClientRepository.getInstance(),
+                        VehicleRepository.getInstance())
         );
     }
 

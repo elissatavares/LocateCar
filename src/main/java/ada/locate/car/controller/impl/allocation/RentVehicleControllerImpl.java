@@ -1,9 +1,10 @@
 package ada.locate.car.controller.impl.allocation;
 
+import ada.locate.car.DTO.AllocationDTO;
 import ada.locate.car.app.config.allocation.AllocationControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.infra.dto.ClientDTO;
-import ada.locate.car.infra.dto.VehicleDTO;
+import ada.locate.car.DTO.ClientDTO;
+import ada.locate.car.DTO.VehicleDTO;
 
 import java.util.List;
 
@@ -44,12 +45,8 @@ public class RentVehicleControllerImpl implements Controller {
         VehicleDTO vehicleDTOAllocation = config.dtoVehicle().search().buildSearchDTOPlateNumber(plateNumberAllocation);
 
         String[] dataAllocation = config.providerAllocation().create().dataAllocation();
-        //gerar o objeto
-        //e passar pro service implmentar
+        AllocationDTO allocationDTO = config.DTO().createAllocation(dataAllocation, clientDTO, vehicleDTOAllocation);
 
-        //printa os veículos disponíveis
-        //recebe a placa do veículo e passa o o client com o documento
-        config.service().create().create(vehicleDTOAllocation, clientDTO);
-        //passa pro service RentVehicle e lá ele vai passar o dto pro service do vehicle, que vai pegar o dto e devolver a lista
+        config.service().create().execute(allocationDTO);
     }
 }

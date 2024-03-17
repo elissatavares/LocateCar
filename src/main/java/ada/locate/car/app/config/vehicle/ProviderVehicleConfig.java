@@ -1,7 +1,6 @@
 package ada.locate.car.app.config.vehicle;
 
-import ada.locate.car.infra.provider.data.client.OutputClient;
-import ada.locate.car.infra.provider.data.vehicle.*;
+import ada.locate.car.provider.vehicle.*;
 
 public record ProviderVehicleConfig(VehicleCreateInputProvider create,
                                     VehicleReadInputProvider read,

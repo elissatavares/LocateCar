@@ -2,14 +2,14 @@ package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
 import ada.locate.car.core.usecase.DeleteClient;
-import ada.locate.car.infra.repository.api.Repository;
-import ada.locate.car.infra.dto.ClientDTO;
+import ada.locate.car.DTO.ClientDTO;
+import ada.locate.car.repository.api.RepositoryClient;
 
 public class DeleteClientService implements DeleteClient {
-    private final Repository<Client> repository;
+    private final RepositoryClient repository;
 
-    public DeleteClientService(Repository<Client> repository) {
-        this.repository = repository;
+    public DeleteClientService(RepositoryClient clientRepository) {
+        this.repository = clientRepository;
     }
 
 

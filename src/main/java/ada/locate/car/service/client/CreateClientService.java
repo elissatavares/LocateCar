@@ -2,17 +2,18 @@ package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
 import ada.locate.car.core.usecase.CreateClient;
-import ada.locate.car.infra.repository.api.Repository;
-import ada.locate.car.infra.dto.ClientDTO;
+import ada.locate.car.repository.api.Repository;
+import ada.locate.car.DTO.ClientDTO;
+import ada.locate.car.repository.api.RepositoryClient;
 
 public class CreateClientService implements CreateClient {
 
-    private final Repository<Client> clientRepository;
+    private final RepositoryClient clientRepository;
 
-    public CreateClientService(Repository<Client> clientRepository) {
-
+    public CreateClientService(RepositoryClient clientRepository) {
         this.clientRepository = clientRepository;
     }
+
 
     @Override
     public void execute(ClientDTO clientDTO) {
