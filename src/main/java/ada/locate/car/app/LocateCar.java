@@ -1,5 +1,9 @@
 package ada.locate.car.app;
 
+import ada.locate.car.app.config.allocation.AllocationControllerConfig;
+import ada.locate.car.app.config.allocation.AllocationControllerImplConfig;
+import ada.locate.car.app.config.allocation.AllocationMenuConfig;
+import ada.locate.car.app.config.allocation.AllocationServiceConfig;
 import ada.locate.car.app.config.client.ClientControllerConfig;
 import ada.locate.car.app.config.client.ClientControllerImplConfig;
 import ada.locate.car.app.config.client.ClientServiceConfig;
@@ -7,11 +11,14 @@ import ada.locate.car.app.config.client.ClientMenuConfig;
 import ada.locate.car.app.config.client.FrontConfigClient;
 import ada.locate.car.app.config.vehicle.FrontConfigVehicle;
 
+import ada.locate.car.app.menu.AllocationMenu;
 import ada.locate.car.app.menu.ClientMenu;
 import ada.locate.car.app.menu.Menu;
 import ada.locate.car.app.messages.MessagesApp;
 import ada.locate.car.app.messages.MessagesClient;
 
+import ada.locate.car.controller.impl.allocation.RentVehicleControllerImpl;
+import ada.locate.car.controller.impl.allocation.ReturnRentedVehicleControllerImpl;
 import ada.locate.car.controller.impl.client.CreateClientControllerImpl;
 import ada.locate.car.controller.impl.client.DeleteClientControllerImpl;
 import ada.locate.car.controller.impl.client.ReadControllerClientImpl;
@@ -46,6 +53,7 @@ import ada.locate.car.controller.impl.vehicle.UpdateVehicleControllerImpl;
 import ada.locate.car.frontend.impl.vehicle.*;
 import ada.locate.car.infra.repository.ClientRepository;
 import ada.locate.car.infra.repository.VehicleRepository;
+import ada.locate.car.service.allocation.CreateAllocationService;
 import ada.locate.car.service.client.CreateClientService;
 import ada.locate.car.service.client.DeleteClientService;
 import ada.locate.car.service.client.ReadClientService;
@@ -72,6 +80,12 @@ public class LocateCar {
         ClientMenuConfig clientMenuConfig = createClientMenuConfig(clientControllerConfig, frontConfigClient);
         Menu clientMenu = new ClientMenu(clientMenuConfig);
 
+        AllocationServiceConfig allocationServiceConfig = createAllocationServiceConfig(vehicleServiceConfig);
+        AllocationControllerImplConfig allocationControllerImplConfig = createAllocationControllerImplConfig(allocationServiceConfig);
+        AllocationControllerConfig allocationControllerConfig = createAllocationControllerConfig(allocationControllerImplConfig);
+        AllocationMenuConfig allocationMenuConfig = createAllocationMenuConfig(allocationControllerConfig);
+        Menu allocation = new AllocationMenu(allocationMenuConfig);
+
 
         String option;
         do {
@@ -84,8 +98,7 @@ public class LocateCar {
                 switch (option) {
                     case "Client" -> clientMenu.run();
                     case "Vehicle" -> vehicleMenu.run();
-                    //Alocation
-                    // case 3 -> AlocationMenu.run();
+                    case "Allocation"-> allocation.run();
                 }
             }
         } while (!option.isEmpty());
@@ -192,4 +205,48 @@ public class LocateCar {
     private static ClientMenuConfig createClientMenuConfig(ClientControllerConfig clientControllerConfig, FrontConfigClient frontConfigClient) {
         return new ClientMenuConfig(clientControllerConfig, frontConfigClient);
     }
+
+    private static AllocationControllerConfig createAllocationControllerConfig(AllocationControllerImplConfig allocationControllerImplConfig){
+        return new AllocationControllerConfig(
+                new RentVehicleControllerImpl(allocationControllerImplConfig),
+                new ReturnRentedVehicleControllerImpl()
+        );
+    }
+
+    private static AllocationMenuConfig createAllocationMenuConfig(AllocationControllerConfig allocationControllerConfig){
+        return new AllocationMenuConfig(allocationControllerConfig);
+    }
+
+    private static AllocationControllerImplConfig createAllocationControllerImplConfig(AllocationServiceConfig allocationServiceConfig){
+        return new AllocationControllerImplConfig(allocationServiceConfig);
+    }
+
+    private static AllocationServiceConfig createAllocationServiceConfig(VehicleServiceConfig vehicleServiceConfig){
+        return new AllocationServiceConfig(
+                new CreateAllocationService(vehicleServiceConfig.read())
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

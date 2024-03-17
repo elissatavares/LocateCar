@@ -29,7 +29,7 @@ public class ReadVehicleControllerImpl implements Controller {
             case "search by plate" ->
                     new VehicleDTO.Builder().plateNumber(searchPlate()).description(searchType).build();
             case "search by color" -> new VehicleDTO.Builder().color(searchColor()).description(searchType).build();
-            case "search all", "search for available vehicles" -> new VehicleDTO.Builder().description(searchType).build();
+            case "search for available vehicles" -> new VehicleDTO.Builder().description(searchType).build();
             default -> null;
         };
     }

@@ -10,17 +10,6 @@ public class Vehicle {
     private String color;
     private String plateNumber;
 
-    @Override
-    public String toString() {
-        return "vehicle{" +
-                "brand='" + brand + '\'' +
-                ", available=" + available +
-                ", model='" + model + '\'' +
-                ", yearManufacture=" + yearManufacture +
-                ", color='" + color + '\'' +
-                ", plateNumber='" + plateNumber + '\'' +
-                '}';
-    }
 
     public Vehicle(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
         this.brand = brand;

@@ -1,5 +1,7 @@
 package ada.locate.car.core.model;
 
+import java.util.List;
+
 public class Client {
     private String flagIdentification;
     private String name;
@@ -7,8 +9,7 @@ public class Client {
     private String phoneNumber;
     private String email;
     private String document;
-
-
+    private List<Allocation> allocationList;
 
     public Client(String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
         this.name = name;
@@ -17,18 +18,6 @@ public class Client {
         this.email = email;
         this.flagIdentification = flagIdentification;
         this.document = document;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "type='" + flagIdentification + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", document='" + document + '\'' +
-                '}';
     }
 
     public String getName() {
@@ -78,6 +67,21 @@ public class Client {
         this.document = document;
     }
 
+    public String getFlagIdentification() {
+        return flagIdentification;
+    }
+
+    public void setFlagIdentification(String flagIdentification) {
+        this.flagIdentification = flagIdentification;
+    }
+
+    public List<Allocation> getAllocationList() {
+        return allocationList;
+    }
+
+    public void setAllocationList(List<Allocation> allocationList) {
+        this.allocationList = allocationList;
+    }
 
     private enum Model {
         CPF("CPF"),

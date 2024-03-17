@@ -23,8 +23,7 @@ public class ReadVehicleService implements ReadVehicle {
             case "search by model" -> list = searchByModelAvailable(vehicleDTO.model());
             case "search by plate" -> list = searchByPlateAvailable(vehicleDTO.plateNumber());
             case "search by color" -> list = searchByColorAvailable(vehicleDTO.color());
-            case "search all" -> list = repository.findAll();
-            case "search for available vehicles" -> list = searchForAvailable();
+            case "search all" -> list = searchForAvailable();
         }
         return VehicleDTO.convertToVehicleDTO(list);
     }
