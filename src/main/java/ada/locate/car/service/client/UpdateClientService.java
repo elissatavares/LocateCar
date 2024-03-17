@@ -4,19 +4,52 @@ import ada.locate.car.core.model.Client;
 import ada.locate.car.core.usecase.UpdateClient;
 import ada.locate.car.infra.api.Repository;
 import ada.locate.car.infra.dto.ClientDTO;
-import ada.locate.car.infra.dto.VehicleDTO;
-
 
 public class UpdateClientService implements UpdateClient {
-    private final Repository<Client> repository;
 
-    public UpdateClientService(Repository<Client> repository) {
-        this.repository = repository;
+    private final Repository<Client> clientRepository;
+
+    public UpdateClientService(Repository<Client> clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
-
     @Override
-    public void update(ClientDTO o) {
-
+    public ClientDTO execute(ClientDTO clientDTO) {
+        Client oldClient = clientRepository.read(clientDTO.document());
+        Client updatedClient = null;
+        switch (clientDTO.description().toLowerCase()){
+            case "name" -> updatedClient = new Client(
+                    clientDTO.name(),
+                    oldClient.getAddress(),
+                    oldClient.getPhoneNumber(),
+                    oldClient.getEmail(),
+                    oldClient.getIdentification(),
+                    oldClient.getDocument());
+            case "address" ->
+                    updatedClient = new Client(
+                            oldClient.getName(),
+                            clientDTO.address(),
+                            oldClient.getPhoneNumber(),
+                            oldClient.getEmail(),
+                            oldClient.getIdentification(),
+                            oldClient.getDocument());
+            case "phone number" ->
+                    updatedClient = new Client(
+                            oldClient.getName(),
+                            oldClient.getAddress(),
+                            clientDTO.phoneNumber(),
+                            oldClient.getEmail(),
+                            oldClient.getIdentification(),
+                            oldClient.getDocument());
+            case "email" -> updatedClient = new Client(
+                    oldClient.getName(),
+                    oldClient.getAddress(),
+                    oldClient.getPhoneNumber(),
+                    clientDTO.email(),
+                    oldClient.getIdentification(),
+                    oldClient.getDocument());
+        }
+        clientRepository.update(updatedClient, oldClient);
+        return ClientDTO.convertClient(updatedClient);
     }
 }
