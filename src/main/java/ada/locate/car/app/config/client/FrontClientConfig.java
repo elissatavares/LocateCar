@@ -7,7 +7,7 @@ import ada.locate.car.frontend.api.ShowOutputDetails;
 import ada.locate.car.frontend.impl.client.ShowInputCNPJ;
 import ada.locate.car.frontend.impl.client.ShowInputCPF;
 
-public record FrontConfigClient(
+public record FrontClientConfig(
         ShowInputOptionsString optionsClient,
         ShowInputOptionsString optionCreate,
         ShowInputMultipleFields dataClient,

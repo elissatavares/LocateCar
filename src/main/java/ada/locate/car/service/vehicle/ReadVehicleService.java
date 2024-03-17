@@ -2,7 +2,7 @@ package ada.locate.car.service.vehicle;
 
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.ReadVehicle;
-import ada.locate.car.infra.api.RepositoryVehicle;
+import ada.locate.car.infra.repository.api.RepositoryVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class ReadVehicleService implements ReadVehicle {
             case "search by color" -> list = searchByColorAvailable(vehicleDTO.color());
             case "search all" -> list = searchForAvailable();
         }
+        System.out.println(VehicleDTO.convertToVehicleDTO(list));
         return VehicleDTO.convertToVehicleDTO(list);
     }
 
@@ -40,8 +41,9 @@ public class ReadVehicleService implements ReadVehicle {
         return repository.findAllByPredicate(vehicle -> vehicle.getColor().equalsIgnoreCase(color));
     }
 
+    // ver isso
     private List<Vehicle> searchForAvailable(){
-        return repository.findAllByPredicate(Vehicle::isAvailable);
+        return repository.findAllByPredicate(vehicle -> vehicle.isAvailable() == true);
     }
 
 }

@@ -1,8 +1,7 @@
-package ada.locate.car.infra.api;
+package ada.locate.car.infra.repository.api;
 
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface Repository<T>  {
 

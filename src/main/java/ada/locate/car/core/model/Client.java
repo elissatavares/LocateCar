@@ -1,5 +1,6 @@
 package ada.locate.car.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
@@ -9,7 +10,7 @@ public class Client {
     private String phoneNumber;
     private String email;
     private String document;
-    private List<Allocation> allocationList;
+    private List<Allocation> allocationList = new ArrayList<>();
 
     public Client(String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
         this.name = name;
@@ -79,8 +80,8 @@ public class Client {
         return allocationList;
     }
 
-    public void setAllocationList(List<Allocation> allocationList) {
-        this.allocationList = allocationList;
+    public void setAllocationList(Allocation newAllocation) {
+        this.allocationList.add(newAllocation);
     }
 
     private enum Model {

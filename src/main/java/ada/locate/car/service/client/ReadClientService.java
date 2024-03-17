@@ -1,7 +1,7 @@
 package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
-import ada.locate.car.infra.api.Repository;
+import ada.locate.car.infra.repository.api.Repository;
 import ada.locate.car.infra.dto.ClientDTO;
 import ada.locate.car.core.usecase.ReadClient;
 
@@ -16,6 +16,6 @@ public class ReadClientService implements ReadClient {
     @Override
     public ClientDTO execute(ClientDTO clientDTO) {
         Client client = clientRepository.read(clientDTO.document());
-        return ClientDTO.convertClient(client);
+        return ClientDTO.convertClientToDTO(client);
     }
 }

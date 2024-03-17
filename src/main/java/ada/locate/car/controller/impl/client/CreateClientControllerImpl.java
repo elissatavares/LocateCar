@@ -15,35 +15,12 @@ public class CreateClientControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String type = config.front().optionCreate().execute();
-        String[] clientData = config.front().dataClient().execute();
-        ClientDTO clientDTO;
-        //verifica qual tipo é
-        if (type.equalsIgnoreCase("CPF")) {
-            String cpf = config.front().CPFentry().execute();
-            clientDTO = new ClientDTO.Builder()
-                    .name(clientData[0])
-                    .address(clientData[1])
-                    .phoneNumber(clientData[2])
-                    .email(clientData[3])
-                    .flagIdentification(type)
-                    .document(cpf)
-                    .build();
-
-        } else {
-            String cnpj = config.front().CNPJentry().execute();
-            clientDTO = new ClientDTO.Builder()
-                    .name(clientData[0])
-                    .address(clientData[1])
-                    .phoneNumber(clientData[2])
-                    .email(clientData[3])
-                    .flagIdentification(type)
-                    .document(cnpj)
-                    .build();
-        }
+        String type = config.provider().create().optionCreate();
+        String document = config.provider().documentEntry().document(type);
+        String[] clientData = config.provider().create().dataClient();
+        ClientDTO clientDTO = config.DTO().create().buildClientDTO(type, clientData, document);
         config.service().create().execute(clientDTO);
-
-        config.front().createdSuccessfully().execute(clientDTO.toString());
+        config.provider().output().createdSuccessfully(clientDTO.toString());
 
         System.out.println("SUCCESS! Enter Read option to see details.");
     }

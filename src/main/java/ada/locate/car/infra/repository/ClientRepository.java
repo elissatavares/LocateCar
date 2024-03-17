@@ -1,11 +1,10 @@
 package ada.locate.car.infra.repository;
 
 import ada.locate.car.core.model.Client;
-import ada.locate.car.infra.api.Repository;
+import ada.locate.car.infra.repository.api.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class ClientRepository implements Repository<Client> {
 

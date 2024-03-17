@@ -14,17 +14,12 @@ public class DeleteClientControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String type = config.front().optionDelete().execute();
+        String type = config.provider().delete().optionDelete();
 
-        String document;
-        if (type.equalsIgnoreCase("CPF")) {
-            document = config.front().CPFentry().execute();
-        } else {
-            document = config.front().CNPJentry().execute();
-        }
-        ClientDTO deleteClientDTO = new ClientDTO.Builder().document(document).build();
+        String document = config.provider().documentEntry().document(type);
+        ClientDTO deleteClientDTO = config.DTO().delete().buildClientDTO(document);
         config.service().delete().execute(deleteClientDTO);
-        config.front().deletedSuccessfully().execute(deleteClientDTO.toString());
+        config.provider().output().deletedSuccessfully(deleteClientDTO.document());
         System.out.println(deleteClientDTO);
     }
 

@@ -5,7 +5,7 @@ import ada.locate.car.frontend.api.ShowInputOnlyField;
 import ada.locate.car.frontend.api.ShowInputOptionsString;
 import ada.locate.car.frontend.api.ShowOutputDetails;
 
-public record FrontConfigVehicle (
+public record FrontVehicleConfig(
         ShowInputMultipleFields showDataVehicleEntry,
         ShowInputMultipleFields showColorAndPlateNumberUpdateDataEntry,
 
@@ -21,7 +21,6 @@ public record FrontConfigVehicle (
         ShowInputOptionsString showInputOptionsUpdateVehicle,
         ShowInputOptionsString showInputOptionsVehicle,
         ShowInputOptionsString showInputOptionsInsertModelFilter,
-        ShowInputOptionsString showMainMenu,
 
         ShowOutputDetails readVehicle
 ) {

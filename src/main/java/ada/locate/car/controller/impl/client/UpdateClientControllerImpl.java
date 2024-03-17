@@ -16,57 +16,15 @@ public class UpdateClientControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String type = config.front().updateCPForCNPJ().execute();
+        String type = config.provider().update().typeClientUpdate();
+        String document = config.provider().documentEntry().document(type);
 
-        String document;
-        if (type.equalsIgnoreCase("CPF")) {
-            document = config.front().CPFentry().execute();
-        } else {
-            document = config.front().CNPJentry().execute();
-        }
+        String edit = config.provider().update().optionsUpdate();
 
-        String edit = config.front().optionsUpdate().execute();
-        System.out.println(edit);
-
-        ClientDTO updatedClient = null;
-        switch (edit.toLowerCase()) {
-            case "name" -> updatedClient = new ClientDTO.Builder()
-                    .name(nameUpdate())
-                    .document(document)
-                    .description(edit)
-                    .build();
-            case "address" -> updatedClient = new ClientDTO.Builder()
-                    .address(addressUpdate())
-                    .description(edit)
-                    .document(document)
-                    .build();
-            case "phone number" -> updatedClient = new ClientDTO.Builder()
-                    .phoneNumber(phoneNumberUpdate())
-                    .document(document)
-                    .description(edit)
-                    .build();
-            case "email" -> updatedClient = new ClientDTO.Builder()
-                    .email(emailUpdate())
-                    .document(document)
-                    .description(edit)
-                    .build();
-        }
+        ClientDTO updatedClient = config.DTO().update().buildClientDTO(document, edit);
         ClientDTO clientDTO = config.service().update().execute(updatedClient);
-        config.front().updatedSuccessfully().execute(clientDTO.toString());
-    }
 
-    private String nameUpdate(){
-        return config.front().updateName().execute();
-    }
-    private String addressUpdate(){
-        return config.front().updateAddress().execute();
-    }
-
-    private String phoneNumberUpdate(){
-        return config.front().updatePhoneNumber().execute();
-    }
-    private String emailUpdate(){
-        return config.front().updateEmail().execute();
+        config.provider().output().updatedSuccessfully(clientDTO.toString());
     }
 
 }

@@ -1,7 +1,7 @@
 package ada.locate.car.infra.repository;
 
 import ada.locate.car.core.model.Vehicle;
-import ada.locate.car.infra.api.RepositoryVehicle;
+import ada.locate.car.infra.repository.api.RepositoryVehicle;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,14 +15,8 @@ public class DeleteVehicleControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String plateNumber = config.front().showExclusionField().execute();
-        VehicleDTO vehicleDTO = buildVehicleDTO(plateNumber);
+        String plateNumber = config.provider().delete().showExclusionField();
+        VehicleDTO vehicleDTO = config.DTO().delete().buildVehicleDTO(plateNumber);
         config.service().delete().execute(vehicleDTO);
-        //config.front().showInformation().execute("Plate Number", plateNumber);
-    }
-    private VehicleDTO buildVehicleDTO(String plateNumber) {
-        return new VehicleDTO.Builder()
-                .plateNumber(plateNumber)
-                .build();
     }
 }

@@ -1,4 +1,4 @@
-package ada.locate.car.infra.api;
+package ada.locate.car.infra.repository.api;
 
 import ada.locate.car.core.model.Vehicle;
 

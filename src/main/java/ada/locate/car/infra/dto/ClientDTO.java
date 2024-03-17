@@ -64,7 +64,7 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
         }
     }
 
-    public static ClientDTO convertClient(Client client){
+    public static ClientDTO convertClientToDTO(Client client){
         return new Builder()
                 .name(client.getName())
                 .address(client.getAddress())
@@ -74,5 +74,12 @@ public record ClientDTO(String name, String address, String phoneNumber, String 
                 .document(client.getDocument())
                 .build();
     }
-
+    public static Client convertClientDTOToClient(ClientDTO clientDTO){
+        return new Client(clientDTO.name,
+                clientDTO.address,
+                clientDTO.phoneNumber,
+                clientDTO.email,
+                clientDTO.flagIdentification,
+                clientDTO.document);
+    }
 }

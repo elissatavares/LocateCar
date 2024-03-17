@@ -12,8 +12,7 @@ public class AllocationMenu implements Menu {
 
     @Override
     public void run() {
-        String option = "a";
-                //config.front().
+        String option = config.provider().create().optionAllocation();
         if (option.isEmpty()) {
             return;
         }
