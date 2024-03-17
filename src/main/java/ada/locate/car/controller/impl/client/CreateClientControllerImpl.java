@@ -1,38 +1,26 @@
 package ada.locate.car.controller.impl.client;
 
-import ada.locate.car.app.messages.MessagesClient;
+import ada.locate.car.app.config.client.ClientControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.core.usecase.CreateClient;
-import ada.locate.car.frontend.api.Input;
-import ada.locate.car.frontend.api.Output;
 import ada.locate.car.infra.dto.ClientDTO;
 
 public class CreateClientControllerImpl implements Controller {
 
-    private final Input<String[]> inputMultipleFields;
-    private final Input<String> flagIdentification;
-    private final Output showInformation;
-    private final Input<String> inputCNPJ;
-    private final Input<String> inputCPF;
-    private final CreateClient clientCreateService;
+    private final ClientControllerImplConfig config;
 
-    public CreateClientControllerImpl(Input<String[]> inputMultipleFields, Input<String> flagIdentification, Output showInformation, Input<String> inputCNPJ, Input<String> inputCPF, CreateClient clientCreateService) {
-        this.inputMultipleFields = inputMultipleFields;
-        this.flagIdentification = flagIdentification;
-        this.showInformation = showInformation;
-        this.inputCNPJ = inputCNPJ;
-        this.inputCPF = inputCPF;
-        this.clientCreateService = clientCreateService;
+    public CreateClientControllerImpl(ClientControllerImplConfig config) {
+        this.config = config;
     }
+
 
     @Override
     public void execute() {
-        String type = flagIdentification.execute(MessagesClient.CLIENT_MENU.get(), MessagesClient.ALL_TYPES.get());
-        String[] clientData = inputMultipleFields.execute(MessagesClient.INSERT_CLIENT_DATA.get(), MessagesClient.ALL_CLIENT_DATA.get());
+        String type = config.front().optionCreate().execute();
+        String[] clientData = config.front().dataClient().execute();
         ClientDTO clientDTO;
         //verifica qual tipo é
         if (type.equalsIgnoreCase("CPF")) {
-            String cpf = inputCPF.execute(MessagesClient.ENTER_CPF.get(), MessagesClient.ENTER_CPF.get());
+            String cpf = config.front().CPFentry().execute();
             clientDTO = new ClientDTO.Builder()
                     .name(clientData[0])
                     .address(clientData[1])
@@ -43,7 +31,7 @@ public class CreateClientControllerImpl implements Controller {
                     .build();
 
         } else {
-            String cnpj = inputCNPJ.execute(MessagesClient.ENTER_CNPJ.get(), MessagesClient.ENTER_CNPJ.get());
+            String cnpj = config.front().CNPJentry().execute();
             clientDTO = new ClientDTO.Builder()
                     .name(clientData[0])
                     .address(clientData[1])
@@ -53,10 +41,10 @@ public class CreateClientControllerImpl implements Controller {
                     .document(cnpj)
                     .build();
         }
-        clientCreateService.execute(clientDTO);
+        config.service().create().execute(clientDTO);
 
-        showInformation.execute("Client created successfully.", MessagesClient.CLIENT_DETAILS.get());
+        config.front().createdSuccessfully().execute(clientDTO.toString());
 
-        System.out.println("SUCESS! Enter Read option to see details.");
+        System.out.println("SUCCESS! Enter Read option to see details.");
     }
 }

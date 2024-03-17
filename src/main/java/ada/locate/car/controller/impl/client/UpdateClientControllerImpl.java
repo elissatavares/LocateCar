@@ -2,72 +2,73 @@
 package ada.locate.car.controller.impl.client;
 
 
-import ada.locate.car.app.messages.MessagesClient;
+import ada.locate.car.app.config.client.ClientControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.core.usecase.UpdateClient;
-import ada.locate.car.frontend.api.Input;
-import ada.locate.car.frontend.api.Output;
 import ada.locate.car.infra.dto.ClientDTO;
 
 public class UpdateClientControllerImpl implements Controller {
-    private final Input<String> stringOption;
-    private final Input<String> inputCPF;
-    private final Input<String> inputCNPJ;
-    private final Output showInformation;
-    private final UpdateClient updateClientService;
-    private final Input<String> inputOnlyField;
+    private final ClientControllerImplConfig config;
 
-    public UpdateClientControllerImpl(Input<String> stringOption, Input<String> inputCPF, Input<String> inputCNPJ,  Output showInformation, UpdateClient updateClientService, Input<String> inputOnlyField) {
-        this.stringOption = stringOption;
-        this.inputCPF = inputCPF;
-        this.inputCNPJ = inputCNPJ;
-        this.showInformation = showInformation;
-        this.updateClientService = updateClientService;
-        this.inputOnlyField = inputOnlyField;
+    public UpdateClientControllerImpl(ClientControllerImplConfig config) {
+        this.config = config;
     }
 
 
     @Override
     public void execute() {
-        String type = stringOption.execute(MessagesClient.OPTION_UPDATE.get(), MessagesClient.SEARCH_OPTION_PROMPT.get());
+        String type = config.front().updateCPForCNPJ().execute();
 
         String document;
         if (type.equalsIgnoreCase("CPF")) {
-            document = inputCPF.execute(MessagesClient.ENTER_CPF.get(), MessagesClient.ENTER_CPF.get());
+            document = config.front().CPFentry().execute();
         } else {
-            document = inputCNPJ.execute(MessagesClient.ENTER_CNPJ.get(), MessagesClient.ENTER_CNPJ.get());
+            document = config.front().CNPJentry().execute();
         }
 
-        String edit = stringOption.execute(MessagesClient.MENU_UPDATED_CLIENT.get(), MessagesClient.UPDATED_CLIENT_DATA.get());
+        String edit = config.front().optionsUpdate().execute();
         System.out.println(edit);
-        String updateField = inputOnlyField.execute(MessagesClient.MENU_UPDATED_CLIENT.get(), edit);
 
         ClientDTO updatedClient = null;
         switch (edit.toLowerCase()) {
             case "name" -> updatedClient = new ClientDTO.Builder()
-                    .name(updateField)
+                    .name(nameUpdate())
                     .document(document)
                     .description(edit)
                     .build();
             case "address" -> updatedClient = new ClientDTO.Builder()
-                    .address(updateField)
+                    .address(addressUpdate())
                     .description(edit)
                     .document(document)
                     .build();
             case "phone number" -> updatedClient = new ClientDTO.Builder()
-                    .phoneNumber(updateField)
+                    .phoneNumber(phoneNumberUpdate())
                     .document(document)
                     .description(edit)
                     .build();
             case "email" -> updatedClient = new ClientDTO.Builder()
-                    .email(updateField)
+                    .email(emailUpdate())
                     .document(document)
                     .description(edit)
                     .build();
         }
-        updateClientService.execute(updatedClient);
-        showInformation.execute("Client updated successfully.", MessagesClient.CLIENT_DETAILS.get());
+        ClientDTO clientDTO = config.service().update().execute(updatedClient);
+        config.front().updatedSuccessfully().execute(clientDTO.toString());
     }
+
+    private String nameUpdate(){
+        return config.front().updateName().execute();
+    }
+    private String addressUpdate(){
+        return config.front().updateAddress().execute();
+    }
+
+    private String phoneNumberUpdate(){
+        return config.front().updatePhoneNumber().execute();
+    }
+    private String emailUpdate(){
+        return config.front().updateEmail().execute();
+    }
+
 }
 
 

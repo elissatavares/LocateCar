@@ -16,13 +16,6 @@ public class ReadClientService implements ReadClient {
     @Override
     public ClientDTO execute(ClientDTO clientDTO) {
         Client client = clientRepository.read(clientDTO.document());
-        return new ClientDTO.Builder()
-                .name(client.getName())
-                .address(client.getAddress())
-                .phoneNumber(client.getPhoneNumber())
-                .email(client.getEmail())
-                .flagIdentification(client.getIdentification())
-                .document(client.getDocument())
-                .build();
+        return ClientDTO.convertClient(client);
     }
 }

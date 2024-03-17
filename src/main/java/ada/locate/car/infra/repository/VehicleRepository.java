@@ -1,14 +1,14 @@
 package ada.locate.car.infra.repository;
 
-import ada.locate.car.infra.api.Repository;
 import ada.locate.car.core.model.Vehicle;
+import ada.locate.car.infra.api.RepositoryVehicle;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class VehicleRepository implements Repository<Vehicle> {
+public class VehicleRepository implements RepositoryVehicle {
 
     List<Vehicle> vehicleList = new ArrayList<>(10);
     private static VehicleRepository instance;

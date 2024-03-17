@@ -28,13 +28,12 @@ public record VehicleDTO(String brand, LocalDate yearManufacture,
 
     @Override
     public String toString() {
-        return "VehicleDTO{" +
-                "brand='" + brand + '\'' +
-                ", yearManufacture=" + yearManufacture +
-                ", color='" + color + '\'' +
-                ", plateNumber='" + plateNumber + '\'' +
-                ", model='" + model + '\'' +
-                '}';
+        return "Vehicle: " +
+                "Brand: " + brand +
+                ", YearManufacture: " + yearManufacture +
+                ", Colo: " + color +
+                ", PlateNumber: " + plateNumber +
+                ", Model: " + model;
     }
 
     public static class Builder {
@@ -83,7 +82,7 @@ public record VehicleDTO(String brand, LocalDate yearManufacture,
             return new VehicleDTO(brand, yearManufacture, color, plateNumber, model, description, newPlateNumber);
         }
     }
-    public List<VehicleDTO> convertToVehicleDTO(List<Vehicle> vehicleList){
+    public static List<VehicleDTO> convertToVehicleDTO(List<Vehicle> vehicleList){
         return vehicleList.stream()
                 .map(vehicle -> new Builder().
                         brand(vehicle.getBrand()).
@@ -94,5 +93,14 @@ public record VehicleDTO(String brand, LocalDate yearManufacture,
                         build()).
                 collect(Collectors.toList());
     }
-
+    public static String formatVehicleList(List<VehicleDTO> vehicles) {
+        return vehicles.stream()
+                .map(vehicle -> "Vehicle: " +
+                        "Brand: " + vehicle.brand() +
+                        ", YearManufacture: " + vehicle.yearManufacture() +
+                        ", Color: " + vehicle.color() +
+                        ", PlateNumber: " + vehicle.plateNumber() +
+                        ", Model: " + vehicle.model())
+                .collect(Collectors.joining("\n"));
+    }
 }

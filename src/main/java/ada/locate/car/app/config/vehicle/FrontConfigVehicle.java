@@ -1,4 +1,4 @@
-package ada.locate.car.app.config.vehicle.front;
+package ada.locate.car.app.config.vehicle;
 
 import ada.locate.car.frontend.api.ShowInputMultipleFields;
 import ada.locate.car.frontend.api.ShowInputOnlyField;

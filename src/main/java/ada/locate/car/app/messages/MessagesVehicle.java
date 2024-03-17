@@ -22,7 +22,7 @@ public enum MessagesVehicle {
     DESCRIPTION_DELETE_VEHICLE("Enter the license plate number of the vehicle you want to delete"),
     DESCRIPTION_INSERT_DATA("Insert vehicle data"),
     DESCRIPTION_ENTER_PLATE("Enter the license plate number you want to search for"),
-    DESCRIPTION_ALL_DATA("Brand: \nYear of Manufacture: \nColor: \nPlate Number: "),
+    DESCRIPTION_ALL_DATA("Brand: \nYear of Manufacture (yyyy-mm-dd): \nColor: \nPlate Number: "),
     DESCRIPTION_ENTER_COLOR("Enter the color of the car you want to search for"),
     RESULTS_SEARCH_FILTER("These are the results based on the search filter"),
     VEHICLE_DETAILS("Vehicle details");

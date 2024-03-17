@@ -16,5 +16,4 @@ public interface Repository<T>  {
 
     List<T> findAll();
 
-    List<T> findAllByPredicate(Predicate<T> predicate);
 }

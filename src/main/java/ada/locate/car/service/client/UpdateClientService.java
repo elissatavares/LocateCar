@@ -14,7 +14,7 @@ public class UpdateClientService implements UpdateClient {
     }
 
     @Override
-    public void execute(ClientDTO clientDTO) {
+    public ClientDTO execute(ClientDTO clientDTO) {
         Client oldClient = clientRepository.read(clientDTO.document());
         Client updatedClient = null;
         switch (clientDTO.description().toLowerCase()){
@@ -50,5 +50,6 @@ public class UpdateClientService implements UpdateClient {
                     oldClient.getDocument());
         }
         clientRepository.update(updatedClient, oldClient);
+        return ClientDTO.convertClient(updatedClient);
     }
 }

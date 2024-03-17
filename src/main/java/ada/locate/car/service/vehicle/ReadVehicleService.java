@@ -2,18 +2,19 @@ package ada.locate.car.service.vehicle;
 
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.ReadVehicle;
-import ada.locate.car.infra.api.Repository;
+import ada.locate.car.infra.api.RepositoryVehicle;
 import ada.locate.car.infra.dto.VehicleDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadVehicleService implements ReadVehicle {
-    private final Repository<Vehicle> repository;
+    private final RepositoryVehicle repository;
 
-    public ReadVehicleService(Repository<Vehicle> repository) {
+    public ReadVehicleService(RepositoryVehicle repository) {
         this.repository = repository;
     }
+
 
     @Override
     public List<VehicleDTO> execute(VehicleDTO vehicleDTO) {
@@ -25,7 +26,7 @@ public class ReadVehicleService implements ReadVehicle {
             case "search all" -> list = repository.findAll();
             case "search for available vehicles" -> list = searchForAvailable();
         }
-        return vehicleDTO.convertToVehicleDTO(list);
+        return VehicleDTO.convertToVehicleDTO(list);
     }
 
     private List<Vehicle> searchByModelAvailable(String model) {

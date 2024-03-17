@@ -1,6 +1,5 @@
-package ada.locate.car.frontend.impl;
+package ada.locate.car.frontend.impl.vehicle;
 
-import ada.locate.car.app.messages.MessagesVehicle;
 import ada.locate.car.frontend.api.ShowInputOnlyField;
 
 public class ShowInputInsertFilterPlate extends ShowInputOnlyField {
