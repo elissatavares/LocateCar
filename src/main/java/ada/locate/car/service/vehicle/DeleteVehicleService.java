@@ -5,6 +5,8 @@ import ada.locate.car.core.usecase.vehicle.DeleteVehicle;
 import ada.locate.car.repository.api.RepositoryVehicle;
 import ada.locate.car.DTO.VehicleDTO;
 
+import java.util.Optional;
+
 public class DeleteVehicleService implements DeleteVehicle {
 
     private final RepositoryVehicle repository;
@@ -16,7 +18,7 @@ public class DeleteVehicleService implements DeleteVehicle {
 
     @Override
     public void execute(VehicleDTO vehicleDTO) {
-        Vehicle vehicle = repository.read(vehicleDTO.plateNumber());
-        repository.delete(vehicle);
+        Optional<Vehicle> vehicle = repository.read(vehicleDTO.plateNumber());
+        repository.delete(vehicle.get());
     }
 }

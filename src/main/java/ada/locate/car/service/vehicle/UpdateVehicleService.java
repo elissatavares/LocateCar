@@ -5,6 +5,8 @@ import ada.locate.car.core.usecase.vehicle.UpdateVehicle;
 import ada.locate.car.repository.api.RepositoryVehicle;
 import ada.locate.car.DTO.VehicleDTO;
 
+import java.util.Optional;
+
 public class UpdateVehicleService implements UpdateVehicle {
 
     private final RepositoryVehicle repository;
@@ -16,28 +18,28 @@ public class UpdateVehicleService implements UpdateVehicle {
 
     @Override
     public void execute(VehicleDTO vehicleDTO) {
-        Vehicle oldVehicle = repository.read(vehicleDTO.plateNumber());
+        Optional<Vehicle> oldVehicle = repository.read(vehicleDTO.plateNumber());
         Vehicle newVehicle = null;
         switch (vehicleDTO.description().toLowerCase()){
             case "color" -> newVehicle = new Vehicle(
-                    oldVehicle.getBrand(),
-                    oldVehicle.getYearManufacture(),
+                    oldVehicle.get().getBrand(),
+                    oldVehicle.get().getYearManufacture(),
                     vehicleDTO.color(),
-                    oldVehicle.getPlateNumber(),
-                    oldVehicle.getModel());
+                    oldVehicle.get().getPlateNumber(),
+                    oldVehicle.get().getModel());
             case "plate number" -> newVehicle = new Vehicle(
-                    oldVehicle.getBrand(),
-                    oldVehicle.getYearManufacture(),
-                    oldVehicle.getColor(),
+                    oldVehicle.get().getBrand(),
+                    oldVehicle.get().getYearManufacture(),
+                    oldVehicle.get().getColor(),
                     vehicleDTO.newPlateNumber(),
-                    oldVehicle.getModel());
+                    oldVehicle.get().getModel());
             case "plate color and number" -> newVehicle = new Vehicle(
-                    oldVehicle.getBrand(),
-                    oldVehicle.getYearManufacture(),
+                    oldVehicle.get().getBrand(),
+                    oldVehicle.get().getYearManufacture(),
                     vehicleDTO.color(),
                     vehicleDTO.newPlateNumber(),
-                    oldVehicle.getModel());
+                    oldVehicle.get().getModel());
         }
-        repository.update(newVehicle, oldVehicle);
+        repository.update(newVehicle, oldVehicle.get());
     }
 }

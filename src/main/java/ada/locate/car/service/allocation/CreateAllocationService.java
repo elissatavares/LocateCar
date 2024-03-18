@@ -12,6 +12,7 @@ import ada.locate.car.repository.api.RepositoryClient;
 import ada.locate.car.repository.api.RepositoryVehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CreateAllocationService implements CreateAllocation{
     private final ReadVehicle readVehicleService;
@@ -36,9 +37,9 @@ public class CreateAllocationService implements CreateAllocation{
         List<VehicleDTO> vehicleToAllocation =  readVehicleService.execute(allocationDTO.plateNumberVehicle());
         VehicleDTO vehicleDTO = vehicleToAllocation.getFirst();
 
-        Vehicle vehicle = repositoryVehicle.read(vehicleDTO.plateNumber());
+        Optional<Vehicle> vehicle = repositoryVehicle.read(vehicleDTO.plateNumber());
         String[] dataAllocation = allocationDTO.data();
-        Allocation allocation = new Allocation(dataAllocation[0], dataAllocation[1], vehicle);
+        Allocation allocation = new Allocation(dataAllocation[0], dataAllocation[1], vehicle.get());
         clientRepository.createAllocation(allocation, client.document());
     }
 

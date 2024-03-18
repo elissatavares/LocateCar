@@ -5,16 +5,16 @@ import ada.locate.car.repository.api.RepositoryVehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class VehicleRepository implements RepositoryVehicle {
 
-    List<Vehicle> vehicleList = new ArrayList<>(10);
+    private final List<Vehicle> vehicleList = new ArrayList<>();
     private static VehicleRepository instance;
 
-    private VehicleRepository() {
-    }
+    private VehicleRepository() {}
 
     public static VehicleRepository getInstance() {
         if (instance == null) {
@@ -25,34 +25,27 @@ public class VehicleRepository implements RepositoryVehicle {
 
 
     @Override
-    public void create(Vehicle o) {
-        vehicleList.add(o);
-
+    public boolean create(Vehicle vehicle) {
+        return vehicleList.add(vehicle);
     }
 
     @Override
-    public Vehicle read(String key) {
+    public Optional<Vehicle> read(String key) {
         return vehicleList.stream()
                 .filter(vehicle -> vehicle.getPlateNumber().equalsIgnoreCase(key))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
-    public void update(Vehicle newVehicle, Vehicle oldVehicle) {
-        vehicleList.remove(oldVehicle);
+    public boolean update(Vehicle newVehicle, Vehicle oldVehicle) {
+        if (!vehicleList.remove(oldVehicle)) return false;
         vehicleList.add(newVehicle);
+        return true;
     }
 
     @Override
-    public void delete(Vehicle o) {
-        vehicleList.remove(o);
-    }
-
-
-    @Override
-    public List<Vehicle> findAll() {
-        return vehicleList;
+    public boolean delete(Vehicle vehicle) {
+        return vehicleList.remove(vehicle);
     }
 
     @Override
@@ -60,5 +53,10 @@ public class VehicleRepository implements RepositoryVehicle {
         return vehicleList.stream()
                 .filter(predicate)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Vehicle> findAll() {
+        return new ArrayList<>(vehicleList);
     }
 }

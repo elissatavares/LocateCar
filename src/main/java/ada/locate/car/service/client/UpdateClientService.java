@@ -5,6 +5,8 @@ import ada.locate.car.core.usecase.client.UpdateClient;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.repository.api.RepositoryClient;
 
+import java.util.Optional;
+
 public class UpdateClientService implements UpdateClient {
 
     private final RepositoryClient clientRepository;
@@ -15,41 +17,42 @@ public class UpdateClientService implements UpdateClient {
 
     @Override
     public ClientDTO execute(ClientDTO clientDTO) {
-        Client oldClient = clientRepository.read(clientDTO.document());
+        //precisa chamar a camada security e valida se existe ou nao
+        Optional<Client> oldClient = clientRepository.read(clientDTO.document());
         Client updatedClient = null;
         switch (clientDTO.description().toLowerCase()){
             case "name" -> updatedClient = new Client(
                     clientDTO.name(),
-                    oldClient.getAddress(),
-                    oldClient.getPhoneNumber(),
-                    oldClient.getEmail(),
-                    oldClient.getIdentification(),
-                    oldClient.getDocument());
+                    oldClient.get().getAddress(),
+                    oldClient.get().getPhoneNumber(),
+                    oldClient.get().getEmail(),
+                    oldClient.get().getIdentification(),
+                    oldClient.get().getDocument());
             case "address" ->
                     updatedClient = new Client(
-                            oldClient.getName(),
+                            oldClient.get().getName(),
                             clientDTO.address(),
-                            oldClient.getPhoneNumber(),
-                            oldClient.getEmail(),
-                            oldClient.getIdentification(),
-                            oldClient.getDocument());
+                            oldClient.get().getPhoneNumber(),
+                            oldClient.get().getEmail(),
+                            oldClient.get().getIdentification(),
+                            oldClient.get().getDocument());
             case "phone number" ->
                     updatedClient = new Client(
-                            oldClient.getName(),
-                            oldClient.getAddress(),
+                            oldClient.get().getName(),
+                            oldClient.get().getAddress(),
                             clientDTO.phoneNumber(),
-                            oldClient.getEmail(),
-                            oldClient.getIdentification(),
-                            oldClient.getDocument());
+                            oldClient.get().getEmail(),
+                            oldClient.get().getIdentification(),
+                            oldClient.get().getDocument());
             case "email" -> updatedClient = new Client(
-                    oldClient.getName(),
-                    oldClient.getAddress(),
-                    oldClient.getPhoneNumber(),
+                    oldClient.get().getName(),
+                    oldClient.get().getAddress(),
+                    oldClient.get().getPhoneNumber(),
                     clientDTO.email(),
-                    oldClient.getIdentification(),
-                    oldClient.getDocument());
+                    oldClient.get().getIdentification(),
+                    oldClient.get().getDocument());
         }
-        clientRepository.update(updatedClient, oldClient);
+        clientRepository.update(updatedClient, oldClient.get());
         return ClientDTO.convertClientToDTO(updatedClient);
     }
 }

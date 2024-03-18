@@ -2,16 +2,17 @@ package ada.locate.car.repository.api;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Repository<T>  {
 
-    void create(T o);
+    boolean create(T o);
 
-    T read(String key);
+    Optional<T> read(String key);
 
-    void update(T o, T key);
+    boolean update(T o, T key);
 
-    void delete(T o);
+    boolean delete(T o);
 
     List<T> findAll();
 

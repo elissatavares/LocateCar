@@ -16,6 +16,7 @@ public class CreateClientService implements CreateClient {
 
     @Override
     public void execute(ClientDTO clientDTO) {
+        //precisa chamar a camada security e valida se existe ou nao
         Client client = new Client(
                 clientDTO.name(),
                 clientDTO.address(),

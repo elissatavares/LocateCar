@@ -8,6 +8,7 @@ import ada.locate.car.core.usecase.allocation.ReturnAllocation;
 import ada.locate.car.repository.api.RepositoryClient;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ReturnAllocationService implements ReturnAllocation {
     private final RepositoryClient clientRepository;
@@ -22,8 +23,8 @@ public class ReturnAllocationService implements ReturnAllocation {
     public void execute(AllocationDTO allocationDTO) {
         ClientDTO client = readClientService.execute(allocationDTO.clientDocument());
         List<Allocation> allocationList = clientRepository.findAllAllocation(allocationDTO.clientDocument().document());
-        Allocation allocation = clientRepository.findAllocation(allocationList, allocationDTO.plateNumberVehicle().plateNumber());
-        clientRepository.returnAllocation(allocation, allocationDTO.clientDocument().document());
+        Optional<Allocation> allocation = clientRepository.findAllocation(allocationList, allocationDTO.plateNumberVehicle().plateNumber());
+        clientRepository.returnAllocation(allocation.get(), allocationDTO.clientDocument().document());
     }
     @Override
     public List<AllocationDTO> getAllAllocations(ClientDTO clientDTO){
@@ -37,8 +38,8 @@ public class ReturnAllocationService implements ReturnAllocation {
     public double allocationValue(AllocationDTO allocationDTO) {
         ClientDTO client = readClientService.execute(allocationDTO.clientDocument());
         List<Allocation> allocationList = clientRepository.findAllAllocation(allocationDTO.clientDocument().document());
-        Allocation allocation = clientRepository.findAllocation(allocationList, allocationDTO.plateNumberVehicle().plateNumber());
-        return allocation.allocationValue(allocationDTO.localDateTime(), allocationDTO.clientDocument().flagIdentification(), allocation.getVehicle().getModel());
+        Optional<Allocation> allocation = clientRepository.findAllocation(allocationList, allocationDTO.plateNumberVehicle().plateNumber());
+        return allocation.get().allocationValue(allocationDTO.localDateTime(), allocationDTO.clientDocument().flagIdentification(), allocation.get().getVehicle().getModel());
     }
 
 }

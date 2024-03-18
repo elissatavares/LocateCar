@@ -6,15 +6,15 @@ import ada.locate.car.repository.api.RepositoryClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ClientRepository implements RepositoryClient {
 
-    private List<Client> clientList = new ArrayList<>();
+    private final List<Client> clientList = new ArrayList<>();
 
     private static ClientRepository instance;
 
-    private ClientRepository() {
-    }
+    private ClientRepository() {}
 
     public static ClientRepository getInstance() {
         if (instance == null) {
@@ -24,62 +24,72 @@ public class ClientRepository implements RepositoryClient {
     }
 
     @Override
-    public void create(Client client) {
-        clientList.add(client);
-
+    public boolean create(Client client) {
+       return clientList.add(client);
     }
 
     @Override
-    public Client read(String key) {
+    public Optional<Client> read(String key) {
         return clientList.stream()
                 .filter(client -> client.getDocument().equals(key))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
-
     @Override
-    public void update(Client updatedClient, Client oldClient) {
-        clientList.add(updatedClient);
-        clientList.remove(oldClient);
+    public boolean update(Client updatedClient, Client oldClient) {
+        if (clientList.contains(oldClient)) {
+            clientList.remove(oldClient);
+            clientList.add(updatedClient);
+            return true; // Atualização bem-sucedida
+        }
+        return false; // Falha na atualização
     }
 
-
     @Override
-    public void delete(Client client) {
-        clientList.remove(client);
+    public boolean delete(Client client) {
+        return clientList.remove(client); // Retorna true se removido com sucesso, false caso contrário
     }
 
     @Override
     public List<Client> findAll() {
-        return clientList;
+        return new ArrayList<>(clientList); // Retorna uma cópia da lista de clientes para evitar modificação direta
     }
 
     @Override
-    public void createAllocation(Allocation allocation, String key) {
-        Client client = read(key);
-        allocation.getVehicle().wasRented();
-        client.setAllocationList(allocation);
-        System.out.println(client);
+    public boolean createAllocation(Allocation allocation, String key) {
+        Optional<Client> clientOptional = read(key);
+        if (clientOptional.isPresent()) {
+            Client client = clientOptional.get();
+            allocation.getVehicle().wasRented();
+            client.setAllocationList(allocation);
+            System.out.println(client);
+            return true; // Criação de alocação bem-sucedida
+        }
+        return false; // Falha na criação de alocação (cliente não encontrado)
     }
 
     @Override
-    public void returnAllocation(Allocation allocation, String key) {
-        Client client = read(key);
-        allocation.getVehicle().wasReturned();
-        client.getAllocationList().remove(allocation);
+    public boolean returnAllocation(Allocation allocation, String key) {
+        Optional<Client> clientOptional = read(key);
+        if (clientOptional.isPresent()) {
+            Client client = clientOptional.get();
+            allocation.getVehicle().wasReturned();
+            return client.getAllocationList().remove(allocation); // Retorna true se removido com sucesso, false caso contrário
+        }
+        return false; // Falha ao retornar alocação (cliente não encontrado)
     }
 
     @Override
     public List<Allocation> findAllAllocation(String key) {
-        Client client = read(key);
-        return client.getAllocationList();
+        return read(key)
+                .map(Client::getAllocationList)
+                .orElse(new ArrayList<>());
     }
 
     @Override
-    public Allocation findAllocation(List<Allocation> allocationList, String plateNumber) {
-        return allocationList.stream().
-                filter(allocation -> allocation.getVehicle().getPlateNumber().equalsIgnoreCase(plateNumber))
-                .findFirst().orElse(null);
+    public Optional<Allocation> findAllocation(List<Allocation> allocationList, String plateNumber) {
+        return allocationList.stream()
+                .filter(allocation -> allocation.getVehicle().getPlateNumber().equalsIgnoreCase(plateNumber))
+                .findFirst();
     }
 }

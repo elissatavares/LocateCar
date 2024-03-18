@@ -5,6 +5,8 @@ import ada.locate.car.core.usecase.client.DeleteClient;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.repository.api.RepositoryClient;
 
+import java.util.Optional;
+
 public class DeleteClientService implements DeleteClient {
     private final RepositoryClient repository;
 
@@ -15,7 +17,8 @@ public class DeleteClientService implements DeleteClient {
 
     @Override
     public void execute(ClientDTO clientDTO) {
-        Client client = repository.read(clientDTO.document());
-        repository.delete(client);
+        //precisa chamar a camada security e valida se existe ou nao
+        Optional<Client> client = repository.read(clientDTO.document());
+        repository.delete(client.get());
     }
 }
