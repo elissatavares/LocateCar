@@ -1,6 +1,6 @@
 package ada.locate.car.app.menu;
 
-import ada.locate.car.app.config.vehicle.VehicleMenuConfig;
+import ada.locate.car.config.record.vehicle.VehicleMenuConfig;
 
 public class VehicleMenu implements Menu {
     private final VehicleMenuConfig config;

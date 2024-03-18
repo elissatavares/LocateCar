@@ -1,6 +1,6 @@
 package ada.locate.car.app.menu;
 
-import ada.locate.car.app.config.client.ClientMenuConfig;
+import ada.locate.car.config.record.client.ClientMenuConfig;
 
 public class ClientMenu implements Menu {
 

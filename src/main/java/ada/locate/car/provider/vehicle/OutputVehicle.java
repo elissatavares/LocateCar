@@ -1,11 +1,11 @@
 package ada.locate.car.provider.vehicle;
 
-import ada.locate.car.app.config.vehicle.FrontVehicleConfig;
+import ada.locate.car.config.record.vehicle.VehicleFrontendConfig;
 
 public class OutputVehicle {
-    private final FrontVehicleConfig front;
+    private final VehicleFrontendConfig front;
 
-    public OutputVehicle(FrontVehicleConfig front) {
+    public OutputVehicle(VehicleFrontendConfig front) {
         this.front = front;
     }
 

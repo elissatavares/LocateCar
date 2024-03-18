@@ -1,6 +1,6 @@
 package ada.locate.car.app.menu;
 
-import ada.locate.car.app.config.allocation.AllocationMenuConfig;
+import ada.locate.car.config.record.allocation.AllocationMenuConfig;
 
 public class AllocationMenu implements Menu {
 

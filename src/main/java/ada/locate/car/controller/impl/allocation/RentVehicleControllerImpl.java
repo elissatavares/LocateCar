@@ -1,7 +1,7 @@
 package ada.locate.car.controller.impl.allocation;
 
 import ada.locate.car.DTO.AllocationDTO;
-import ada.locate.car.app.config.allocation.AllocationControllerImplConfig;
+import ada.locate.car.config.record.allocation.AllocationControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.DTO.VehicleDTO;
@@ -42,7 +42,7 @@ public class RentVehicleControllerImpl implements Controller {
 
         //vai chamar a função que recebe o placa do veículo a ser alogado
         String plateNumberAllocation = config.providerAllocation().create().plateNumber();
-        VehicleDTO vehicleDTOAllocation = config.dtoVehicle().search().buildSearchDTOPlateNumber(plateNumberAllocation);
+        VehicleDTO vehicleDTOAllocation = config.dtoVehicle().searchPlateNumber().buildSearchDTOPlateNumberDTO(plateNumberAllocation);
 
         String[] dataAllocation = config.providerAllocation().create().dataAllocation();
         AllocationDTO allocationDTO = config.DTO().create().createAllocation(dataAllocation, clientDTO, vehicleDTOAllocation);
