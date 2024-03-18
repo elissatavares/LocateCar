@@ -17,7 +17,6 @@ public enum MessagesClient {
     UPDATED_CLIENT_DATA("Name\nAddress\nPhone Number\nEmail"),
     ENTER_SEARCH_OPTION("Read by CPF\nRead by CNPJ"),
     SEARCH_OPTION_PROMPT("CPF\nCNPJ"),
-    OPTION_UPDATE("Update with CPF\n Update with CNPJ"),
 
     CREATE_SUCESS_MSG("Client created successfully!"),
     DELETE_SUCESS_MSG("Client deleted successfully!"),

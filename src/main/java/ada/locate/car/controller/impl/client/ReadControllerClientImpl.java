@@ -3,7 +3,7 @@ package ada.locate.car.controller.impl.client;
 import ada.locate.car.app.config.client.ClientControllerImplConfig;
 
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.infra.dto.ClientDTO;
+import ada.locate.car.DTO.ClientDTO;
 
 public class ReadControllerClientImpl implements Controller {
     private final ClientControllerImplConfig config;
@@ -15,19 +15,14 @@ public class ReadControllerClientImpl implements Controller {
 
     @Override
     public void execute() {
-        String option = config.front().optionsRead().execute();
+        String type = config.provider().read().optionsRead();
 
-        String document;
-        if (option.equalsIgnoreCase("CPF")) {
-            document = config.front().CPFentry().execute();
-        } else {
-            document = config.front().CNPJentry().execute();
-        }
+        String document = config.provider().documentEntry().document(type);
 
-        ClientDTO clientDTO = new ClientDTO.Builder().document(document).build();
+        ClientDTO clientDTO = config.DTO().search().buildClientDTO(document, type);
         ClientDTO readClient = config.service().read().execute(clientDTO);
 
-        config.front().read().execute(readClient.toString());
+        config.provider().output().details(readClient.toString());
 
         System.out.println(readClient);
     }

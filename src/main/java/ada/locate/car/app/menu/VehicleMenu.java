@@ -12,7 +12,7 @@ public class VehicleMenu implements Menu {
 
     @Override
     public void run() {
-        String option = config.front().showInputOptionsVehicle().execute();
+        String option = config.provider().menu().showInputOptionsVehicle();
         if (option.isEmpty()) {
             return;
         }

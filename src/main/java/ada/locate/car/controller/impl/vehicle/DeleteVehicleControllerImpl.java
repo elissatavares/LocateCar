@@ -2,7 +2,7 @@ package ada.locate.car.controller.impl.vehicle;
 
 import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
-import ada.locate.car.infra.dto.VehicleDTO;
+import ada.locate.car.DTO.VehicleDTO;
 
 public class DeleteVehicleControllerImpl implements Controller {
 
@@ -15,14 +15,8 @@ public class DeleteVehicleControllerImpl implements Controller {
 
     @Override
     public void execute() {
-        String plateNumber = config.front().showExclusionField().execute();
-        VehicleDTO vehicleDTO = buildVehicleDTO(plateNumber);
+        String plateNumber = config.provider().delete().showExclusionField();
+        VehicleDTO vehicleDTO = config.DTO().delete().buildVehicleDTO(plateNumber);
         config.service().delete().execute(vehicleDTO);
-        //config.front().showInformation().execute("Plate Number", plateNumber);
-    }
-    private VehicleDTO buildVehicleDTO(String plateNumber) {
-        return new VehicleDTO.Builder()
-                .plateNumber(plateNumber)
-                .build();
     }
 }

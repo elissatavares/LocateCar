@@ -13,7 +13,7 @@ public class ClientMenu implements Menu {
 
     @Override
     public void run() {
-        String option = config.front().optionsClient().execute();
+        String option = config.provider().menu().optionsClient();
 
         if (option.isEmpty()) {
             return;

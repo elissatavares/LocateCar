@@ -2,14 +2,15 @@ package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
 import ada.locate.car.core.usecase.UpdateClient;
-import ada.locate.car.infra.api.Repository;
-import ada.locate.car.infra.dto.ClientDTO;
+import ada.locate.car.repository.api.Repository;
+import ada.locate.car.DTO.ClientDTO;
+import ada.locate.car.repository.api.RepositoryClient;
 
 public class UpdateClientService implements UpdateClient {
 
-    private final Repository<Client> clientRepository;
+    private final RepositoryClient clientRepository;
 
-    public UpdateClientService(Repository<Client> clientRepository) {
+    public UpdateClientService(RepositoryClient clientRepository) {
         this.clientRepository = clientRepository;
     }
 
@@ -50,6 +51,6 @@ public class UpdateClientService implements UpdateClient {
                     oldClient.getDocument());
         }
         clientRepository.update(updatedClient, oldClient);
-        return ClientDTO.convertClient(updatedClient);
+        return ClientDTO.convertClientToDTO(updatedClient);
     }
 }

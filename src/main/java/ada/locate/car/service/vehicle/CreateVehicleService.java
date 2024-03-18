@@ -2,8 +2,8 @@ package ada.locate.car.service.vehicle;
 
 import ada.locate.car.core.model.Vehicle;
 import ada.locate.car.core.usecase.CreateVehicle;
-import ada.locate.car.infra.api.RepositoryVehicle;
-import ada.locate.car.infra.dto.VehicleDTO;
+import ada.locate.car.repository.api.RepositoryVehicle;
+import ada.locate.car.DTO.VehicleDTO;
 
 public class CreateVehicleService implements CreateVehicle {
 

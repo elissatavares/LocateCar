@@ -6,5 +6,8 @@ import ada.locate.car.core.usecase.ReadVehicle;
 import ada.locate.car.core.usecase.UpdateVehicle;
 
 //configuração pra quem precisa acessar meu service
-public record VehicleServiceConfig(CreateVehicle create, ReadVehicle read, UpdateVehicle update, DeleteVehicle delete) {
+public record VehicleServiceConfig(CreateVehicle create,
+                                   ReadVehicle read,
+                                   UpdateVehicle update,
+                                   DeleteVehicle delete) {
 }

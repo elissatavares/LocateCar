@@ -1,5 +1,8 @@
 package ada.locate.car.core.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Client {
     private String flagIdentification;
     private String name;
@@ -7,8 +10,7 @@ public class Client {
     private String phoneNumber;
     private String email;
     private String document;
-
-
+    private List<Allocation> allocationList = new ArrayList<>();
 
     public Client(String name, String address, String phoneNumber, String email, String flagIdentification, String document) {
         this.name = name;
@@ -21,55 +23,43 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "type='" + flagIdentification + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", document='" + document + '\'' +
-                '}';
+        return
+        "Client: " +
+                "Name: " + name +
+                ", Address: " + address +
+                ", PhoneNumber: " + phoneNumber +
+                ", Email: " + email +
+                ", Identification: " + flagIdentification +
+                ", Document: " + document;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getIdentification() {
         return flagIdentification;
     }
-
-    public void setIdentification(String identification) {
-        this.flagIdentification = identification;
+    public List<Allocation> getAllocationList() {
+        return allocationList;
     }
+
+
     public String getDocument() {
         return document;
     }
@@ -78,6 +68,20 @@ public class Client {
         this.document = document;
     }
 
+
+    public String formatAllocationList() {
+        StringBuilder list = new StringBuilder();
+
+        allocationList.forEach(allocation -> {
+            list.append(allocation.toString())
+                    .append(System.lineSeparator());
+        });
+        return String.valueOf(list);
+    }
+
+    public void setAllocationList(Allocation newAllocation) {
+        this.allocationList.add(newAllocation);
+    }
 
     private enum Model {
         CPF("CPF"),

@@ -1,6 +1,7 @@
 package ada.locate.car.core.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Vehicle {
     private String brand;
@@ -9,24 +10,24 @@ public class Vehicle {
     private LocalDate yearManufacture;
     private String color;
     private String plateNumber;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     public String toString() {
-        return "vehicle{" +
-                "brand='" + brand + '\'' +
-                ", available=" + available +
-                ", model='" + model + '\'' +
-                ", yearManufacture=" + yearManufacture +
-                ", color='" + color + '\'' +
-                ", plateNumber='" + plateNumber + '\'' +
-                '}';
+        return "Vehicle: " +
+                "Brand: " + brand +
+                ", YearManufacture: " + yearManufacture +
+                ", Color: " + color +
+                ", PlateNumber: " + plateNumber +
+                ", Model: " + model;
+
     }
 
-    public Vehicle(String brand, LocalDate yearManufacture, String color, String plateNumber, String model) {
+    public Vehicle(String brand, String yearManufacture, String color, String plateNumber, String model) {
         this.brand = brand;
         this.available = true;
         this.model = model;
-        this.yearManufacture = yearManufacture;
+        this.yearManufacture = LocalDate.parse(yearManufacture);
         this.color = color;
         this.plateNumber = plateNumber;
     }
@@ -68,8 +69,8 @@ public class Vehicle {
         return model;
     }
 
-    public LocalDate getYearManufacture() {
-        return yearManufacture;
+    public String getYearManufacture() {
+        return yearManufacture.format(formatter);
     }
 
     public String getColor() {
@@ -84,25 +85,20 @@ public class Vehicle {
         return available;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void wasRented(){
+        this.available = false;
+    }
+    public void wasReturned(){
+        this.available = true;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
+
 
     public void setModel(String model) {
         this.model = model;
     }
 
-    public void setYearManufacture(LocalDate yearManufacture) {
-        this.yearManufacture = yearManufacture;
-    }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public void setPlateNumber(String plateNumber) {
         this.plateNumber = plateNumber;
