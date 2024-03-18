@@ -3,7 +3,7 @@ package ada.locate.car.controller.impl.allocation;
 import ada.locate.car.DTO.AllocationDTO;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.DTO.VehicleDTO;
-import ada.locate.car.app.config.allocation.AllocationControllerImplConfig;
+import ada.locate.car.config.record.allocation.AllocationControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class ReturnRentedVehicleControllerImpl implements Controller {
 
         //receber a placa do carro que quer devolver
         String plateNumberAllocation = config.providerAllocation().delete().plateNumber();
-        VehicleDTO vehicleDTOReturn = config.dtoVehicle().search().buildSearchDTOPlateNumber(plateNumberAllocation);
+        VehicleDTO vehicleDTOReturn = config.dtoVehicle().searchPlateNumber().buildSearchDTOPlateNumberDTO(plateNumberAllocation);
 
         //inserir a data que esta devolvendo
         String finalDay = config.providerAllocation().delete().finalDay();

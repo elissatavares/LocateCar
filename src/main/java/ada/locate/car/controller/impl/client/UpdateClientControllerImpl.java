@@ -2,7 +2,7 @@
 package ada.locate.car.controller.impl.client;
 
 
-import ada.locate.car.app.config.client.ClientControllerImplConfig;
+import ada.locate.car.config.record.client.ClientControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.DTO.ClientDTO;
 

@@ -1,7 +1,7 @@
 package ada.locate.car.service.vehicle;
 
 import ada.locate.car.core.model.Vehicle;
-import ada.locate.car.core.usecase.UpdateVehicle;
+import ada.locate.car.core.usecase.vehicle.UpdateVehicle;
 import ada.locate.car.repository.api.RepositoryVehicle;
 import ada.locate.car.DTO.VehicleDTO;
 

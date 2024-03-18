@@ -1,11 +1,11 @@
 package ada.locate.car.provider.client;
 
-import ada.locate.car.app.config.client.FrontClientConfig;
+import ada.locate.car.config.record.client.ClientFrontendConfig;
 
 public class OutputClient {
-    private final FrontClientConfig front;
+    private final ClientFrontendConfig front;
 
-    public OutputClient(FrontClientConfig front) {
+    public OutputClient(ClientFrontendConfig front) {
         this.front = front;
     }
 

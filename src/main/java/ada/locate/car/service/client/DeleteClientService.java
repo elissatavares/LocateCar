@@ -1,7 +1,7 @@
 package ada.locate.car.service.client;
 
 import ada.locate.car.core.model.Client;
-import ada.locate.car.core.usecase.DeleteClient;
+import ada.locate.car.core.usecase.client.DeleteClient;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.repository.api.RepositoryClient;
 

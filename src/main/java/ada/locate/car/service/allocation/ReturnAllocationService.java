@@ -3,9 +3,8 @@ package ada.locate.car.service.allocation;
 import ada.locate.car.DTO.AllocationDTO;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.core.model.Allocation;
-import ada.locate.car.core.model.Vehicle;
-import ada.locate.car.core.usecase.ReadClient;
-import ada.locate.car.core.usecase.ReturnAllocation;
+import ada.locate.car.core.usecase.client.ReadClient;
+import ada.locate.car.core.usecase.allocation.ReturnAllocation;
 import ada.locate.car.repository.api.RepositoryClient;
 
 import java.util.List;

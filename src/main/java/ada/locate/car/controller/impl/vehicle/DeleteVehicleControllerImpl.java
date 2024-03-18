@@ -1,6 +1,6 @@
 package ada.locate.car.controller.impl.vehicle;
 
-import ada.locate.car.app.config.vehicle.VehicleControllerImplConfig;
+import ada.locate.car.config.record.vehicle.VehicleControllerImplConfig;
 import ada.locate.car.controller.api.Controller;
 import ada.locate.car.DTO.VehicleDTO;
 
