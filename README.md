@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="#">
-    <img src="https://ibb.co/LpQkcpk" />
+    <img src="https://i.ibb.co/TrHpwg9/banner-locatecar.png" alt="banner-locatecar" border="0">
   </a>
 </p>
 &nbsp;
@@ -46,7 +46,7 @@ Dentre os conceitos estudados: Generics, Interfaces, Collectins, Comparable, e S
 ## Arquitetura de Pastas do projeto ☕
 <p align="center">
   <a href="#">
-    <img src="https://ibb.co/wwvkxV0" />
+    <img src="https://i.ibb.co/17mBHJL/locatecar-drawio.png" alt="locatecar-drawio" border="0">
   </a>
 </p>
 <p align="center"> Figura: Organização de pastas do projeto na data de 17/03/24</p>
@@ -56,7 +56,7 @@ Dentre os conceitos estudados: Generics, Interfaces, Collectins, Comparable, e S
 
 <p align="center">
   <a href="#">
-    <img src="https://ibb.co/VxrwYvY" />
+   <img src="https://i.ibb.co/F5tMHYD/Screencastfrom17-03-2024193026-ezgif-com-added-text.gif" alt="Screencastfrom17-03-2024193026-ezgif-com-added-text" border="0">
   </a>
 </p>
 
@@ -92,7 +92,7 @@ Algumas etapas do desenvolvimento foram:
 
  <p align="center">
   <a href="#">
-    <img src="https://ibb.co/FmRVSQ8" />
+   <img src="https://i.ibb.co/Dz0pxBw/Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter.gif" alt="Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter" border="0">
   </a>
 </p>
 
@@ -103,7 +103,7 @@ Algumas etapas do desenvolvimento foram:
 
 <p align="center">
   <a href="#">
-    <img src="https://ibb.co/TcxjTxk" />
+    <img src="https://i.ibb.co/Y2FnWF3/Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter-1.gif" alt="Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter-1" border="0">
   </a>
 </p>
 
@@ -197,7 +197,7 @@ Algumas telas desenvolvidas:
 
 <p align="center">
   <a href="#">
-    <img src="https://ibb.co/FmRVSQ8" />
+    <img src="https://i.ibb.co/Y2FnWF3/Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter-1.gif" alt="Screencastfrom18-03-2024000338-ezgif-com-video-to-gif-converter-1" border="0">
   </a>
 </p>
 
@@ -211,13 +211,13 @@ Por padrão, estamos usando a pasta `frontend` para armazenar e manipularmos as 
 
 ## 💻 Ajustes e melhorias
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
-- [] : Adicionar camada de segurança
-- [] : Buscar veículo por parte do nome
-- [] : Paginação de clientes
-- [] : Paginação de veículos
-- [] : Paginação de alocação
-- [] : Exportar arquivo
-- [] : Histórico de locações
+- [ ] : Adicionar camada de segurança
+- [ ] : Buscar veículo por parte do nome
+- [ ] : Paginação de clientes
+- [ ] : Paginação de veículos
+- [ ] : Paginação de alocação
+- [ ] : Exportar arquivo
+- [ ] : Histórico de locações
 
 ## 🤝 Colaboradores
 <a name="contribua"></a>
@@ -261,8 +261,4 @@ Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/ma
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 <hr>
-<p align="center">Copyright © 2024 | LocateCar by Fernanda Costa e Maria Elissa
-  <a href="#">
-    <img src="" />
-  </a>
-</p>
+<p align="center">Copyright © 2024 | LocateCar by Fernanda Costa e Maria Elissa</p>
