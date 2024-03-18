@@ -20,25 +20,28 @@ public class ReturnRentedVehicleControllerImpl implements Controller {
     public void execute() {
         //escolhe o tipo da pessoa que vai devolver
         //mostrar o menu que vai perguntar pra qual tipo de pessoa vai devolver;
-        //MUDAR PRA delete().
-        String typePerson = config.providerAllocation().create().typeCleint();
+        String typePerson = config.providerAllocation().delete().typeClient();
 
         //pega o tipo do cliente e recebe o documento dele
         String documentPerson = config.providerClient().documentEntry().document(typePerson);
 
         //coloca o documento num clientDTOBuilder, pois vai servir pra buscar o client por document
-        ClientDTO clientDTO = config.dtoClient().search().buildClientDTO(documentPerson);
+        ClientDTO clientDTO = config.dtoClient().search().buildClientDTO(documentPerson, typePerson);
 
         List<AllocationDTO> allocationDTOS = config.service().delete().getAllAllocations(clientDTO);
-        String formated = AllocationDTO.formatAllocationDTOList(allocationDTOS);
+        config.providerAllocation().delete().details(AllocationDTO.formatAllocationDTOList(allocationDTOS));
 
         //receber a placa do carro que quer devolver
-        String plateNumberAllocation = config.providerAllocation().create().numberPlate();
+        String plateNumberAllocation = config.providerAllocation().delete().plateNumber();
         VehicleDTO vehicleDTOReturn = config.dtoVehicle().search().buildSearchDTOPlateNumber(plateNumberAllocation);
 
-        //exibe o valor a ser pago: mostra a opção devolver ou cancelar
+        //inserir a data que esta devolvendo
+        String finalDay = config.providerAllocation().delete().finalDay();
+        AllocationDTO allocationDTO = config.DTO().delete().deleteAllocation(clientDTO, vehicleDTOReturn, finalDay);
+        double finalValue = config.service().delete().allocationValue(allocationDTO);
 
-        AllocationDTO allocationDTO = config.DTO().deleteAllocation(clientDTO, vehicleDTOReturn);
+        config.providerAllocation().delete().displaysTotalAmount(String.valueOf(finalValue));
+
         //passa pro service desalocar
         config.service().delete().execute(allocationDTO);
         //mostra a mensagem devolvido com sucesso

@@ -19,7 +19,7 @@ public class ReadControllerClientImpl implements Controller {
 
         String document = config.provider().documentEntry().document(type);
 
-        ClientDTO clientDTO = config.DTO().search().buildClientDTO(document);
+        ClientDTO clientDTO = config.DTO().search().buildClientDTO(document, type);
         ClientDTO readClient = config.service().read().execute(clientDTO);
 
         config.provider().output().details(readClient.toString());

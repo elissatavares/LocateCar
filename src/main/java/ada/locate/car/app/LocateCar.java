@@ -1,6 +1,8 @@
 package ada.locate.car.app;
 
+import ada.locate.car.DTO.AllocationDTO;
 import ada.locate.car.DTO.utils.allocation.CreateAllocationDTO;
+import ada.locate.car.DTO.utils.allocation.DeleteAllocationDTO;
 import ada.locate.car.DTO.utils.vehicle.*;
 import ada.locate.car.app.config.allocation.*;
 import ada.locate.car.app.config.client.*;
@@ -19,11 +21,11 @@ import ada.locate.car.controller.impl.client.CreateClientControllerImpl;
 import ada.locate.car.controller.impl.client.DeleteClientControllerImpl;
 import ada.locate.car.controller.impl.client.ReadControllerClientImpl;
 import ada.locate.car.controller.impl.client.UpdateClientControllerImpl;
-import ada.locate.car.core.model.Client;
 import ada.locate.car.frontend.impl.allocation.create.ShowInputDataCreateAllocation;
 import ada.locate.car.frontend.impl.allocation.create.ShowInputOptionsCreateAllocation;
 import ada.locate.car.frontend.impl.allocation.create.ShowInputPlateNumberAllocation;
 import ada.locate.car.frontend.impl.allocation.create.ShowOptionsAllocation;
+import ada.locate.car.frontend.impl.allocation.delete.*;
 import ada.locate.car.frontend.impl.client.ShowInputCNPJ;
 import ada.locate.car.frontend.impl.client.ShowInputCPF;
 import ada.locate.car.frontend.impl.client.ShowInputOptionsClient;
@@ -41,8 +43,8 @@ import ada.locate.car.DTO.utils.client.ClientDeleteBuilder;
 import ada.locate.car.DTO.utils.client.ClientReadBuilder;
 import ada.locate.car.DTO.utils.client.ClientUpdateBuilder;
 import ada.locate.car.provider.allocation.AllocationCreateInputProvider;
+import ada.locate.car.provider.allocation.AllocationDeleteInputProvider;
 import ada.locate.car.provider.client.*;
-import ada.locate.car.repository.api.Repository;
 import ada.locate.car.repository.api.RepositoryClient;
 import ada.locate.car.repository.api.RepositoryVehicle;
 import ada.locate.car.app.menu.VehicleMenu;
@@ -94,8 +96,10 @@ public class LocateCar {
         FrontAllocationConfig frontAllocationConfig = createFrontConfigAllocation();
         AllocationServiceConfig allocationServiceConfig = createAllocationServiceConfig(vehicleServiceConfig, clientServiceConfig);
         ProviderAllocationConfig providerAllocationConfig = createProviderAllocationConfig(frontAllocationConfig);
+        AllocationDTOConfig allocationDTOConfig = createAllocationDTOConfig();
         AllocationControllerImplConfig allocationControllerImplConfig = createAllocationControllerImplConfig(vehicleDTOBuilderconfig,
-                providerVehicleConfig, clientDTOBuilderConfig, providerClientConfig, providerAllocationConfig, allocationServiceConfig);
+                providerVehicleConfig, clientDTOBuilderConfig, providerClientConfig, providerAllocationConfig,
+                allocationDTOConfig, allocationServiceConfig);
         AllocationControllerConfig allocationControllerConfig = createAllocationControllerConfig(allocationControllerImplConfig);
         AllocationMenuConfig allocationMenuConfig = createAllocationMenuConfig(allocationControllerConfig, providerAllocationConfig);
         Menu allocation = new AllocationMenu(allocationMenuConfig);
@@ -123,7 +127,9 @@ public class LocateCar {
     }
 
     private static ProviderAllocationConfig createProviderAllocationConfig(FrontAllocationConfig frontAllocationConfig) {
-        return new ProviderAllocationConfig(new AllocationCreateInputProvider(frontAllocationConfig));
+        return new ProviderAllocationConfig(
+                new AllocationCreateInputProvider(frontAllocationConfig),
+                new AllocationDeleteInputProvider(frontAllocationConfig));
     }
 
     //injeta todas as dependencias para uma chamada da camada service
@@ -288,6 +294,7 @@ public class LocateCar {
                                                                                        ClientDTOBuilderconfig dtoClient,
                                                                                        ProviderClientConfig providerClient,
                                                                                        ProviderAllocationConfig providerAllocationConfig,
+                                                                                       AllocationDTOConfig allocationDTOConfig,
                                                                                        AllocationServiceConfig service
     ) {
         return new AllocationControllerImplConfig(dtoVehicle,
@@ -295,8 +302,12 @@ public class LocateCar {
                 dtoClient,
                 providerClient,
                 providerAllocationConfig,
-                new CreateAllocationDTO(),
+                allocationDTOConfig,
                 service);
+    }
+
+    private static AllocationDTOConfig createAllocationDTOConfig(){
+        return new AllocationDTOConfig(new CreateAllocationDTO(), new DeleteAllocationDTO());
     }
 
     private static AllocationServiceConfig createAllocationServiceConfig(VehicleServiceConfig vehicleServiceConfig,
@@ -305,16 +316,22 @@ public class LocateCar {
                 new CreateAllocationService(vehicleServiceConfig.read(),
                         clientServiceConfig.read(),
                         ClientRepository.getInstance(),
-                        VehicleRepository.getInstance())
+                        VehicleRepository.getInstance()),
+                new ReturnAllocationService(ClientRepository.getInstance(), clientServiceConfig.read())
         );
     }
 
     private static FrontAllocationConfig createFrontConfigAllocation(){
         return new FrontAllocationConfig(
-                new ShowInputOptionsCreateAllocation(MessagesAllocation.ENTER_TYPE_CLIENT.get(), MessagesAllocation.SEARCH_OPTION_PROMPT.get()),
+                new ShowInputOptionsCreateAllocation(MessagesAllocation.ENTER_CREATE_TYPE_CLIENT.get(), MessagesAllocation.SEARCH_OPTION_PROMPT.get()),
                 new ShowInputPlateNumberAllocation(MessagesAllocation.ALLOCATION_MENU.get(), MessagesAllocation.VEHICLE_IDENTIFICATION.get()),
                 new ShowInputDataCreateAllocation(MessagesAllocation.ALLOCATION_MENU.get(), MessagesAllocation.ALL_ALLOCATION_DATA.get()),
-                new ShowOptionsAllocation(MessagesAllocation.ALLOCATION_MENU.get(), MessagesAllocation.OPTION_ALLOCATION.get())
+                new ShowOptionsAllocation(MessagesAllocation.ALLOCATION_MENU.get(), MessagesAllocation.OPTION_ALLOCATION.get()),
+                new ShowInputOptionsDeleteAllocation(MessagesAllocation.ENTER_RETURN_TYPE_CLIENT.get(), MessagesAllocation.SEARCH_OPTION_PROMPT.get()),
+                new ShowInputPlateNumberReturnAllocation(MessagesAllocation.MENU_RETURN.get(), MessagesAllocation.VEHICLE_IDENTIFICATION.get()),
+                new ShowOutputClientAllocations(MessagesAllocation.ALLOCATION_ClIENT_CAR.get()),
+                new ShowInputFinalDay(MessagesAllocation.ENTER_FINAL_DAY.get(), MessagesAllocation.DESCRIPTION_FINAL_DAY.get()),
+                new ShowValueAllocation(MessagesAllocation.VALUE_FINAL.get())
         );
     }
 

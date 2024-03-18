@@ -9,17 +9,19 @@ public class AllocationCreateInputProvider {
         this.front = front;
     }
 
-    public String typeCleint(){
-        return front.clientType().execute();
-    }
-    public String numberPlate(){
-        return front.plateNumber().execute();
+    public String typeClient() {
+        return front.clientTypeCreate().execute();
     }
 
-    public String[] dataAllocation(){
+    public String plateNumber() {
+        return front.plateNumberCreate().execute();
+    }
+
+    public String[] dataAllocation() {
         return front.dataAllocation().execute();
     }
-    public String optionAllocation(){
+
+    public String optionAllocation() {
         return front.optionsAllocation().execute();
     }
 }

@@ -4,11 +4,12 @@ import ada.locate.car.DTO.AllocationDTO;
 import ada.locate.car.DTO.ClientDTO;
 import ada.locate.car.DTO.VehicleDTO;
 
-public class CreateAllocationDTO {
-    public AllocationDTO createAllocation(String[] dataAllocation, ClientDTO clientDocument, VehicleDTO plateNumberVehicle){
+public class DeleteAllocationDTO {
+    public AllocationDTO deleteAllocation(ClientDTO clientDocument, VehicleDTO plateNumberVehicle, String finalDay){
         return new AllocationDTO.Builder()
                 .clientDocument(clientDocument)
                 .plateNumberVehicle(plateNumberVehicle)
-                .data(dataAllocation).build();
+                .localDateTimeRent(finalDay)
+                .build();
     }
 }

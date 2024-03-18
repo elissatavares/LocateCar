@@ -2,13 +2,10 @@ package ada.locate.car.repository.impl;
 
 import ada.locate.car.core.model.Allocation;
 import ada.locate.car.core.model.Client;
-import ada.locate.car.repository.api.Repository;
 import ada.locate.car.repository.api.RepositoryClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class ClientRepository implements RepositoryClient {
 
@@ -41,7 +38,6 @@ public class ClientRepository implements RepositoryClient {
     }
 
 
-
     @Override
     public void update(Client updatedClient, Client oldClient) {
         clientList.add(updatedClient);
@@ -70,6 +66,7 @@ public class ClientRepository implements RepositoryClient {
     @Override
     public void returnAllocation(Allocation allocation, String key) {
         Client client = read(key);
+        allocation.getVehicle().wasReturned();
         client.getAllocationList().remove(allocation);
     }
 

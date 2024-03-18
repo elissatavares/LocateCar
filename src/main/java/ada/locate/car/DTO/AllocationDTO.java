@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 
 
 public record AllocationDTO(ClientDTO clientDocument, VehicleDTO plateNumberVehicle,
-                            String[] data, String localDateTimeRent, String local, Vehicle vehicle){
+                            String[] data, String localDateTime, String local, Vehicle vehicle){
 
     @Override
     public String toString() {
         return "Allocation: " +
-                "LocalDateTimeRent: " + localDateTimeRent +
-                ", Local: " + local +
-                ", vehicle: " + "\n" + vehicle;
+                "LocalDateTimeRent: " + localDateTime +
+                " Local: " + local +
+                 "\n" + vehicle;
     }
     @Override
     public ClientDTO clientDocument() {
@@ -30,7 +30,7 @@ public record AllocationDTO(ClientDTO clientDocument, VehicleDTO plateNumberVehi
         private ClientDTO clientDocument;
         private VehicleDTO plateNumberVehicle;
         private String[] data;
-        private String localDateTimeRent;
+        private String localDateTime;
         private String local;
         private Vehicle vehicle;
 
@@ -50,7 +50,7 @@ public record AllocationDTO(ClientDTO clientDocument, VehicleDTO plateNumberVehi
         }
 
         public Builder localDateTimeRent(String localDateTimeRent) {
-            this.localDateTimeRent = localDateTimeRent;
+            this.localDateTime = localDateTimeRent;
             return this;
         }
 
@@ -65,7 +65,7 @@ public record AllocationDTO(ClientDTO clientDocument, VehicleDTO plateNumberVehi
         }
 
         public AllocationDTO build() {
-            return new AllocationDTO(clientDocument, plateNumberVehicle, data, localDateTimeRent, local, vehicle);
+            return new AllocationDTO(clientDocument, plateNumberVehicle, data, localDateTime, local, vehicle);
         }
     }
     public static List<AllocationDTO> convertToDTO(List<Allocation> allocationList) {

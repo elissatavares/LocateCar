@@ -18,7 +18,7 @@ public class AllocationMenu implements Menu {
         }
         switch (option.toLowerCase().trim()) {
             case "rent vehicle" -> config.controller().rentVehicle().execute();
-            case "return rented vehicle"   -> config.controller().returnRentedVehicle().execute();
+            case "return vehicle"   -> config.controller().returnRentedVehicle().execute();
         }
     }
 }

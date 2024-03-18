@@ -88,6 +88,9 @@ public class Vehicle {
     public void wasRented(){
         this.available = false;
     }
+    public void wasReturned(){
+        this.available = true;
+    }
 
 
 

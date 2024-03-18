@@ -20,13 +20,13 @@ public class RentVehicleControllerImpl implements Controller {
     public void execute() {
         //escolhe o tipo da pessoa que vai alugar
         //mostrar o menu que vai perguntar pra qual tipo de pessoa vai querer alugar;
-        String typePerson = config.providerAllocation().create().typeCleint();
+        String typePerson = config.providerAllocation().create().typeClient();
 
         //pega o tipo do cliente e recebe o documento dele
         String documentPerson = config.providerClient().documentEntry().document(typePerson);
 
         //coloca o documento num clientDTOBuilder, pois vai servir pra buscar o client por document
-        ClientDTO clientDTO = config.dtoClient().search().buildClientDTO(documentPerson);
+        ClientDTO clientDTO = config.dtoClient().search().buildClientDTO(documentPerson, typePerson);
 
         //seleciona por qual tipo ele quer buscar o vehicle
         String searchVehicles = config.providerVehicle().read().showInputOptionsReadVehicle();
@@ -41,11 +41,11 @@ public class RentVehicleControllerImpl implements Controller {
         //printar pro usuário ver a lista
 
         //vai chamar a função que recebe o placa do veículo a ser alogado
-        String plateNumberAllocation = config.providerAllocation().create().numberPlate();
+        String plateNumberAllocation = config.providerAllocation().create().plateNumber();
         VehicleDTO vehicleDTOAllocation = config.dtoVehicle().search().buildSearchDTOPlateNumber(plateNumberAllocation);
 
         String[] dataAllocation = config.providerAllocation().create().dataAllocation();
-        AllocationDTO allocationDTO = config.DTO().createAllocation(dataAllocation, clientDTO, vehicleDTOAllocation);
+        AllocationDTO allocationDTO = config.DTO().create().createAllocation(dataAllocation, clientDTO, vehicleDTOAllocation);
 
         config.service().create().execute(allocationDTO);
     }

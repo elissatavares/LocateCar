@@ -43,7 +43,7 @@ public class ReadVehicleService implements ReadVehicle {
 
     // ver isso
     private List<Vehicle> searchForAvailable(){
-        return repository.findAllByPredicate(vehicle -> vehicle.isAvailable() == true);
+        return repository.findAllByPredicate(vehicle -> vehicle.isAvailable());
     }
 
 }
