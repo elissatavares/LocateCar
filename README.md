@@ -31,7 +31,6 @@ O projeto *LocateCar* é uma aplicação em Java desenvolvida como parte de um s
 - <a href="#acaoafazer">Ações a fazer</a>
 - <a href="#front">Interface - Java Swing</a>
 
-<!-- <img src="#" fullwidth/> -->
 
 ## Introdução ☕
 <a name="intro"></a>
@@ -46,7 +45,7 @@ Dentre os conceitos estudados: Generics, Interfaces, Collectins, Comparable, e S
 ## Arquitetura de Pastas do projeto ☕
 <p align="center">
   <a href="#">
-    <img src="https://i.ibb.co/17mBHJL/locatecar-drawio.png" alt="locatecar-drawio" border="0">
+    <img src="https://i.ibb.co/mFg8TVb/locatecar-drawio-white.png" alt="locatecar-drawio-white" border="0">
   </a>
 </p>
 <p align="center"> Figura: Organização de pastas do projeto na data de 17/03/24</p>
@@ -227,7 +226,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     <sub><b>Fernanda Costa</b></sub></a>
 
 <br />
-<a href="#" alt="LinkedIn">
+<a href="https://www.linkedin.com/in/fernandacostads/" alt="LinkedIn">
   <img src="https://img.shields.io/badge/-Linkedin-0e76a8?style=flat-square&logo=Linkedin&logoColor=white&link=https://linkedin.com/in/fernandacostads" /></a>
 </td>
     <td align="center"><a href="https://github.com/ma-elissa" target="_blank"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/128258713?v=4" width="100px;" alt=""/>
@@ -235,7 +234,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     <sub><b>Maria Elissa</b></sub></a>
 
 <br />
-<a href="#" alt="LinkedIn">
+<a href="https://www.linkedin.com/in/elissatavares/" alt="LinkedIn">
   <img src="https://img.shields.io/badge/-Linkedin-0e76a8?style=flat-square&logo=Linkedin&logoColor=white&link=https://linkedin.com/in/ma-elissa" /></a>
 </td>
   </tr>
@@ -256,7 +255,7 @@ Clique [AQUI](https://opensource.guide/how-to-contribute/) e leia como contribui
 
 
 ## 📝 Licença
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/ma-elissa/LocateCar/LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/ma-elissa/LocateCar/blob/main/LICENSE.md) para mais detalhes.
 
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
