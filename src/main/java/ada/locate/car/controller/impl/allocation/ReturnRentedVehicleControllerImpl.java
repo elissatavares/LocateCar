@@ -38,6 +38,8 @@ public class ReturnRentedVehicleControllerImpl implements Controller {
         //inserir a data que esta devolvendo
         String finalDay = config.providerAllocation().delete().finalDay();
         AllocationDTO allocationDTO = config.DTO().delete().deleteAllocation(clientDTO, vehicleDTOReturn, finalDay);
+
+        //chamar a classe que calcula o valor final aqui e passar o
         double finalValue = config.service().delete().allocationValue(allocationDTO);
 
         config.providerAllocation().delete().displaysTotalAmount(String.valueOf(finalValue));

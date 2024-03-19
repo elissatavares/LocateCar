@@ -71,7 +71,7 @@ public record AllocationDTO(ClientDTO clientDocument, VehicleDTO plateNumberVehi
     public static List<AllocationDTO> convertToDTO(List<Allocation> allocationList) {
         return allocationList.stream()
                 .map(allocation -> new Builder()
-                        .localDateTimeRent(allocation.getLocalDate())
+                        .localDateTimeRent(allocation.getLocalDateFormatted())
                         .local(allocation.getLocal())
                         .vehicle(allocation.getVehicle())
                         .build())
